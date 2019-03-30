@@ -1,0 +1,62 @@
+Template for DTR Memo
+Project:
+
+Group Member Names:
+
+Goals and Expectations for the Project (What does each group member hope to get out of this project? What do we want to achieve as a team? How will we know that we're successful?):
+
+Mike: Controller actions, login and sessions
+Matt L: Forms for new/edit
+Blake: Namespacing, authentication, database structure
+Rene: CRUD functionality(Delete), Login, sessions
+Noah: Debugging issues (wants people to come to him to potentially solve)
+
+No CSS beyond functionality styling until end of the project
+
+Team strengths & collaboration styles (consider discussing your Pairin qualities here):
+
+Mike: Candid conversation style; Direct clear feedback unpackaged. Works well in pair programming with people to discover a solution.
+Matt L: Feels comfortable with the material.  Able to give constructive feedback on coding and willing to pair to tackle problems.  Works well independently with quiet space for his best work.
+Noah: Works with candid direct feedback. Working style with music and pairing with people to get best work done.
+Concerns about too much planning over implementation.
+Rene: Creative thinking style and very detail oriented.  Potentially helpful for review process. Enjoys CSS and HTML. Prefer team collaboration for setup and then divide and conquer individually for specific tasks.  Ensure use of kind, actionable, specific feedback for concerns and corrections.
+Blake: Direct feedback and team to setup.
+
+Overall approach to problem solving
+Rene: Prefers a strong plan structure for outline.
+Blake: Strong foundation for database and setup and then experiment within the scope of the project.
+
+How we can use our strengths to overcome obstacles:
+
+Schedule Expectations (When are we available to work together and individually? What constraints do we have?):
+
+Limits on schedule
+Rene: Sunday morning
+Blake: Sunday all day, and avoid mornings for project time
+Noah: Pretty flexible
+Matt L: Clear schedule
+Mike: Pretty flexible
+
+Plan the next day schedule the day before.
+
+Communication Expectations (How and often will we communicate? How do we keep lines of communication open? How will we make decisions as a team?):
+
+Abilities & Growth Expectations (Technical strengths and areas for desired improvement):
+
+Workload Expectations (What features do we each want to work on?):
+
+Workflow Expectations (Git workflow/Tools/Code Review/Reviewing Pull Requests/Debugging and Problem-solving Techniques):
+
+Use of template for each PR. Implement securities on master branch with a single review required to pull in. PR initiator will resolve merge conflicts.
+Message the group for every PR to get pulled in. Keep comments on code in Github and not in Slack channel to keep commentary with the code. Delete branches after pull into master. Check-in when working on on similar files.
+
+Test structure initially try out functionality with each user type as a bucket then
+
+Expectations for giving and receiving feedback:
+
+Project management tools we will use:
+
+
+Day 1 Agenda:
+
+Additional Notes:
