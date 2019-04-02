@@ -13,4 +13,6 @@ class User < ApplicationRecord
   has_many :items
 
   has_secure_password
+
+  enum role: ['user', 'merchant', 'admin']
 end
