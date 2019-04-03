@@ -5,7 +5,6 @@ class MerchantsController < ApplicationController
   end
 
   def dashboard
-
+    
   end
-
 end
