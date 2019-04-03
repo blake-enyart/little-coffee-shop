@@ -14,29 +14,45 @@ RSpec.describe 'Login workflow' do
     it '*can login a user' do
       user = create(:user)
 
-      allow_any_instance_of(ApplicationController).to \
-      receive(:current_user).and_return(user)
-
       visit root_path
 
-      click_link "I already have an account"
+      click_link "Login"
 
       expect(current_path).to eq(login_path)
       fill_in "email", with: user.email
       fill_in "password", with: user.password
-      click_link "Log In"
+      click_button "Log In"
 
       expect(current_path).to eq(profile_path)
+    end
+  end
 
-      #sessions buttons
-      expect(page).to have_content("Welcome, #{user.name}")
-      expect(page).to have_link(@logout)
-      expect(page).to_not have_link(@login)
-      expect(page).to_not have_link(@register_user)
-      #user role specific navigation bar
-      expect(page).to have_link(@profile)
-      expect(page).to_not have_link(@merchant_dashboard)
-      expect(page).to_not have_link(@admin_dashboard)
+  context '*as a registered admin' do
+    it '*can login an admin' do
+      admin = create(:admin)
+
+      visit root_path
+
+      click_link "Login"
+
+      expect(current_path).to eq(login_path)
+      fill_in "email", with: admin.email
+      fill_in "password", with: admin.password
+      click_button "Log In"
+
+      expect(current_path).to eq(root_path)
+    end
+
+    xit '*stays on the page when credentials bad' do
+
     end
   end
 end
+# As a visitor
+# When I visit the login path
+# I see a field to enter my email address and password
+# When I submit valid information
+# If I am a regular user, I am redirected to my profile page
+# If I am a merchant user, I am redirected to my merchant dashboard page
+# If I am an admin user, I am redirected to the home page of the site
+# And I see a flash message that I am logged in
