@@ -28,6 +28,18 @@
     <% flash.each do |type, message| %>
       <%= content_tag :div, message, class: type %>
     <% end %>
+
+    <% if current_user %>
+      <%= link_to "Logout", logout_path %>
+    <% end %>
+
+    <% if current_reguser? %>
+      <%= link_to "Profile", profile_path %>
+      <section>Logged in as <%= current_user.name %> </section>
+    <% end %>
+
+    <% if merchant_user? %>
+      <%= link_to "Dashboard", dashboard_path %>
     
     <%= yield %>
   </body>
