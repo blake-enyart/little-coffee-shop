@@ -53,7 +53,7 @@ RSpec.describe 'navigation bar' do
 
       click_link "Logout"
       expect(current_path).to eq(root_path)
-      expect(page).to_not have_content("Logged in as #{user.name}")
+
 
     end
   end
@@ -74,14 +74,15 @@ RSpec.describe 'navigation bar' do
       click_link "Home"
       expect(current_path).to eq(root_path)
 
+      expect(page).to_not have_link("Register", href: new_user_path)
+
+      expect(page).to_not have_link("Login", href: login_path)
+
       click_link "Dashboard"
       expect(current_path).to eq(dashboard_path)
-      expect(page).to_not have_link("Login", href: login_path)
-      expect(page).to_not have_link("Register", href: new_user_path)
 
       click_link "Logout"
       expect(current_path).to eq(root_path)
-      expect(page).to_not have_link("Dashboard", href: dashboard_path)
     end
   end
 end
