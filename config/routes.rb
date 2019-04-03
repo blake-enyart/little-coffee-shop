@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   #merchant routes
   resources :merchants, only: [:index]
-  get '/dashboard', to: 'merchants#show', as: :dashboard
+  get '/dashboard', to: 'merchants#dashboard', as: :dashboard
 
   #admin routes
   namespace :admin do

@@ -13,6 +13,7 @@ class SessionsController < ApplicationController
     user = User.find_by(email: params[:email])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
+      flash[:success] = "You are now logged in as #{user.email}."
       user_redirect
     end
   end
@@ -24,6 +25,8 @@ class SessionsController < ApplicationController
       redirect_to(root_path)
     elsif current_user.user?
       redirect_to(profile_path)
+    elsif current_user.merchant?
+      redirect_to(dashboard_path)
     end
   end
 end

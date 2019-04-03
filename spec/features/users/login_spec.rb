@@ -23,6 +23,7 @@ RSpec.describe 'Login workflow' do
       fill_in "password", with: user.password
       click_button "Log In"
 
+      expect(page).to have_content("You are now logged in as #{user.email}.")
       expect(current_path).to eq(profile_path)
     end
   end
@@ -40,19 +41,26 @@ RSpec.describe 'Login workflow' do
       fill_in "password", with: admin.password
       click_button "Log In"
 
+      expect(page).to have_content("You are now logged in as #{admin.email}.")
       expect(current_path).to eq(root_path)
     end
 
-    xit '*stays on the page when credentials bad' do
+    context '*as a registered merchant' do
+      it '*can login an merchant' do
+        merchant = create(:merchant)
 
+        visit root_path
+
+        click_link "Login"
+
+        expect(current_path).to eq(login_path)
+        fill_in "email", with: merchant.email
+        fill_in "password", with: merchant.password
+        click_button "Log In"
+
+        expect(page).to have_content("You are now logged in as #{merchant.email}.")
+        expect(current_path).to eq(dashboard_path)
+      end
     end
   end
 end
-# As a visitor
-# When I visit the login path
-# I see a field to enter my email address and password
-# When I submit valid information
-# If I am a regular user, I am redirected to my profile page
-# If I am a merchant user, I am redirected to my merchant dashboard page
-# If I am an admin user, I am redirected to the home page of the site
-# And I see a flash message that I am logged in
