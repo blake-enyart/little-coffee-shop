@@ -22,6 +22,7 @@
     <% if current_reguser? %>
       <%= link_to "Profile", profile_path %>
       <%= link_to "Logout", logout_path %>
+      <section>Logged in as <%= current_user.name %> </section>
     <% end %>
   </nav>
     <%= yield %>

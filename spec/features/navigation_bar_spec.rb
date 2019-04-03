@@ -32,6 +32,8 @@ RSpec.describe 'navigation bar' do
 
       visit root_path
 
+      expect(page).to have_content("Logged in as #{user.name}")
+
       click_link "Items"
       expect(current_path).to eq(items_path)
 
@@ -44,15 +46,17 @@ RSpec.describe 'navigation bar' do
       click_link "Home"
       expect(current_path).to eq(root_path)
 
+      click_link "Logout"
+      expect(current_path).to eq(root_path)
+      expect(page).to_not have_content("Logged in as #{user.name}")
+
       click_link "Profile"
       expect(current_path).to eq(profile_path)
       expect(page).to_not have_link("Login", href: login_path)
       expect(page).to_not have_link("Register", href: new_user_path)
-      expect(page).to have_content("Logged in as #{user.name}")
 
-      click_link "Logout"
-      expect(current_path).to eq(root_path)
-      expect(page).to_not have_content("Logged in as #{user.name}")
+
+
     end
   end
   context ' as a merchant' do
@@ -73,14 +77,13 @@ RSpec.describe 'navigation bar' do
       expect(current_path).to eq(root_path)
 
       click_link "Dashboard"
-      expect(current_path).to eq(profile_path)
+      expect(current_path).to eq(dashboard_path)
       expect(page).to_not have_link("Login", href: login_path)
       expect(page).to_not have_link("Register", href: new_user_path)
-      expect(page).to_not have_content("Logged in as #{user.name}")
 
       click_link "Logout"
       expect(current_path).to eq(root_path)
-      expect(page).to_not have_content("Logged in as #{user.name}")
+      expect(page).to_not have_link("Dashboard", href: dashboard_path)
     end
   end
 end
