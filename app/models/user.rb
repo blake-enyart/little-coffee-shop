@@ -6,7 +6,6 @@ class User < ApplicationRecord
   validates_presence_of :state
   validates_presence_of :zipcode
   validates_presence_of :role
-  validates_presence_of :enabled
   validates :email, presence: true, uniqueness: true
 
   has_many :orders

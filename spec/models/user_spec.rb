@@ -10,7 +10,6 @@ RSpec.describe User, type: :model do
     it { should validate_presence_of :state }
     it { should validate_presence_of :zipcode }
     it { should validate_presence_of :role }
-    it { should validate_presence_of :enabled }
 
     it { should validate_uniqueness_of :email }
   end
