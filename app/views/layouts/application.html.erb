@@ -19,10 +19,17 @@
     <% end %>
     <%= link_to "Home", root_path %>
 
+    <% if current_user %>
+      <%= link_to "Logout", logout_path %>
+    <% end %>
+
     <% if current_reguser? %>
       <%= link_to "Profile", profile_path %>
-      <%= link_to "Logout", logout_path %>
       <section>Logged in as <%= current_user.name %> </section>
+    <% end %>
+
+    <% if merchant_user? %>
+      <%= link_to "Dashboard", dashboard_path %>
     <% end %>
   </nav>
     <%= yield %>

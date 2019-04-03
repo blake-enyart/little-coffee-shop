@@ -11,5 +11,6 @@ Rails.application.routes.draw do
 
   get '/profile', to: "users#show", as: :profile
 
+  get '/dashboard', to: 'merchants#dashboard', as: 'dashboard'
 
 end
