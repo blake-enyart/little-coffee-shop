@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Registration workflow' do
   context '*as a unregistered visitor' do
     it '*it can register a user' do
-      user = create(:user)
+      user = build(:user)
 
       visit root_path
 
@@ -13,7 +13,7 @@ RSpec.describe 'Registration workflow' do
       fill_in "Name", with: user.name
       fill_in "Email", with: user.email
       fill_in "Password", with: user.password
-      fill_in "Password confirmation", with: user.password_confirmation
+      fill_in "Password confirmation", with: user.password
       fill_in "Street", with: user.street
       fill_in "City", with: user.city
       fill_in "State", with: user.state

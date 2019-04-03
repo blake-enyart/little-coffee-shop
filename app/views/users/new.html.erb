@@ -1,0 +1,27 @@
+<%= form_for(@user) do |f| %>
+<%= f.label :name %>
+<%= f.text_field :name %>
+
+<%= f.label :street %>
+<%= f.text_field :street %>
+
+<%= f.label :city %>
+<%= f.text_field :city %>
+
+<%= f.label :state %>
+<%= f.text_field :state %>
+
+<%= f.label :zipcode %>
+<%= f.text_field :zipcode %>
+
+<%= f.label :email %>
+<%= f.text_field :email %>
+
+<%= f.label :password %>
+<%= f.text_field :password %>
+
+<%= f.label :password_confirmation %>
+<%= f.text_field :password_confirmation %>
+<%= f.submit('Register User') %>
+
+<% end %>
