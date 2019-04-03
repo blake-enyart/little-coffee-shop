@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Registration workflow' do
-  context '*as a unregistered visitor' do
+  context '*as an unregistered visitor' do
     it '*it can register a user' do
       user = build(:user)
 
