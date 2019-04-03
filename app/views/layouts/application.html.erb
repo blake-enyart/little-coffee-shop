@@ -12,7 +12,9 @@
     <nav>
       <%= link_to "Items", items_path %>
       <%= link_to "Merchants", merchants_path %>
-      <%= link_to "Cart", cart_path %>
+
+        <%= link_to "Cart", cart_path %>
+
       <% unless current_user %>
         <%= link_to "Login", login_path %>
         <%= link_to "Register", new_user_path %>
