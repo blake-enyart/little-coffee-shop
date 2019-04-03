@@ -26,7 +26,7 @@ RSpec.describe 'navigation bar' do
   end
   context ' as a registered user' do
     it 'shows all the links' do
-      user = User.create!(name: "noah", email: "email@email.com",password: "1234", street: "123 Street", city: "city", state: "co", zipcode: "00123", role: 0, enabled: true)
+      user = create(:user)
 
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
