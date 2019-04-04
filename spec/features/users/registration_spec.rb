@@ -48,7 +48,7 @@ RSpec.describe 'Registration workflow' do
         expect(page).to have_content('Missing required field(s)')
       end
 
-      xit '*visitor registers with nonunique email' do
+      it '*visitor registers with nonunique email' do
         user = create(:user) #saves user to database
 
         visit root_path
@@ -65,10 +65,10 @@ RSpec.describe 'Registration workflow' do
         fill_in "State", with: user.state
         fill_in "Zipcode", with: user.zipcode
         click_button "Register User"
-
-        expect(page).to have_content('The email address is already in use')
-        expect(page).to_not have_content(user.password)
-        expect(page).to_not have_content(user.email)
+        
+        expect(page).to have_content("Email has already been taken")
+        expect(find_field('Email').value).to_not eq(user.email)
+        expect(find_field('Password').value).to_not eq(user.password)
       end
     end
   end
