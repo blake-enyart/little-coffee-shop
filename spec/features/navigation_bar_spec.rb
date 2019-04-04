@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'navigation bar' do
-  context ' as a visitor' do
+  context 'as a visitor' do
     it 'shows all the links' do
       visit root_path
 
@@ -24,7 +24,7 @@ RSpec.describe 'navigation bar' do
       expect(current_path).to eq(root_path)
     end
   end
-  context ' as a registered user' do
+  context 'as a registered user' do
     it 'shows navigation bar for a registered user' do
       user = create(:user)
 
@@ -53,11 +53,9 @@ RSpec.describe 'navigation bar' do
 
       click_link "Logout"
       expect(current_path).to eq(root_path)
-
-
     end
   end
-  context ' as a merchant' do
+  context 'as a merchant' do
     it 'shows navigation bar for merchant' do
       merchant = create(:merchant)
 
@@ -85,7 +83,7 @@ RSpec.describe 'navigation bar' do
       expect(current_path).to eq(root_path)
     end
   end
-  context ' as an Admin' do
+  context 'as an Admin' do
     it 'shows navigation bar for admin' do
       admin = create(:admin)
 
