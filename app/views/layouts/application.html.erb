@@ -15,7 +15,7 @@
       <%= link_to "Merchants", merchants_path %>
 
       <% unless merchant_user? || admin_user? %>
-        <%= link_to "Cart", cart_path %>
+        <%= link_to "Cart", cart_path %>: <%= @cart.total_count %>
       <% end %>
 
       <% unless current_user %>

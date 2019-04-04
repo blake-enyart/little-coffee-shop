@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   #user routes
   get '/cart', to: "cart#index", as: :cart
   get '/profile', to: "users#show", as: :profile
+  resources :cart, only: [:create]
 
   #all users routes
   get '/login', to: "sessions#new", as: :login
