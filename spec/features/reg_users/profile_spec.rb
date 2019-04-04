@@ -33,7 +33,7 @@ RSpec.describe 'Profile Show Page' do
         expect(current_path).to eq(edit_profile_path)
         expect(find_field('Name').value).to eq(@user.name)
         expect(find_field('Email').value).to eq(@user.email)
-        expect(find_field('Address').value).to eq(@user.street)
+        expect(find_field('Street').value).to eq(@user.street)
         expect(find_field('City').value).to eq(@user.city)
         expect(find_field('State').value).to eq(@user.state)
         expect(find_field('Zipcode').value).to eq(@user.zipcode)
@@ -41,6 +41,7 @@ RSpec.describe 'Profile Show Page' do
         expect(find_field('Password confirmation').value).to eq(nil)
 
         fill_in('Name', with: 'new name')
+        
         click_button('Submit')
         expect(current_path).to eq(profile_path)
         expect(page).to have_content('Your data is updated')

@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   #user routes
   get '/cart', to: "cart#index", as: :cart
   get '/profile', to: "users#show", as: :profile
-  get '/profile', to: "users#edit", as: :edit_profile
+  get '/profile/edit', to: "users#edit", as: :edit_profile
   resources :cart, only: [:create]
 
   #all users routes
@@ -23,5 +23,5 @@ Rails.application.routes.draw do
   post '/login', to: "sessions#create"
   get '/logout', to: "sessions#destroy", as: :logout
 
-  resources :users, only: [:new, :create, :edit]
+  resources :users, only: [:new, :create, :edit, :update]
 end

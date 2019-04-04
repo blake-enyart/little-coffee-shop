@@ -26,9 +26,33 @@ class UsersController < ApplicationController
     end
   end
 
+  def edit
+    @user = current_user
+  end
+
+  def update
+    @user = current_user
+    if user_params[:password] != ''
+
+      @user.update(user_params)
+      flash[:success] = "Your data is updated"
+
+      redirect_to profile_path
+    else
+      binding.pry
+      @user.update!(profile_params)
+      flash[:success] = "Your data is updated"
+      redirect_to profile_path
+    end
+  end
+
   private
 
   def user_params
     params.require(:user).permit(:name, :street, :city, :state, :zipcode, :email, :password)
+  end
+
+  def profile_params
+    params.require(:user).permit(:name, :street, :city, :state, :zipcode, :email)
   end
 end
