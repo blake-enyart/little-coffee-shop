@@ -10,9 +10,9 @@ class Item < ApplicationRecord
 
   def average_fulfilled_time
     fulfillment = Item.joins(:orders)
-    .select("avg(order_items.updated_at - order_items.created_at) as average_time")
-    .where(id: self.id, order_items: {fulfilled: true})
-    .group(:id).first
+                      .select("avg(order_items.updated_at - order_items.created_at) as average_time")
+                      .where(id: self.id, order_items: {fulfilled: true})
+                      .group(:id).first
 
     if fulfillment
       fulfillment.average_time
