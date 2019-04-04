@@ -28,8 +28,8 @@ RSpec.describe Item, type: :model do
       order_item_1= create(:fulfilled_order_item, item: item, order: order_1, created_at: 3.days.ago)
       order_item_2= create(:fulfilled_order_item, item: item, order: order_2, created_at: 2.days.ago)
       order_item_3= create(:fulfilled_order_item, item: item, order: order_3, created_at: 6.days.ago)
-
-      expect(item.average_fulfilled_time).to include("3")
+# binding.pry
+      expect(item.average_fulfilled_time).to include("3 days 16:00")
 
     end
   end
