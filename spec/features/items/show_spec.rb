@@ -12,8 +12,8 @@ RSpec.describe 'Items Show Page', type: :feature do
         visit item_path(@item_1)
 
         expect(page).to have_content(@item_1.name)
-        expect(page).to have_content( "Description: #{@@item_1.description}" )
-        expect(page).to have_xpath("//img[contains(@src,'#{File.basename(@item_1.image_url)}')]")
+        expect(page).to have_content( "Description: #{@item_1.description}" )
+        expect(page).to have_css("img[src*='#{@item_1.image_url}']")
         expect(page).to have_content( "Merchant: #{@item_1.user.name}" )
         expect(page).to have_content( "In stock: #{@item_1.quantity}" )
         expect(page).to have_content( "Unit Price: $#{@item_1.price.round(2)}" )
@@ -27,12 +27,13 @@ RSpec.describe 'Items Show Page', type: :feature do
 
       it "lets a registered user see all information for this item" do
         user = create(:user)
-
         allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+
+        visit item_path(@item_1)
 
         expect(page).to have_content(@item_1.name)
         expect(page).to have_content( "Description: #{@item_1.description}" )
-        expect(page).to have_xpath("//img[contains(@src,'#{File.basename(@item_1.image_url)}')]")
+        expect(page).to have_css("img[src*='#{@item_1.image_url}']")
         expect(page).to have_content( "Merchant: #{@item_1.user.name}" )
         expect(page).to have_content( "In stock: #{@item_1.quantity}" )
         expect(page).to have_content( "Unit Price: $#{@item_1.price.round(2)}" )
@@ -45,12 +46,13 @@ RSpec.describe 'Items Show Page', type: :feature do
 
       it "lets a merchant see all information for this item" do
         merchant = create(:merchant)
-
         allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(merchant)
+
+        visit item_path(@item_1)
 
         expect(page).to have_content(@item_1.name)
         expect(page).to have_content( "Description: #{@item_1.description}" )
-        expect(page).to have_xpath("//img[contains(@src,'#{File.basename(@item_1.image_url)}')]")
+        expect(page).to have_css("img[src*='#{@item_1.image_url}']")
         expect(page).to have_content( "Merchant: #{@item_1.user.name}" )
         expect(page).to have_content( "In stock: #{@item_1.quantity}" )
         expect(page).to have_content( "Unit Price: $#{@item_1.price.round(2)}" )
@@ -62,12 +64,13 @@ RSpec.describe 'Items Show Page', type: :feature do
 
       it "lets an admin see all information for this item" do
         admin = create(:admin)
-
         allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(admin)
+
+        visit item_path(@item_1)
 
         expect(page).to have_content(@item_1.name)
         expect(page).to have_content( "Description: #{@item_1.description}" )
-        expect(page).to have_xpath("//img[contains(@src,'#{File.basename(@item_1.image_url)}')]")
+        expect(page).to have_css("img[src*='#{@item_1.image_url}']")
         expect(page).to have_content( "Merchant: #{@item_1.user.name}" )
         expect(page).to have_content( "In stock: #{@item_1.quantity}" )
         expect(page).to have_content( "Unit Price: $#{@item_1.price.round(2)}" )
