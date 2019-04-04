@@ -48,7 +48,7 @@ RSpec.describe 'Registration workflow' do
         expect(page).to have_content('Missing required field(s)')
       end
 
-      xit '*visitor registers with nonunique email' do
+      it '*visitor registers with nonunique email' do
         user = create(:user) #saves user to database
 
         visit root_path

@@ -13,6 +13,9 @@ class UsersController < ApplicationController
     if @user.save
       flash[:alert] = "You are now registered and logged in as #{@user.email}."
       redirect_to profile_path
+    elsif @user.errors.full_messages.include?('Email')
+      flash[:error] = @user.errors.full_messages
+      render :new
     else
       flash[:error] = 'Missing required field(s)'
       render :new
