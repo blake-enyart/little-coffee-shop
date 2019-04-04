@@ -10,7 +10,6 @@
     <li>Average fulfillment time: <%= @item.average_fulfilled_time %></li>
   </ul>
 </section>
-<i>if </i>
 
 <% unless merchant_user? || admin_user? %>
   <%= button_to "Add to Cart", cart_path(item_id: @item.id) %>
