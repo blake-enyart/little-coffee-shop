@@ -6,6 +6,7 @@ class SessionsController < ApplicationController
 
   def destroy
 
+    flash[:alert] = 'You are now logged out'
     redirect_to root_path
   end
 
@@ -14,7 +15,10 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       flash[:success] = "You are now logged in as #{user.email}."
-      user_redirect
+      user_redirect()
+    else
+      flash[:error] = 'Your credentials are incorrect.'
+      render :new
     end
   end
 
