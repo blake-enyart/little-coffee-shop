@@ -10,8 +10,8 @@ Rails.application.routes.draw do
   #admin routes
   namespace :admin do
     get '/dashboard', to: 'users#show', as: :dashboard
-    resources :merchants, only: [:show]
-    post 'merchants', to: 'merchants#edit', as: :merchant_edit
+    resources :merchants, only: [:show, :update]
+    resources :users, only: [:show]
   end
 
   #user routes

@@ -1,1 +1,1 @@
-<%= link_to 'downgrade to user', admin_user_path(@current_merch), method: :post %>
+<%= link_to 'downgrade to user', "/admin/merchants/#{@current_merch.id}", method: :patch %>
