@@ -81,7 +81,24 @@ RSpec.describe 'Login workflow' do
         click_button('Log In')
 
         expect(current_path).to eq(login_path)
-        
+
+        expect(page).to have_content('Your credentials are incorrect.')
+      end
+
+      it '*cannot login with bad email' do
+        user = create(:user)
+
+        visit root_path
+
+        click_link('Login')
+
+        expect(current_path).to eq(login_path)
+        fill_in('Email', with: 'wrong_email@gmail.com')
+        fill_in('Password', with: user.password)
+        click_button('Log In')
+
+        expect(current_path).to eq(login_path)
+
         expect(page).to have_content('Your credentials are incorrect.')
       end
     end
