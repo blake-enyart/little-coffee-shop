@@ -19,10 +19,8 @@ RSpec.describe 'Profile Show Page' do
         expect(current_path).to eq(profile_path)
         expect(page).to have_content(user.name)
         expect(page).to have_content("Email: #{user.email}")
-        expect(page).to have_content("Address: #{user.street}")
-        expect(page).to have_content("City: #{user.city}")
-        expect(page).to have_content("State: #{user.state}")
-        expect(page).to have_content("Zipcode: #{user.zipcode}")
+        expect(page).to have_content(user.street)
+        expect(page).to have_content("#{user.city}, #{user.state} #{user.zipcode}")
         expect(page).to_not have_content(user.password)
         expect(page).to have_link('Edit Details')
       end
