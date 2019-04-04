@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   end
 
   def show
-
+    render file: "/public/404", status: 404 unless current_reguser?
   end
 
   def create
