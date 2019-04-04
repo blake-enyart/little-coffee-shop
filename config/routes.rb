@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   #admin routes
   namespace :admin do
-    get '/dashboard', to: 'dashboard#show', as: :dashboard
+    get '/dashboard', to: 'users#show', as: :dashboard
   end
 
   #user routes
@@ -20,5 +20,6 @@ Rails.application.routes.draw do
   get '/login', to: "sessions#new", as: :login
   post '/login', to: "sessions#create"
   get '/logout', to: "sessions#destroy", as: :logout
+
   resources :users, only: [:new, :create]
 end
