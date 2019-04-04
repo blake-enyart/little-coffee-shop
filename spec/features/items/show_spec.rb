@@ -29,7 +29,6 @@ RSpec.describe 'Items Show Page', type: :feature do
         expect(page).to have_content( "Unit Price: $#{@item_1.price.round(2)}" )
         expect(page).to have_content( "Average fulfillment time: #{@item_1.average_fulfilled_time}" )
 
-
         expect(page).to have_button("Add to Cart")
         expect(page).to_not have_content( "#{@item_2.name}" )
         expect(page).to_not have_content( "#{@item_2.description}" )
