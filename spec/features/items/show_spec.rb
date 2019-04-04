@@ -16,7 +16,6 @@ RSpec.describe 'Items Show Page', type: :feature do
         @order_item_1= create(:fulfilled_order_item, item: @item_1, order: @order_1, created_at: 3.days.ago)
         @order_item_2= create(:fulfilled_order_item, item: @item_1, order: @order_2, created_at: 2.days.ago)
         @order_item_3= create(:fulfilled_order_item, item: @item_1, order: @order_3, created_at: 6.days.ago)
-
       end
 
       it "lets an unregistred visitor to see all information for this item" do
