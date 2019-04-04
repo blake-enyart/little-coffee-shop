@@ -35,7 +35,6 @@ RSpec.describe Item, type: :model do
 
         item = create(:item)
 
-
         expect(item.average_fulfilled_time).to include("no fulfillment data available for this item")
       end
     end
