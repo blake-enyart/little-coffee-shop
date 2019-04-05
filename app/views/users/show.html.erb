@@ -1,0 +1,6 @@
+<h1><%= @user.name %></h1>
+<p>Email: <%= @user.email %></p>
+<h3>Address:</h3>
+<p><%= @user.street %></p>
+<p><%= @user.city %>, <%= @user.state %> <%= @user.zipcode %></p>
+<%= link_to 'Edit Details', edit_user_path(@user) %>
