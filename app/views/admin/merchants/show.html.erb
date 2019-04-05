@@ -1,1 +1,4 @@
-<%= link_to 'downgrade to user', "/admin/merchants/#{@current_merch.id}", method: :patch %>
+<% if flash[:notice] %>
+    <div class="notice"><%= flash[:notice] %></div>
+<% end %>
+<%= link_to 'downgrade to user', "/admin/merchants/#{@current_user.id}", method: :patch %>

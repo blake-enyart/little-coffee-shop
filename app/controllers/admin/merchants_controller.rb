@@ -1,13 +1,14 @@
 class Admin::MerchantsController < ApplicationController
 
   def show
-    @current_merch = User.find(params[:id])
-  #   render file: "/public/404", status: 404 unless admin_user?
+    render file: "/public/404", status: 404 unless admin_user?
+    @current_user = User.find(params[:id])
   end
 
   def update
-    @current_merch = User.find(params[:id])
-    @current_merch[:role] = 0
-    redirect_to admin_user_path(@current_merch)
+    @current_user = User.find(params[:id])
+    @current_user.update!(role: 0)
+    flash[:notice] = "Merchant downgraded"
+    redirect_to admin_user_path(@current_user)
   end
 end
