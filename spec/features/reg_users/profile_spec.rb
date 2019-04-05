@@ -16,7 +16,7 @@ RSpec.describe 'Profile Show Page' do
         click_button "Log In"
       end
 
-      it '*can see all the appropriate user data' do
+      it '*can see all the appropriate user data on profile' do
 
         expect(current_path).to eq(profile_path)
         expect(page).to have_content(@user.name)
@@ -27,7 +27,7 @@ RSpec.describe 'Profile Show Page' do
         expect(page).to have_link('Edit Details')
       end
 
-      it '*can edit profile data' do
+      it '*can edit single profile data attribute' do
         click_link('Edit Details')
 
         expect(current_path).to eq(edit_profile_path)
@@ -41,11 +41,47 @@ RSpec.describe 'Profile Show Page' do
         expect(find_field('Password confirmation').value).to eq(nil)
 
         fill_in('Name', with: 'new name')
-        
+
         click_button('Submit')
         expect(current_path).to eq(profile_path)
         expect(page).to have_content('Your data is updated')
         expect(page).to have_content('new name')
+      end
+
+      it '*can edit all profile data attributes' do
+        user_2 = build(:user)
+
+        click_link('Edit Details')
+
+        expect(current_path).to eq(edit_profile_path)
+        expect(find_field('Name').value).to eq(@user.name)
+        expect(find_field('Email').value).to eq(@user.email)
+        expect(find_field('Street').value).to eq(@user.street)
+        expect(find_field('City').value).to eq(@user.city)
+        expect(find_field('State').value).to eq(@user.state)
+        expect(find_field('Zipcode').value).to eq(@user.zipcode)
+        expect(find_field('Password').value).to eq(nil)
+        expect(find_field('Password confirmation').value).to eq(nil)
+
+        fill_in('Name', with: user_2.name)
+        fill_in('Email', with: user_2.email)
+        fill_in('Street', with: user_2.street)
+        fill_in('City', with: user_2.street)
+        fill_in('State', with: user_2.state)
+        fill_in('Zipcode', with: user_2.zipcode)
+        fill_in('Password', with: user_2.password)
+        fill_in('Password confirmation', with: user_2.password)
+
+        click_button('Submit')
+
+        expect(current_path).to eq(profile_path)
+        expect(page).to have_content('Your data is updated')
+        expect(page).to have_content(user_2.name)
+        expect(page).to have_content(user_2.email)
+        expect(page).to have_content(user_2.street)
+        expect(page).to have_content(user_2.state)
+        expect(page).to have_content(user_2.zipcode)
+        expect(page).to_not have_content(user_2.password)
       end
     end
 

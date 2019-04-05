@@ -19,7 +19,7 @@ RSpec.describe 'Registration workflow' do
         fill_in "City", with: user.city
         fill_in "State", with: user.state
         fill_in "Zipcode", with: user.zipcode
-        click_button "Register User"
+        click_button "Submit"
 
         expect(current_path).to eq(profile_path)
         expect(page).to have_content("You are now registered and logged in as #{user.email}.")
@@ -43,7 +43,7 @@ RSpec.describe 'Registration workflow' do
         fill_in "City", with: user.city
         fill_in "State", with: user.state
         #missing zipcode for completion
-        click_button "Register User"
+        click_button "Submit"
 
         expect(page).to have_content('Missing required field(s)')
       end
@@ -64,8 +64,8 @@ RSpec.describe 'Registration workflow' do
         fill_in "City", with: user.city
         fill_in "State", with: user.state
         fill_in "Zipcode", with: user.zipcode
-        click_button "Register User"
-        
+        click_button "Submit"
+
         expect(page).to have_content("Email has already been taken")
         expect(find_field('Email').value).to_not eq(user.email)
         expect(find_field('Password').value).to_not eq(user.password)
