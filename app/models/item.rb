@@ -7,4 +7,17 @@ class Item < ApplicationRecord
   belongs_to :user
   has_many :order_items
   has_many :orders, through: :order_items
+
+  def average_fulfilled_time
+    fulfillment = Item.joins(:order_item)
+                      .select("avg(order_items.updated_at - order_items.created_at) as average_time")
+                      .where(id: self.id, order_items: {fulfilled: true})
+                      .group(:id).first
+
+    if fulfillment
+      fulfillment.average_time
+    else
+      "no fulfillment data available for this item"
+    end
+  end
 end
