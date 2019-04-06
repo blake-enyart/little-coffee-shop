@@ -13,4 +13,8 @@ class User < ApplicationRecord
   has_secure_password
 
   enum role: ['user', 'merchant', 'admin']
+
+  def disable_merchant_items
+    items.each {|item| item.disable}
+  end
 end
