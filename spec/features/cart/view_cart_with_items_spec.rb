@@ -33,6 +33,8 @@ RSpec.describe 'User views their cart show page with items in the cart', type: :
       end
 
       expect(page).to have_content("Grand Total: $#{item_1.price + item_2.price * 2}")
+
+      expect(page).to have_link("Empty Cart")
     end
   end
 end
