@@ -34,9 +34,6 @@
         <%= link_to "Dashboard", dashboard_path %>
       <% elsif admin_user? %>
         <%= link_to "Dashboard", admin_dashboard_path %>
-      <% end %>
-
-      <% if admin_user? %>
         <%= link_to 'Users', admin_users_path %>
       <% end %>
     </nav>
