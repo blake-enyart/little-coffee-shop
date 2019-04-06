@@ -26,5 +26,21 @@ class Item < ApplicationRecord
     end
   end
 
+  def self.five_most_popular
+    Item.joins(:order_items)
+    .select("items.*, sum(order_items.quantity) as total_fulfilled")
+    .where(order_items: {fulfilled: true}, items: {enabled: true})
+    .group(:id)
+    .order("total_fulfilled desc")
+    .limit(5)
+  end
 
+  def self.five_least_popular
+    Item.joins(:order_items)
+    .select("items.*, sum(order_items.quantity) as total_fulfilled")
+    .where(order_items: {fulfilled: true}, items: {enabled: true})
+    .group(:id)
+    .order("total_fulfilled asc")
+    .limit(5)
+  end
 end
