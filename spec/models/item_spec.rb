@@ -14,14 +14,16 @@ RSpec.describe Item, type: :model do
     it { should have_many(:orders).through(:order_items) }
   end
 
-<<<<<<< HEAD
+
   it 'model methods' do
     item = create(:item)
 
     expect(item.enabled).to eq(true)
     item.disable
     expect(item.enabled).to eq(false)
-=======
+  end
+
+  
   describe 'instance methods' do
     describe ".average_fulfilled_time" do
       it 'should calculate average fulfillment time for an item' do
@@ -46,6 +48,5 @@ RSpec.describe Item, type: :model do
         expect(item.average_fulfilled_time).to include("no fulfillment data available for this item")
       end
     end
->>>>>>> 6d757cd365e0132465dab8ac95a4dbf2558aa6d0
   end
 end

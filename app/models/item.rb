@@ -8,8 +8,12 @@ class Item < ApplicationRecord
   has_many :order_items
   has_many :orders, through: :order_items
 
+  def disable
+    update(enabled: false)
+  end
+
   def average_fulfilled_time
-    fulfillment = Item.joins(:order_item)
+    fulfillment = Item.joins(:order_items)
                       .select("avg(order_items.updated_at - order_items.created_at) as average_time")
                       .where(id: self.id, order_items: {fulfilled: true})
                       .group(:id).first
