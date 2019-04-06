@@ -14,3 +14,7 @@
 <% end %>
 
 Grand Total: $<%= @cart.grand_total.round(2) %>
+
+<% unless @cart.empty? %>
+  <%= link_to "Empty Cart" %>
+<% end %>
