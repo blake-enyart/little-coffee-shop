@@ -1,7 +1,11 @@
 class MerchantsController < ApplicationController
 
   def index
+    @merchants = User.where(role: 'merchant')
+  end
 
+  def show
+    @user = User.find(params[:id])
   end
 
   def dashboard

@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   #merchant routes
   resources :items, only: [:index, :show]
-  resources :merchants, only: [:index]
+  resources :merchants, only: [:index, :show]
   get '/dashboard', to: 'merchants#dashboard', as: :dashboard
 
   #admin routes
