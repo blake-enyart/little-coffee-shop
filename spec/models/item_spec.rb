@@ -14,7 +14,18 @@ RSpec.describe Item, type: :model do
     it { should have_many(:orders).through(:order_items) }
   end
 
-  describe 'instance methods' do
+  describe 'Instance methods' do
+    describe "#subtotal(quantity)" do
+      it 'returns a subtotal aka item.price * quantity argument' do
+        item = create(:item)
+        quantity = 2
+        expected = item.price * quantity
+
+        expect(item.subtotal(quantity)).to eq(expected)
+      end
+    end
+
+
     describe ".average_fulfilled_time" do
       it 'should calculate average fulfillment time for an item' do
         merchant = create(:merchant)
@@ -31,6 +42,7 @@ RSpec.describe Item, type: :model do
 
         expect(item.average_fulfilled_time).to include("3 days 16:00")
       end
+      
       it 'should calculate average fulfillment time for an item' do
 
         item = create(:item)
