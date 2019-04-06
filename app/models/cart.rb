@@ -31,4 +31,8 @@ class Cart
     items.sum { |item, quantity| item.price * quantity }
   end
 
+  def empty?
+    @contents.count == 0
+  end
+
 end

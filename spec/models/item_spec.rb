@@ -25,7 +25,6 @@ RSpec.describe Item, type: :model do
       end
     end
 
-
     describe ".average_fulfilled_time" do
       it 'should calculate average fulfillment time for an item' do
         merchant = create(:merchant)
@@ -44,10 +43,18 @@ RSpec.describe Item, type: :model do
       end
       
       it 'should calculate average fulfillment time for an item' do
-
         item = create(:item)
 
         expect(item.average_fulfilled_time).to include("no fulfillment data available for this item")
+      end
+    end
+    
+    describe '.disable' do
+      it 'should change item status to disabled' do
+        item = create(:item)
+        expect(item.enabled).to eq(true)
+        item.disable
+        expect(item.enabled).to eq(false)
       end
     end
   end
