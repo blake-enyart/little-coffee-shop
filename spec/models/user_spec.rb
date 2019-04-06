@@ -18,4 +18,20 @@ RSpec.describe User, type: :model do
     it { should have_many :orders } # for customers
     it { should have_many :items } # for merchants
   end
+
+  describe 'Class Methods' do
+    it '.permit_email?' do
+      user_1 = create(:user)
+
+      actual = User.permit_email?(user_1.email)
+      expected = false
+
+      expect(actual).to eq(expected)
+
+      actual = User.permit_email?('new_email@gmail.com')
+      expected = true
+
+      expect(actual).to eq(expected)
+    end
+  end
 end

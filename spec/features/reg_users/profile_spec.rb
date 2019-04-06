@@ -173,6 +173,22 @@ RSpec.describe 'Profile Show Page' do
         expect(page).to_not have_content('Your data is updated')
 
       end
+
+      it '*fills in email that has been taken' do
+        # user_2 is saved in db and @user is attempting to use user_2 email
+        user_2 = create(:user)
+
+        click_link('Edit Details')
+
+        expect(current_path).to eq(edit_profile_path)
+        expect(find_field('Email').value).to eq(@user.email)
+
+        fill_in('Email', with: user_2.email)
+        click_button('Submit')
+
+        expect(page).to have_content('That email is already in use')
+        expect(page).to_not have_content('Your data is updated')
+      end
     end
   end
 end
