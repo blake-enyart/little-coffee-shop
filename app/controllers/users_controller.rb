@@ -33,6 +33,10 @@ class UsersController < ApplicationController
 
   def update
     @user = current_user
+    if params[:user][:password] != params[:user][:password_confirmation]
+      flash[:error] = 'Your passwords are mismatched'
+      return render :edit
+    end
     if params[:user][:password] == ''
       @user.update(update_params)
       flash[:success] = "Your data is updated"
