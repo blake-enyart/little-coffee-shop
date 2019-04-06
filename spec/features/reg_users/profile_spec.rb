@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe 'Profile Show Page' do
-  describe '*happy path' do
-    context '*as a registered user' do
+  context '*as a registered user' do
+    describe '*happy path' do
       before(:each) do
         @user = create(:user)
 
@@ -141,6 +141,37 @@ RSpec.describe 'Profile Show Page' do
 
         expect(current_path).to eq(profile_path)
         expect(page).to have_content(@user.name)
+      end
+    end
+
+    describe '*sad path' do
+      before(:each) do
+        @user = create(:user)
+
+        visit root_path
+
+        click_link "Login"
+
+        expect(current_path).to eq(login_path)
+        fill_in "email", with: @user.email
+        fill_in "password", with: @user.password
+        click_button "Log In"
+      end
+
+      it '*user fills in mismatched passwords' do
+        click_link('Edit Details')
+
+        expect(current_path).to eq(edit_profile_path)
+        expect(find_field('Password').value).to eq(nil)
+        expect(find_field('Password confirmation').value).to eq(nil)
+
+        fill_in('Password', with: 'new password')
+        fill_in('Password confirmation', with: 'wrong password')
+        click_button('Submit')
+
+        expect(page).to have_content('Your passwords are mismatched')
+        expect(page).to_not have_content('Your data is updated')
+
       end
     end
   end
