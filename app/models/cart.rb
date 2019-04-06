@@ -27,10 +27,6 @@ class Cart
     items_hash
   end
 
-  def sub_total(item, quantity)
-    item.price * quantity
-  end
-
   def grand_total
     total = 0.0
     items.each do |item, quantity|

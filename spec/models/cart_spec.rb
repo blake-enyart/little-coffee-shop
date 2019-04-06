@@ -50,15 +50,6 @@ RSpec.describe Cart do
     end
   end
 
-  describe "#sub_total(item, quantity)" do
-    it 'returns a sub_total based on an item and desired quantity' do
-      quantity = @cart.contents[@item_1.id]
-      expected = @item_1.price * quantity
-
-      expect(@cart.sub_total(@item_1, quantity)).to eq(expected)
-    end
-  end
-
   describe "#grand_total" do
     it 'returns a grand total price of all items in cart' do
       item_1_quantity = @cart.contents[@item_1.id]
