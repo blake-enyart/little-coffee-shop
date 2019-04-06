@@ -21,5 +21,13 @@ RSpec.describe 'merchant role downgrade' do
       expect(page).to_not have_content(item_2.name)
       expect(page).to_not have_content(item_3.name)
     end
+
+    it 'when admin visits merchant that doesnt exist' do
+      admin = create(:admin)
+      user = create(:user)
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(admin)
+      visit admin_merchant_path(user)
+      expect(current_path).to eq(admin_user_path(user))
+    end
   end
 end
