@@ -1,15 +1,14 @@
 class Admin::MerchantsController < ApplicationController
-
+  before_action :pdne_unless_admin
   def show
-    render file: "/public/404", status: 404 unless admin_user?
-    @current_user = User.find(params[:id])
+    @user_to_be_updated = User.find(params[:id])
   end
-  
+
   def update
-    @current_user = User.find(params[:id])
-    @current_user.disable_merchant_items if admin_user?
-    @current_user.update!(role: 0)
-    flash[:notice] = "Merchant downgraded"
-    redirect_to admin_user_path(@current_user)
+    user_to_be_updated = User.find(params[:id])
+    user_to_be_updated.disable_merchant_items
+    user_to_be_updated.update(role: 0)
+    flash[:notice] = "Merchant #{user_to_be_updated.name} downgraded"
+    redirect_to admin_user_path(user_to_be_updated)
   end
 end
