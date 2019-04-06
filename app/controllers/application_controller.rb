@@ -23,8 +23,8 @@ class ApplicationController < ActionController::Base
     @cart ||= Cart.new(session[:cart])
   end
 
-  def pdne_unless_admin
+  def error_unless_admin
     render file: "/public/404", status: 404 unless admin_user?
-  end 
+  end
 
 end

@@ -1,5 +1,5 @@
 class Admin::MerchantsController < ApplicationController
-  before_action :pdne_unless_admin
+  before_action :error_unless_admin
   def show
     @user_to_be_updated = User.find(params[:id])
   end
