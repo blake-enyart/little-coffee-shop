@@ -33,6 +33,22 @@ RSpec.describe Cart do
       end
     end
 
+    describe "#deduct_item" do
+      it 'deducts an item to its contents' do
+        subject.deduct_item(1)
+        subject.deduct_item(2)
+
+        expect(subject.contents).to eq({'1' => 1, '2' => 2})
+      end
+
+      it 'deletes an item if its quantity reaches 0' do
+        subject.deduct_item(1)
+        subject.deduct_item(1)
+
+        expect(subject.contents).to eq({'2' => 3})
+      end
+    end
+
     describe "#count_of" do
       it 'adds returns the count of an item_id in the cart' do
         expect(subject.count_of(1)).to eq(2) # two copies of item 1
