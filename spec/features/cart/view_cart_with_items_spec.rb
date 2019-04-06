@@ -21,7 +21,7 @@ RSpec.describe 'User views their cart show page with items in the cart', type: :
         expect(page).to have_css("img[src*='#{item_1.image_url}']")
         expect(page).to have_content(item_1.user.name)
         expect(page).to have_content("$#{item_1.price}")
-        expect(page).to have_content("Subtotal: #{item_1.price}")
+        expect(page).to have_content("Subtotal: #{item_1.subtotal(1)}")
       end
 
       within "#cart-item-#{item_2.id}" do
@@ -29,7 +29,7 @@ RSpec.describe 'User views their cart show page with items in the cart', type: :
         expect(page).to have_css("img[src*='#{item_2.image_url}']")
         expect(page).to have_content(item_2.user.name)
         expect(page).to have_content("$#{item_2.price}")
-        expect(page).to have_content("Subtotal: #{item_2.price * 2}")
+        expect(page).to have_content("Subtotal: #{item_2.subtotal(2)}")
       end
 
       expect(page).to have_content("Grand Total: $#{item_1.price + item_2.price * 2}")
