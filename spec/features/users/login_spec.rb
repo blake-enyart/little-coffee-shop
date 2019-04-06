@@ -26,6 +26,7 @@ RSpec.describe 'Login workflow' do
 
         expect(page).to have_content("You are now logged in as #{user.email}.")
         expect(current_path).to eq(profile_path)
+        expect(page).to have_content(user.name)
       end
     end
 
