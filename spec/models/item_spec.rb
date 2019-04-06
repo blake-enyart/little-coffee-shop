@@ -41,7 +41,7 @@ RSpec.describe Item, type: :model do
 
         expect(item.average_fulfilled_time).to include("3 days 16:00")
       end
-      
+
       it 'should calculate average fulfillment time for an item' do
         item = create(:item)
 
@@ -56,6 +56,46 @@ RSpec.describe Item, type: :model do
         item.disable
         expect(item.enabled).to eq(false)
       end
+    end
+  end
+
+  describe 'class methods' do
+    it "finds the #five_most_popular and #five_least_popular" do
+
+      @merchant = create(:merchant)
+      @user = create(:user)
+
+      @item_1 = create(:inactive_item)
+      @item_2 = create(:item, quantity: 30)
+      @item_3 = create(:item, quantity: 30)
+      @item_4 = create(:item, quantity: 30)
+      @item_5 = create(:item, quantity: 30)
+      @item_6 = create(:item, quantity: 30)
+      @item_7 = create(:item, quantity: 30)
+      @item_8 = create(:item, quantity: 30)
+      @item_9 = create(:item, quantity: 30)
+      @item_10 = create(:item, quantity: 30)
+      @item_11 = create(:item, quantity: 30)
+
+      @order_1 = create(:order, user: @user)
+      @order_2 = create(:shipped_order, user: @user)
+      @order_3 = create(:shipped_order, user: @user)
+
+      @order_item_1= create(:fulfilled_order_item, item: @item_1, order: @order_1)
+      @order_item_2= create(:fulfilled_order_item, item: @item_2, order: @order_2, quantity: 20)
+      @order_item_3= create(:fulfilled_order_item, item: @item_3, order: @order_2, quantity: 18 )
+      @order_item_4= create(:fulfilled_order_item, item: @item_4, order: @order_2, quantity: 16 )
+      @order_item_5= create(:fulfilled_order_item, item: @item_5, order: @order_2, quantity: 14 )
+      @order_item_6= create(:fulfilled_order_item, item: @item_6, order: @order_2, quantity: 12 )
+      @order_item_7= create(:fulfilled_order_item, item: @item_7, order: @order_3, quantity: 10 )
+      @order_item_8= create(:fulfilled_order_item, item: @item_8, order: @order_3, quantity: 9 )
+      @order_item_9= create(:fulfilled_order_item, item: @item_9, order: @order_3, quantity: 8 )
+      @order_item_10= create(:fulfilled_order_item, item: @item_10, order: @order_3, quantity: 6 )
+      @order_item_11= create(:fulfilled_order_item, item: @item_11, order: @order_3, quantity: 2 )
+      @order_item_12= create(:fulfilled_order_item, item: @item_11, order: @order_3, quantity: 2 )
+
+      expect(Item.five_most_popular).to eq([@item_2,@item_3,@item_4,@item_5,@item_6])
+      expect(Item.five_least_popular).to eq([@item_11,@item_10,@item_9,@item_8,@item_7])
     end
   end
 end
