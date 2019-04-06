@@ -19,6 +19,22 @@ RSpec.describe User, type: :model do
     it { should have_many :items } # for merchants
   end
 
+  describe 'Class Methods' do
+    it '.permit_email?' do
+      user_1 = create(:user)
+
+      actual = User.permit_email?(user_1.email)
+      expected = false
+
+      expect(actual).to eq(expected)
+
+      actual = User.permit_email?('new_email@gmail.com')
+      expected = true
+
+      expect(actual).to eq(expected)
+    end
+  end
+  
   describe 'Instance Methods' do
     describe '#disable_merchant_items' do
       it 'disables all items for a merchant' do
