@@ -23,4 +23,32 @@ class CartController < ApplicationController
 
     redirect_to cart_path
   end
+
+  def remove_item
+    @cart.contents.delete(params[:id]) # Remove item.id from @contents
+
+    redirect_to cart_path
+  end
+
+  def increment_item
+    item = Item.find(params[:id])
+
+    if @cart.count_of(item.id) < item.quantity # Check there is stock of item available
+      @cart.add_item(item.id)
+    else
+      flash[:out_of_stock] = "You have reached the maximum stock available currently for #{item.name}."
+    end
+
+    redirect_to cart_path
+  end
+
+  def decrement_item
+    item = Item.find(params[:id])
+
+    if @cart.count_of(item.id) < item.quantity
+      @cart.deduct_item(item.id)
+    end
+
+    redirect_to cart_path
+  end
 end
