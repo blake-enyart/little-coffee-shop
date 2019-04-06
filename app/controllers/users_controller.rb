@@ -37,6 +37,16 @@ class UsersController < ApplicationController
       flash[:error] = 'Your passwords are mismatched'
       return render :edit
     end
+    if current_user.email != params[:user][:email]
+      if User.permit_email?(params[:user][:email])
+        @user.update(user_params)
+        flash[:success] = "Your data is updated"
+        return redirect_to profile_path
+      else
+        flash[:error] = 'That email is already in use'
+        return render :edit
+      end
+    end
     if params[:user][:password] == ''
       @user.update(update_params)
       flash[:success] = "Your data is updated"
