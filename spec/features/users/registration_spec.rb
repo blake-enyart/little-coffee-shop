@@ -23,6 +23,8 @@ RSpec.describe 'Registration workflow' do
 
         expect(current_path).to eq(profile_path)
         expect(page).to have_content("You are now registered and logged in as #{user.email}.")
+        expect(page).to have_content("Logout")
+        expect(page).to_not have_content("Login")
       end
     end
 

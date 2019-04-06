@@ -49,7 +49,7 @@ RSpec.describe 'Profile Show Page' do
       end
 
       it '*can edit all profile data attributes' do
-        user_2 = build(:user)
+        new_info = build(:user)
 
         click_link('Edit Details')
 
@@ -63,27 +63,85 @@ RSpec.describe 'Profile Show Page' do
         expect(find_field('Password').value).to eq(nil)
         expect(find_field('Password confirmation').value).to eq(nil)
 
-        fill_in('Name', with: user_2.name)
-        fill_in('Email', with: user_2.email)
-        fill_in('Street', with: user_2.street)
-        fill_in('City', with: user_2.street)
-        fill_in('State', with: user_2.state)
-        fill_in('Zipcode', with: user_2.zipcode)
-        fill_in('Password', with: user_2.password)
-        fill_in('Password confirmation', with: user_2.password)
+        fill_in('Name', with: new_info.name)
+        fill_in('Email', with: new_info.email)
+        fill_in('Street', with: new_info.street)
+        fill_in('City', with: new_info.street)
+        fill_in('State', with: new_info.state)
+        fill_in('Zipcode', with: new_info.zipcode)
+        fill_in('Password', with: new_info.password)
+        fill_in('Password confirmation', with: new_info.password)
 
         click_button('Submit')
 
         expect(current_path).to eq(profile_path)
         expect(page).to have_content('Your data is updated')
-        expect(page).to have_content(user_2.name)
-        expect(page).to have_content(user_2.email)
-        expect(page).to have_content(user_2.street)
-        expect(page).to have_content(user_2.state)
-        expect(page).to have_content(user_2.zipcode)
-        expect(page).to_not have_content(user_2.password)
+        expect(page).to have_content(new_info.name)
+        expect(page).to have_content(new_info.email)
+        expect(page).to have_content(new_info.street)
+        expect(page).to have_content(new_info.state)
+        expect(page).to have_content(new_info.zipcode)
+        expect(page).to_not have_content(new_info.password)
+      end
+
+      it '*can edit all profile data except password' do
+        new_info = build(:user)
+
+        click_link('Edit Details')
+
+        expect(current_path).to eq(edit_profile_path)
+        expect(find_field('Name').value).to eq(@user.name)
+        expect(find_field('Email').value).to eq(@user.email)
+        expect(find_field('Street').value).to eq(@user.street)
+        expect(find_field('City').value).to eq(@user.city)
+        expect(find_field('State').value).to eq(@user.state)
+        expect(find_field('Zipcode').value).to eq(@user.zipcode)
+        expect(find_field('Password').value).to eq(nil)
+        expect(find_field('Password confirmation').value).to eq(nil)
+
+        fill_in('Name', with: new_info.name)
+        fill_in('Email', with: new_info.email)
+        fill_in('Street', with: new_info.street)
+        fill_in('City', with: new_info.street)
+        fill_in('State', with: new_info.state)
+        fill_in('Zipcode', with: new_info.zipcode)
+
+        click_button('Submit')
+
+        expect(current_path).to eq(profile_path)
+        expect(page).to have_content('Your data is updated')
+        expect(page).to have_content(new_info.name)
+        expect(page).to have_content(new_info.email)
+        expect(page).to have_content(new_info.street)
+        expect(page).to have_content(new_info.state)
+        expect(page).to have_content(new_info.zipcode)
+        expect(page).to_not have_content(new_info.password)
+      end
+
+      it '*can change password correctly' do
+        click_link('Edit Details')
+
+        expect(current_path).to eq(edit_profile_path)
+        expect(find_field('Password').value).to eq(nil)
+        expect(find_field('Password confirmation').value).to eq(nil)
+
+        fill_in('Password', with: 'new password')
+        fill_in('Password confirmation', with: 'new password')
+        click_button('Submit')
+
+        expect(current_path).to eq(profile_path)
+        expect(page).to have_content('Your data is updated')
+
+        click_link('Logout')
+        click_link('Login')
+
+        fill_in('Email', with: @user.email)
+        fill_in('Password', with: 'new password')
+        click_button('Log In')
+
+        expect(current_path).to eq(profile_path)
+        expect(page).to have_content(@user.name)
       end
     end
-
   end
 end

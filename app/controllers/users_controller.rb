@@ -12,6 +12,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      session[:user_id] = @user.id
       flash[:alert] = "You are now registered and logged in as #{@user.email}."
       redirect_to profile_path
     elsif @user.errors.keys.include?(:email) &&
@@ -32,16 +33,21 @@ class UsersController < ApplicationController
 
   def update
     @user = current_user
-    @user.update!(update_params)
-    flash[:success] = "Your data is updated"
-
-    redirect_to profile_path
+    if params[:user][:password] == ''
+      @user.update(update_params)
+      flash[:success] = "Your data is updated"
+      redirect_to profile_path
+    else
+      @user.update(user_params)
+      flash[:success] = "Your data is updated"
+      redirect_to profile_path
+    end
   end
 
   private
 
   def user_params
-    params.require(:user).permit(:name, :street, :city, :state, :zipcode, :email, :password)
+    params.require(:user).permit(:name, :street, :city, :state, :zipcode, :email, :password, :password_confirmation)
   end
 
   def update_params
