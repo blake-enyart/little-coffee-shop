@@ -18,4 +18,9 @@ class CartController < ApplicationController
     redirect_to items_path
   end
 
+  def destroy
+    @cart.contents.clear
+
+    redirect_to cart_path
+  end
 end

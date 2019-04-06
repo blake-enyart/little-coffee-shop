@@ -16,6 +16,7 @@ Rails.application.routes.draw do
 
   #user routes
   get '/cart', to: "cart#index", as: :cart
+  get '/emptycart', to: "cart#destroy", as: :empty_cart
   get '/profile', to: "users#show", as: :profile
   get '/profile/edit', to: "users#edit", as: :edit_profile
   resources :cart, only: [:create]
