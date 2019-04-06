@@ -13,6 +13,10 @@ RSpec.describe 'User views their cart show page with an EMPTY cart', type: :feat
     scenario 'I do not see the link to empty my cart' do
       expect(page).to_not have_link("Empty Cart")
     end
+
+    scenario 'I do not see the Grand Total amount for my cart' do
+      expect(page).to_not have_content("Grand Total:")
+    end
   end
 
   context 'as an registered user (shopper) and I view my cart with no items' do
@@ -29,6 +33,10 @@ RSpec.describe 'User views their cart show page with an EMPTY cart', type: :feat
 
     scenario 'I do not see the link to empty my cart' do
       expect(page).to_not have_link("Empty Cart")
+    end
+
+    scenario 'I do not see the Grand Total amount for my cart' do
+      expect(page).to_not have_content("Grand Total:")
     end
   end
 end
