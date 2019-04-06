@@ -25,4 +25,6 @@ class Item < ApplicationRecord
       "no fulfillment data available for this item"
     end
   end
+
+
 end

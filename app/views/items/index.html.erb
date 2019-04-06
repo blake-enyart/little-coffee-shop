@@ -1,11 +1,31 @@
-<% @items.each do |item| %>
-  <section id='item-<%= item.id %>'>
+<h1>Little Coffee Shop Items </h1>
+
+<section class = 'items-container'>
+  <% @items.each do |item| %>
+    <section id='item-<%= item.id %>'>
+      <ul>
+        <li><%= link_to item.name, item_path(item) %></li>
+        <li><%= link_to image_tag(item.image_url, alt: "Image of #{item.name}"), item_path(item) %></li>
+        <li><%= item.user.name %></li>
+        <li>In stock: <%= item.quantity %></li>
+        <li>$<%= item.price.round(2) %></li>
+      </ul>
+    </section>
+  <% end %>
+<section class = 'statistics-container'>
+  <section class = 'statistics-column' id = 'popular-items'>
+    <h3>5 Most Popular Items</h3>
     <ul>
-      <li><%= link_to item.name, item_path(item) %></li>
-      <li><%= link_to image_tag(item.image_url, alt: "Image of #{item.name}"), item_path(item) %></li>
-      <li><%= item.user.name %></li>
-      <li>In stock: <%= item.quantity %></li>
-      <li>$<%= item.price.round(2) %></li>
+      <% @most_popular.each do |item| %>
+        <li><%= item.name %>: <%= item.total_fulfilled %></li>
+      <% end %>
     </ul>
   </section>
-<% end %>
+  <section class = 'statistics-column' id = 'unpopular-items'>
+    <h3>5 Least Popular Items </h3>
+    <ul>
+    <% @least_popular.each do |item| %>
+      <li><%= item.name %>: <%= item.total_fulfilled %></li>
+    <% end %>
+  </section>
+</section>
