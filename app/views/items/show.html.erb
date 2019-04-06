@@ -1,0 +1,16 @@
+<h1> <%= @item.name %></h1>
+
+<section id='item-info'>
+  <ul>
+    <li><%=image_tag(@item.image_url, alt: "Image of #{@item.name}")%></li>
+    <li>Description: <%= @item.description %></li>
+    <li>Merchant: <%= @item.user.name %></li>
+    <li>In stock: <%= @item.quantity %></li>
+    <li>Unit Price: $<%= @item.price.round(2) %></li>
+    <li>Average fulfillment time: <%= @item.average_fulfilled_time %></li>
+  </ul>
+</section>
+
+<% unless merchant_user? || admin_user? %>
+  <%= button_to "Add to Cart", cart_path(item_id: @item.id) %>
+<% end %>

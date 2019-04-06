@@ -17,11 +17,12 @@ Rails.application.routes.draw do
   #user routes
   get '/cart', to: "cart#index", as: :cart
   get '/profile', to: "users#show", as: :profile
+  resources :cart, only: [:create]
 
   #all users routes
   get '/login', to: "sessions#new", as: :login
   post '/login', to: "sessions#create"
   get '/logout', to: "sessions#destroy", as: :logout
 
-  resources :users, only: [:new, :create]
+  resources :users, only: [:new, :create, :edit]
 end
