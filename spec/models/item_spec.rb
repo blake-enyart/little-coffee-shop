@@ -13,4 +13,16 @@ RSpec.describe Item, type: :model do
     it { should have_many :order_items }
     it { should have_many(:orders).through(:order_items) }
   end
+
+  describe 'Instance methods' do
+    describe "#subtotal(quantity)" do
+      it 'returns a subtotal aka item.price * quantity argument' do
+        item = create(:item)
+        quantity = 2
+        expected = item.price * quantity
+
+        expect(item.subtotal(quantity)).to eq(expected)
+      end
+    end
+  end
 end

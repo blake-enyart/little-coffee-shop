@@ -8,7 +8,7 @@
       <li><%= item.user.name %></li>
       <li>$<%= item.price.round(2) %></li>
       <li>Quantity: <%= quantity %></li>
-      <li>Subtotal: <%= @cart.sub_total(item, quantity).round(2) %></li>
+      <li>Subtotal: <%= item.subtotal(quantity).round(2) %></li>
     </ul>
   </section>
 <% end %>
