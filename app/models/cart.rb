@@ -28,11 +28,7 @@ class Cart
   end
 
   def grand_total
-    total = 0.0
-    items.each do |item, quantity|
-      total += item.price * quantity
-    end
-    total
+    items.sum { |item, quantity| item.price * quantity }
   end
 
 end
