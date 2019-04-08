@@ -26,8 +26,7 @@ RSpec.describe "All users can see a merchants index page", type: :feature do
         expect(page).to have_content(@merchant_2.created_at)
       end
 
-      expect(page).to_not have_link(@merchant_3.name, href: user_path(@merchant_3))
-      expect(page).to have_content(@merchant_3.created_at)
+      expect(page).to_not have_css("#merchant-#{@merchant_3.id}")
     end
   end
 end
