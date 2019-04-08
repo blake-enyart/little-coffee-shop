@@ -19,7 +19,7 @@ class CartController < ApplicationController
   end
 
   def destroy
-    @cart.contents.clear
+    @cart.empty_cart
 
     redirect_to cart_path
   end
@@ -50,5 +50,15 @@ class CartController < ApplicationController
     end
 
     redirect_to cart_path
+  end
+
+  def checkout
+    @cart.generate_order(current_user)
+
+    flash[:order_created_success] = "Your order was created successfully."
+
+    @cart.empty_cart
+
+    redirect_to orders_path
   end
 end

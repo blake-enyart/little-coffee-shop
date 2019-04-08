@@ -15,14 +15,18 @@ Rails.application.routes.draw do
     resources :users, only: [:show, :index]
   end
 
-  #user routes
+  #cart routes
   get '/cart', to: "cart#index", as: :cart
   get '/emptycart', to: "cart#destroy", as: :empty_cart
-  get '/remove_item(/:id)', to: "cart#remove_item", as: :remove_item
-  get '/increment_item(/:id)', to: "cart#increment_item", as: :increment_item
-  get '/decrement_item(/:id)', to: "cart#decrement_item", as: :decrement_item
+  get '/remove_item/:id', to: "cart#remove_item", as: :remove_item
+  get '/increment_item/:id', to: "cart#increment_item", as: :increment_item
+  get '/decrement_item/:id', to: "cart#decrement_item", as: :decrement_item
+  get '/checkout', to: "cart#checkout", as: :checkout
+
+  #user routes
   get '/profile', to: "users#show", as: :profile
   get '/profile/edit', to: "users#edit", as: :edit_profile
+  get '/profile/orders', to: "orders#index", as: :orders
   resources :cart, only: [:create]
 
   #all users routes
