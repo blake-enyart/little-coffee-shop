@@ -89,5 +89,46 @@ RSpec.describe Cart do
         expect(@cart.empty?).to eq(false)
       end
     end
+
+    describe "#empty_cart" do
+      it 'empties the cart' do
+        expect(@cart.empty?).to eq(false)
+
+        @cart.empty_cart
+
+        expect(@cart.empty?).to eq(true)
+      end
+    end
+
+    describe "#generate_order" do
+      it 'creates one order and all order_items from a cart' do
+        user = create(:user)
+        item_1 = create(:item)
+        item_2 = create(:item)
+
+        cart = Cart.new({
+          item_1.id.to_s => 2,   # two copies of item 1
+          item_2.id.to_s => 3    # three copies of item 2
+        })
+
+        cart.generate_order(user)
+
+        order = Order.last
+        expect(order.user_id).to eq(user.id)
+
+        order_item_1 = OrderItem.first
+        order_item_2 = OrderItem.last
+
+        expect(order_item_1.order_id).to eq(order.id)
+        expect(order_item_1.item_id).to eq(item_1.id)
+        expect(order_item_1.order_price).to eq(item_1.price)
+        expect(order_item_1.quantity).to eq(cart.contents[item_1.id.to_s])
+
+        expect(order_item_2.order_id).to eq(order.id)
+        expect(order_item_2.item_id).to eq(item_2.id)
+        expect(order_item_2.order_price).to eq(item_2.price)
+        expect(order_item_2.quantity).to eq(cart.contents[item_2.id.to_s])
+      end
+    end
   end
 end
