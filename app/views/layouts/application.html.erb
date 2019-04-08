@@ -11,6 +11,7 @@
   </head>
 
   <body>
+
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <a class="navbar-brand" href="#">Little Coffee Shop</a>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
@@ -38,11 +39,12 @@
           <% elsif merchant_user? %>
             <li class="nav-item nav-link"><%= link_to "Dashboard", dashboard_path %></li>
           <% elsif admin_user? %>
-            <li class="nav-item nav-link"><%= link_to "Dashboard", admin_dashboard_path %></li>
+            <li class="nav-item nav-link"><%= link_to "Dashboard", admin_dashboard_path(current_user) %></li>
             <li class="nav-item nav-link"><%= link_to 'Users', admin_users_path %></li>
           <% end %>
         </ul>
       </div>
+
     </nav>
 
     <% flash.each do |type, message| %>
