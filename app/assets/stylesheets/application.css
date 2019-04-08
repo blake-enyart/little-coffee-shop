@@ -1,15 +1,99 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
- */
+h1 {
+  display: flex;
+  justify-content: left;
+  font-weight: bolder;
+  margin: 20px;
+  padding-top: 40px;
+}
+
+h3 {
+  padding: 10px;
+}
+
+.link {
+  margin: 14px;
+}
+
+.index-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items:  baseline;
+  margin-left: 12px;
+  margin-right: 12px;
+}
+
+#statistics-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  border: 1px solid gray;
+  margin: 10px;
+  justify-content: space-around;
+  text-align: center;
+  width: 100%;
+}
+
+.stats-item {
+  margin: 5px;
+  text-align: center;
+}
+
+.items-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: start;
+}
+
+.item {
+  flex: 30%;
+  border: 1px solid gray;
+  padding: 10px;
+  margin: 10px;
+  text-align: center;
+}
+
+ul {
+  list-style: none;
+}
+
+.form {
+  flex: 30%;
+  border: 1px solid gray;
+  padding: 10px;
+  margin: 10px;
+  text-align: left;
+}
+
+.text-primary {
+  text-align: center;
+}
+
+img {
+  width: 250px;
+  padding: 15px;
+}
+
+.thumbnail {
+  width: 160px;
+  padding: 15px;
+}
+
+.welcome-header {
+  font-size: 400%;
+  font-style: bolder;
+}
+
+.quote {
+  font-size: 200%;
+  margin-top: 120px;
+  margin-left: 60px;
+  font-style: italic;
+}
+
+.developer-links {
+  margin-top: 120px;
+  margin-left: 60px;
+  font-size: 150%
+}
