@@ -4,14 +4,16 @@ Rails.application.routes.draw do
 
   #merchant routes
   resources :items, only: [:index, :show]
+
   resources :merchants, only: [:index, :show]
   get '/dashboard', to: 'merchants#dashboard', as: :dashboard
+
 
   #admin routes
   namespace :admin do
     get '/dashboard', to: 'users#show', as: :dashboard
     resources :merchants, only: [:show, :update]
-    resources :users, only: [:show]
+    resources :users, only: [:show, :index]
   end
 
   #user routes
