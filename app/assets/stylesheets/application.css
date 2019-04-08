@@ -1,18 +1,15 @@
-
-
 h1 {
   display: flex;
   justify-content: left;
   font-weight: bolder;
   margin: 20px;
   padding-top: 40px;
-
 }
 
 h3 {
   padding: 10px;
-
 }
+
 .link {
   margin: 14px;
 }
@@ -26,7 +23,7 @@ h3 {
   margin-right: 12px;
 }
 
-#statistics {
+#statistics-container {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -41,28 +38,26 @@ h3 {
   text-align: center;
 }
 
-.books-container {
+.items-container {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: start;
 }
 
-.books {
+.item {
   flex: 30%;
   border: 1px solid gray;
   padding: 10px;
   margin: 10px;
   text-align: center;
 }
-.reviews {
-  flex: 30%;
-  border: 1px solid gray;
-  padding: 10px;
-  margin: 10px;
-  text-align: center;
+
+ul {
+  list-style: none;
 }
-.form{
+
+.form {
   flex: 30%;
   border: 1px solid gray;
   padding: 10px;
