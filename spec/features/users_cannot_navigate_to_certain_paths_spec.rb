@@ -13,7 +13,8 @@ RSpec.describe 'Users cannot navigate to certain paths', type: :feature do
     end
 
     it 'shows 404 error when visiting /admin paths' do
-      visit admin_dashboard_path
+      user = create(:user)
+      visit admin_dashboard_path(user)
       expect(page).to have_http_status(404)
     end
   end
@@ -30,7 +31,8 @@ RSpec.describe 'Users cannot navigate to certain paths', type: :feature do
     end
 
     it 'shows 404 error when visiting /admin paths' do
-      visit admin_dashboard_path
+      user = create(:user)
+      visit admin_dashboard_path(user)
       expect(page).to have_http_status(404)
     end
   end
@@ -52,7 +54,8 @@ RSpec.describe 'Users cannot navigate to certain paths', type: :feature do
     end
 
     it 'shows 404 error when visiting /admin paths' do
-      visit admin_dashboard_path
+      user = create(:user)
+      visit admin_dashboard_path(user)
       expect(page).to have_http_status(404)
     end
   end
