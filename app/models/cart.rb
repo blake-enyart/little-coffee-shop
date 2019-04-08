@@ -40,4 +40,20 @@ class Cart
     @contents.count == 0
   end
 
+  def empty_cart
+    @contents.clear
+  end
+
+  def generate_order(user)
+    order = user.orders.create
+
+    self.items.each do |item, quantity|
+      order.order_items.create(
+        item_id: item.id,
+        order_price: item.price,
+        quantity: quantity
+      )
+    end
+  end
+
 end
