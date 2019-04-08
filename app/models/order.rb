@@ -6,4 +6,13 @@ class Order < ApplicationRecord
   has_many :items, through: :order_items
 
   enum status: ['pending', 'packaged', 'shipped', 'cancelled']
+
+  def total_quantity
+    self.items.sum(:quantity)
+  end
+
+  def grand_total
+    self.order_items.sum('quantity*order_price')
+  end
+
 end
