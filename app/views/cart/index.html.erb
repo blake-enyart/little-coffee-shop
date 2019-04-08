@@ -8,7 +8,10 @@
       <li><%= item.user.name %></li>
       <li>$<%= item.price.round(2) %></li>
       <li>Quantity: <%= quantity %></li>
+      <li><%= link_to "+", increment_item_path(item) %></li>
+      <li><%= link_to "-", decrement_item_path(item) %></li>
       <li>Subtotal: <%= item.subtotal(quantity).round(2) %></li>
+      <li><%= link_to "Remove", remove_item_path(item) %></li>
     </ul>
   </section>
 <% end %>
