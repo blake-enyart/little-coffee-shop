@@ -5,4 +5,7 @@
 <p><%= @user.city %>, <%= @user.state %> <%= @user.zipcode %></p>
 <% if current_reguser? %>
 <%= link_to 'Edit Details', edit_profile_path %>
+  <% if @user.orders.count > 0 %>
+    <%= link_to 'My Orders', orders_path %>
+  <% end %>
 <% end %>
