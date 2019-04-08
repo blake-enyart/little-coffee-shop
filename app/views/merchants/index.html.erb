@@ -4,14 +4,15 @@
   <% @merchants.each do |merchant| %>
     <section id='merchant-<%= merchant.id %>'>
       <ul>
-        <li><%= link_to merchant.name, merchant_path(merchant) %></li>
-        <li><%= merchant.city%></li>
-        <li><%= merchant.state%></li>
-        <li><%= merchant.created_at%></li>
         <% if admin_user? %>
         <li><%= link_to merchant.name, admin_merchant_path(merchant) %></li>
         <li><%= link_to 'Disable' %></li>
+        <% else %>
+        <li><%= link_to merchant.name, merchant_path(merchant) %></li>
         <% end %>
+        <li><%= merchant.city%></li>
+        <li><%= merchant.state%></li>
+        <li><%= merchant.created_at%></li>
       </ul>
     </section>
   <% end %>
