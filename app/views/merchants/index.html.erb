@@ -1,5 +1,4 @@
 <h1>Merchants</h1>
-
 <section class = "items-container">
   <% @merchants.each do |merchant| %>
     <section class = "item-card" id='merchant-<%= merchant.id %>'>
@@ -13,20 +12,21 @@
         <% if admin_user? %>
           <li><%= link_to 'Disable' %></li>
         <% end %>
-        <li><%= merchant.city%></li>
-        <li><%= merchant.state%></li>
-        <li><%= merchant.created_at%></li>
+        <li>City: <%= merchant.city%></li>
+        <li>State: <%= merchant.state%></li>
+        <li>Enrolled since: <%= merchant.created_at%></li>
       </ul>
     </section>
   <% end %>
   <% if admin_user? %>
-    <% @merchants_disbled.each do |merchant| %>
+    <h1>Disabled Merchants</h1>
+    <% @merchants_disabled.each do |merchant| %>
       <section id='merchant-<%= merchant.id %>'>
+        <h3><%= link_to merchant.name, merchant_path(merchant) %></h3>
         <ul>
-          <li><%= link_to merchant.name, merchant_path(merchant) %></li>
-          <li><%= merchant.city%></li>
-          <li><%= merchant.state%></li>
-          <li><%= merchant.created_at%></li>
+          <li>City: <%= merchant.city%></li>
+          <li>Merchant: <%= merchant.state%></li>
+          <li>Enrolled since: <%= merchant.created_at%></li>
           <li><%= link_to 'Enable' %></li>
         </ul>
       </section>

@@ -2,7 +2,7 @@ class MerchantsController < ApplicationController
 
   def index
     @merchants = User.where(role: 'merchant', enabled: true)
-    @merchants_disbled = User.where(role: 'merchant', enabled: false) if admin_user?
+    @merchants_disabled = User.where(role: 'merchant', enabled: false) if admin_user?
   end
 
   def show
