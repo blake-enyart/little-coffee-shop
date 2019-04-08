@@ -29,6 +29,8 @@ ActiveRecord::Schema.define(version: 20190402025636) do
   end
 
   create_table "order_items", force: :cascade do |t|
+    t.bigint "order_id"
+    t.bigint "item_id"
     t.float "order_price"
     t.integer "quantity"
     t.boolean "fulfilled", default: false
