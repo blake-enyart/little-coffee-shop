@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -5,7 +7,9 @@
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
-    <%= javascript_include_tag 'application' %>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <%= javascript_include_tag 'application' %>
   </head>
 
   <body>
@@ -40,7 +44,8 @@
     <% flash.each do |type, message| %>
     <%= content_tag :div, message, class: type %>
     <% end %>
-
-    <%= yield %>
+    <div class="container-fluid yield">
+       <%= yield %>
+    </div>
   </body>
 </html>
