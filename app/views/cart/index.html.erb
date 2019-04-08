@@ -12,7 +12,7 @@
       <ul>
 
 
-        <li>Quantity: <%= quantity %></li>
+
         <li><%= link_to "+", increment_item_path(item) %></li>
         <li><%= link_to "-", decrement_item_path(item) %></li>
         <li>Subtotal: <%= item.subtotal(quantity).round(2) %></li>
