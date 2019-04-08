@@ -1,12 +1,12 @@
 <h1>Merchants</h1>
 
-<section class = "merchants-container">
+<section class = "items-container">
   <% @merchants.each do |merchant| %>
-    <section id='merchant-<%= merchant.id %>'>
+    <section class = "item-card" id='merchant-<%= merchant.id %>'>
+        <h3 class="bg-dark text-white" ><%= link_to merchant.name, merchant_path(merchant) %></h3>
       <ul>
-        <li><%= link_to merchant.name, merchant_path(merchant) %></li>
-        <li><%= merchant.city%></li>
-        <li><%= merchant.state%></li>
+        <li>City: <%= merchant.city%></li>
+        <li>State: <%= merchant.state%></li>
         <li><%= merchant.created_at%></li>
       </ul>
     </section>

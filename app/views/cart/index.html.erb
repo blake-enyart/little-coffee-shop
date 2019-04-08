@@ -1,20 +1,27 @@
 <h1>Cart</h1>
+<section class = "items-container">
+  <% @cart.items.each do |item, quantity| %>
+    <section class = "cart-card" id="cart-item-<%= item.id %>">
+      <section class = "cart-header">
+        <h3><%= link_to item.name, item_path(item) %> </h3>
+        <%= link_to image_tag(item.image_url, alt: "Image of #{item.name}"), item_path(item) %>
+        <p>Merchant: <%= item.user.name %></p>
+      </section>
+      <p>Unit Price: <%= number_to_currency(item.price) %></p>
+      <p>Quantity: <%= quantity %></p>
+      <ul>
 
-<% @cart.items.each do |item, quantity| %>
-  <section id="cart-item-<%= item.id %>">
-    <ul>
-      <li><%= link_to item.name, item_path(item) %></li>
-      <li><%= link_to image_tag(item.image_url, alt: "Image of #{item.name}"), item_path(item) %></li>
-      <li><%= item.user.name %></li>
-      <li>$<%= item.price.round(2) %></li>
-      <li>Quantity: <%= quantity %></li>
-      <li><%= link_to "+", increment_item_path(item) %></li>
-      <li><%= link_to "-", decrement_item_path(item) %></li>
-      <li>Subtotal: <%= item.subtotal(quantity).round(2) %></li>
-      <li><%= link_to "Remove", remove_item_path(item) %></li>
-    </ul>
-  </section>
-<% end %>
+
+        <li>Quantity: <%= quantity %></li>
+        <li><%= link_to "+", increment_item_path(item) %></li>
+        <li><%= link_to "-", decrement_item_path(item) %></li>
+        <li>Subtotal: <%= item.subtotal(quantity).round(2) %></li>
+        <li><%= link_to "Remove", remove_item_path(item) %></li>
+      </ul>
+    </section>
+  <% end %>
+
+</section>
 
 
 <% unless @cart.empty? %>
