@@ -14,10 +14,14 @@ RSpec.describe 'navigation bar' do
       click_link "Cart"
       expect(current_path).to eq(cart_path)
 
-      click_link "Login"
+      within "nav" do
+        click_link "Login"
+      end
       expect(current_path).to eq(login_path)
 
-      click_link "Register"
+      within "nav" do
+        click_link "Register"
+      end
       expect(current_path).to eq(new_user_path)
 
       click_link "Home"

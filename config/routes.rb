@@ -5,18 +5,21 @@ Rails.application.routes.draw do
   #merchant routes
   resources :items, only: [:index, :show]
   resources :merchants, only: [:index]
-  get '/dashboard', to: 'merchants#dashboard', as: :dashboard
+  get '/dashboard', to: 'merchants#show', as: :dashboard
 
   #admin routes
   namespace :admin do
     get '/dashboard', to: 'users#show', as: :dashboard
     resources :merchants, only: [:show, :update]
-    resources :users, only: [:show]
+    resources :users, only: [:show, :index]
   end
 
   #user routes
   get '/cart', to: "cart#index", as: :cart
   get '/emptycart', to: "cart#destroy", as: :empty_cart
+  get '/remove_item(/:id)', to: "cart#remove_item", as: :remove_item
+  get '/increment_item(/:id)', to: "cart#increment_item", as: :increment_item
+  get '/decrement_item(/:id)', to: "cart#decrement_item", as: :decrement_item
   get '/profile', to: "users#show", as: :profile
   get '/profile/edit', to: "users#edit", as: :edit_profile
   resources :cart, only: [:create]

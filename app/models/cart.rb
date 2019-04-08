@@ -14,6 +14,11 @@ class Cart
     @contents[id.to_s] = @contents[id.to_s] + 1
   end
 
+  def deduct_item(id)
+    @contents[id.to_s] -= 1
+    @contents.delete(id.to_s) if @contents[id.to_s] == 0
+  end
+
   def count_of(id)
     @contents[id.to_s].to_i
   end
