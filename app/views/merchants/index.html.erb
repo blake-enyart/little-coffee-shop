@@ -8,7 +8,24 @@
         <li><%= merchant.city%></li>
         <li><%= merchant.state%></li>
         <li><%= merchant.created_at%></li>
+        <% if admin_user? %>
+        <li><%= link_to merchant.name, admin_merchant_path(merchant) %></li>
+        <li><%= link_to 'Disable' %></li>
+        <% end %>
       </ul>
     </section>
+  <% end %>
+  <% if admin_user? %>
+  <% @merchants_disbled.each do |merchant| %>
+    <section id='merchant-<%= merchant.id %>'>
+      <ul>
+        <li><%= link_to merchant.name, merchant_path(merchant) %></li>
+        <li><%= merchant.city%></li>
+        <li><%= merchant.state%></li>
+        <li><%= merchant.created_at%></li>
+        <li><%= link_to 'Enable' %></li>
+      </ul>
+    </section>
+  <% end %>
   <% end %>
 </section>
