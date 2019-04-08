@@ -1,13 +1,13 @@
 <ul>
-  <% @users.each do |user| %>
+  <% @user.each do |current_user| %>
   <li>
-    <%= link_to user.name, admin_user_path(user.id) %>
+    <%= link_to current_user.name, admin_user_path(current_user.id) %>
   </li>
   <li>
-    Registered: <%= user.created_at %>
+    Registered: <%= current_user.created_at %>
   </li>
   <li>
-    <%= link_to "Upgrade #{user.name} to merchant" %>
+    <%= link_to "Upgrade #{current_user.name} to merchant" %>
   </li>
   <% end %>
 </ul>
