@@ -5,43 +5,56 @@
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
-    <%= javascript_include_tag 'application' %>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <%= javascript_include_tag 'application' %>
   </head>
 
   <body>
-    <nav>
-      <%= link_to "Home", root_path %>
-      <%= link_to "Items", items_path %>
-      <%= link_to "Merchants", merchants_path %>
 
-      <% unless merchant_user? || admin_user? %>
-        <%= link_to "Cart", cart_path %>: <%= @cart.total_count %>
-      <% end %>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">Little Coffee Shop</a>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <ul class="navbar-nav">
+          <li class="nav-item nav-link"><%= link_to "Home", root_path %></li>
+          <li class="nav-item nav-link"><%= link_to "Items", items_path %></li>
+          <li class="nav-item nav-link"><%= link_to "Merchants", merchants_path %></li>
 
-      <% unless current_user %>
-        <%= link_to "Login", login_path %>
-        <%= link_to "Register", new_user_path %>
-      <% end %>
+          <% unless current_user %>
+            <li class="nav-item nav-link"><%= link_to "Login", login_path %></li>
+            <li class="nav-item nav-link"><%= link_to "Register", new_user_path %></li>
+          <% end %>
 
-      <% if current_user %>
-        <%= link_to "Logout", logout_path %>
-      <% end %>
+          <% if current_user %>
+            <li class="nav-item nav-link"><%= link_to "Logout", logout_path %></li>
+          <% end %>
 
-      <% if current_reguser? %>
-        <%= link_to "Profile", profile_path %>
-        <section>Logged in as <%= current_user.name %> </section>
-      <% elsif merchant_user? %>
-        <%= link_to "Dashboard", dashboard_path %>
-      <% elsif admin_user? %>
-        <%= link_to "Dashboard", admin_dashboard_path(current_user) %>
-        <%= link_to 'Users', admin_users_path %>
-      <% end %>
+          <% unless merchant_user? || admin_user? %>
+            <li class="nav-item nav-link"><%= link_to "Cart", cart_path %>: <%= @cart.total_count %></li>
+          <% end %>
+
+          <% if current_reguser? %>
+            <li class="nav-item nav-link"><%= link_to "Profile", profile_path %></li>
+            <section>Logged in as <%= current_user.name %> </section>
+          <% elsif merchant_user? %>
+            <li class="nav-item nav-link"><%= link_to "Dashboard", dashboard_path %></li>
+          <% elsif admin_user? %>
+            <li class="nav-item nav-link"><%= link_to "Dashboard", admin_dashboard_path(current_user) %></li>
+            <li class="nav-item nav-link"><%= link_to 'Users', admin_users_path %></li>
+          <% end %>
+        </ul>
+      </div>
+
     </nav>
 
     <% flash.each do |type, message| %>
     <%= content_tag :div, message, class: type %>
     <% end %>
-
-    <%= yield %>
+    <div class="container-fluid yield">
+       <%= yield %>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   </body>
 </html>
