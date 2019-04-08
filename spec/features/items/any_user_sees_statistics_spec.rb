@@ -39,7 +39,7 @@ RSpec.describe 'Items Index Page Statistics', type: :feature do
 
   context 'as any kind of user on the system' do
     it 'shows an area with statistics' do
-      within ".statistics-container" do
+      within "#statistics-container" do
         within "#popular-items" do
           expect(page).to have_content("5 Most Popular Items")
           expect(page).to have_content("#{@item_2.name}: 20")
