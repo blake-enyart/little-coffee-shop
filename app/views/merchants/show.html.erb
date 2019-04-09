@@ -3,7 +3,7 @@
 <section id='pending-orders'>
   <% @pending_orders.each do |order| %>
   <section id="pending-order-card-<%= order.id %>">
-    <p><%= link_to order.id, order_path(order) %>,
+    <p><%= link_to order.id, dashboard_order_path(order) %>,
     <%= order.created_at %>, Quantity: <%= order.total_quantity %>,
     Total Value: $<%= order.grand_total %>
     </p>
