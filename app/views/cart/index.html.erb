@@ -10,27 +10,29 @@
   <% end %>
 </header>
 <h1>Cart</h1>
-<section class = "cart-container">
+<section id = "items-container">
   <% @cart.items.each do |item, quantity| %>
-    <section class = "cart-card" id="cart-item-<%= item.id %>">
+    <section class = "cart-container" id="cart-item-<%= item.id %>">
       <section id = "cart-header">
         <h3><%= link_to item.name, item_path(item) %> </h3>
-        <%= link_to image_tag(item.image_url, alt: "Image of #{item.name}"), item_path(item) %>
-        <p>Merchant: <%= item.user.name %></p>
+        <%= link_to image_tag(item.image_url, class: "small-image", alt: "Image of #{item.name}"), item_path(item) %>
+        <p><%= link_to "Remove Item From Cart", remove_item_path(item) %></p>
       </section>
+      <p>Merchant: <%= item.user.name %></p>
       <p>Unit Price: <%= number_to_currency(item.price) %></p>
-      <p>Quantity: <%= quantity %>
-        <ul>
-          <li><%= link_to "+", increment_item_path(item) %></li>
-          <li><%= link_to "-", decrement_item_path(item) %></li>
-        </ul>
-      </p>
+      <section class = "quantity">
+        <p>Quantity: <%= quantity %>
+          <ul>
+            <li><%= link_to "+", increment_item_path(item) %></li>
+            <li><%= link_to "-", decrement_item_path(item) %></li>
+          </ul>
+        </p>
+      </section>
       <p>Subtotal: <%= number_to_currency(item.subtotal(quantity)) %></p>
-      <p><%= link_to "Remove", remove_item_path(item) %></p>
     </section>
   <% end %>
 </section>
 
 <% unless @cart.empty? %>
-  Grand Total: $<%= @cart.grand_total.round(2) %>
+  <h5 class = "grand-total">Grand Total: <%= number_to_currency(@cart.grand_total) %></h5>
 <% end %>

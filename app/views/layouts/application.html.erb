@@ -43,7 +43,9 @@
           <% end %>
         </ul>
           <span class="navbar-text">
-            Logged in as <%= current_user.name %>
+            <% if current_user %>
+              Logged in as <%= current_user.name %>
+            <% end %>
           </span>
       </div>
 
