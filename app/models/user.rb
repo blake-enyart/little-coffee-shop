@@ -21,6 +21,18 @@ class User < ApplicationRecord
     end
     true
   end
+
+  def self.top_three_sellers
+    result = User.joins(items: :order_items).select("users.*, sum(order_items.order_price * order_items.quantity) as total_revenue").where("order_items.fulfilled = 'true'").group(:id).order("total_revenue DESC").limit(3)
+  end
+
+  def self.fastest_fulfillment
+    result = User.joins(items: :order_items).select('users.*, avg(order_items.updated_at - order_items.created_at) as fill_time').where("order_items.fulfilled = 'true'").group(:id).order("fill_time ASC").limit(3)
+  end
+
+  def self.slowest_fulfillment
+    result = User.joins(items: :order_items).select('users.*, avg(order_items.updated_at - order_items.created_at) as fill_time').where("order_items.fulfilled = 'true'").group(:id).order("fill_time DESC").limit(3)
+  end
   
   def disable_merchant_items
     items.each {|item| item.disable}
