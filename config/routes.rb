@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   namespace :admin do
     get '/dashboard', to: 'users#dashboard', as: :dashboard
     resources :merchants, only: [:show, :update]
+    # patch '/merchants/:id/disable', to: 'merchants#update', as: :disable_merchant
     resources :users, only: [:show, :index]
   end
 
