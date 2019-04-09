@@ -7,12 +7,11 @@ class Order < ApplicationRecord
 
   enum status: ['pending', 'packaged', 'shipped', 'cancelled']
 
+  def grand_total
+    self.order_items.sum("quantity * order_price")
+  end
+
   def total_quantity
     self.order_items.sum(:quantity)
   end
-
-  def grand_total
-    self.order_items.sum('quantity*order_price')
-  end
-
 end

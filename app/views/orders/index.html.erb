@@ -1,10 +1,17 @@
 <h1>Your Orders</h1>
 
-<ul>
-  <% @orders.each do |order| %>
-    <li>Order ID: <%= order.id %></li>
-    <li>Date of Order: <%= order.created_at %></li>
-    <li>Last Updated: <%= order.updated_at %></li>
-    <li>Status: <%= order.status %></li>
-  <% end %>
-</ul>
+<section>
+  <ul>
+    <section>
+      <% @orders.each do |order| %>
+        <section id='order-<%= order.id %>'>
+          <li>Order ID: <%= link_to order.id, profile_order_path(order) %></li>
+          <li>Date of Order: <%= order.created_at %></li>
+          <li>Last Updated: <%= order.updated_at %></li>
+          <li>Status: <%= order.status %></li>
+          <li>$<%= order.grand_total %></li>
+        </section>
+      <% end %>
+    </section>
+  </ul>
+</section>

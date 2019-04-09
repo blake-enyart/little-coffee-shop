@@ -59,6 +59,6 @@ class CartController < ApplicationController
 
     @cart.empty_cart
 
-    redirect_to orders_path
+    redirect_to profile_orders_path
   end
 end

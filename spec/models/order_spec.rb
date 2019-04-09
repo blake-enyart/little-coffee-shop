@@ -12,34 +12,35 @@ RSpec.describe Order, type: :model do
   end
 
   describe 'Instance Method(s)' do
-    it '#total_quantity' do
-      oi_1 = create(:order_item)
-      #creates three order_items and items bound to same order from oi_1
-      oi_2, oi_3, oi_4 = create_list(:order_item, 3, order: oi_1.order)
-      #main order for clarity in test
-      order_1 = oi_1.order
+    describe '#grand_total' do
+      it 'returns the grand total $ amount for an order' do
+        item_1 = create(:item)
+        item_2 = create(:item)
+        order = create(:order)
+        order_item_1 = create(:order_item, order: order, item: item_1)
+        order_item_2 = create(:order_item, order: order, item: item_2)
 
-      #total quantity of items in a single order
-      actual = order_1.total_quantity
-      #generated via pry session AR query
-      expected = [oi_1, oi_2, oi_3, oi_4].sum { |oi| oi.quantity }
+        expected = (order_item_1.order_price * order_item_1.quantity) + (order_item_2.order_price * order_item_2.quantity)
 
-      expect(actual).to eq(expected)
+        expect(order.grand_total).to eq(expected)
+      end
     end
+      
+    describe '#total_quantity' do
+      it 'returns the total quantity of items for an order' do
+        oi_1 = create(:order_item)
+        #creates three order_items and items bound to same order from oi_1
+        oi_2, oi_3, oi_4 = create_list(:order_item, 3, order: oi_1.order)
+        #main order for clarity in test
+        order_1 = oi_1.order
 
-    it '#grand_total' do
-      oi_1 = create(:order_item)
-      #creates three order_items and items bound to same order from oi_1
-      oi_2, oi_3, oi_4 = create_list(:order_item, 3, order: oi_1.order)
-      #main order for clarity in test
-      order_1 = oi_1.order
+        #total quantity of items in a single order
+        actual = order_1.total_quantity
 
-      #grand total of item prices summed up for single order
-      actual = order_1.grand_total
-      #generated via pry session AR query
-      expected = [oi_1, oi_2, oi_3, oi_4].sum { |oi| oi.quantity * oi.order_price }
+        expected = [oi_1, oi_2, oi_3, oi_4].sum { |oi| oi.quantity }
 
-      expect(actual).to eq(expected)
+        expect(actual).to eq(expected)
+      end
     end
   end
 end
