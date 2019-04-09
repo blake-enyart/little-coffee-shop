@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe 'User Order Show Page' do
-  describe 'when a registered user visits their  Profile Orders page' do
-    scenario 'they click on an order id number' do
+  describe 'when a registered user visits their profile orders page' do
+    describe 'they click on an order id number' do
       it 'lets them see that order show page' do
         @user = create(:user)
         @order_1 = create(:order, user: @user)
@@ -15,7 +15,13 @@ RSpec.describe 'User Order Show Page' do
 
         allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
 
-    
+        visit profile_orders_path
+
+        click_on "#{@order_1.id}"
+
+        expect(current_path).to eq(profile_order_path(@order_1))
+
+
       end
     end
   end
