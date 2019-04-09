@@ -15,7 +15,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <a class="navbar-brand" href="#">Little Coffee Shop</a>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav mr-auto">
           <li class="nav-item nav-link"><%= link_to "Home", root_path %></li>
           <li class="nav-item nav-link"><%= link_to "Items", items_path %></li>
           <li class="nav-item nav-link"><%= link_to "Merchants", merchants_path %></li>
@@ -25,6 +25,15 @@
             <li class="nav-item nav-link"><%= link_to "Register", new_user_path %></li>
           <% end %>
 
+          <% if current_reguser? %>
+            <li class="nav-item nav-link"><%= link_to "Profile", profile_path %></li>
+          <% elsif merchant_user? %>
+            <li class="nav-item nav-link"><%= link_to "Dashboard", dashboard_path %></li>
+          <% elsif admin_user? %>
+            <li class="nav-item nav-link"><%= link_to "Dashboard", admin_dashboard_path(current_user) %></li>
+            <li class="nav-item nav-link"><%= link_to 'Users', admin_users_path %></li>
+          <% end %>
+
           <% if current_user %>
             <li class="nav-item nav-link"><%= link_to "Logout", logout_path %></li>
           <% end %>
@@ -32,17 +41,10 @@
           <% unless merchant_user? || admin_user? %>
             <li class="nav-item nav-link"><%= link_to "Cart", cart_path %>: <%= @cart.total_count %></li>
           <% end %>
-
-          <% if current_reguser? %>
-            <li class="nav-item nav-link"><%= link_to "Profile", profile_path %></li>
-            <section>Logged in as <%= current_user.name %> </section>
-          <% elsif merchant_user? %>
-            <li class="nav-item nav-link"><%= link_to "Dashboard", dashboard_path %></li>
-          <% elsif admin_user? %>
-            <li class="nav-item nav-link"><%= link_to "Dashboard", admin_dashboard_path(current_user) %></li>
-            <li class="nav-item nav-link"><%= link_to 'Users', admin_users_path %></li>
-          <% end %>
         </ul>
+          <span class="navbar-text">
+            Logged in as <%= current_user.name %>
+          </span>
       </div>
 
     </nav>
