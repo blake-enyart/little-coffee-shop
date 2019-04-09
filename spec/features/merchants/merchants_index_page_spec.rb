@@ -79,7 +79,7 @@ RSpec.describe "All users can see a merchants index page", type: :feature do
       within "#merchant-#{@merchant_1.id}" do
         click_link 'Disable'
         expect(current_path).to eq(merchants_path)
-        #link should now be to enalbe to the account
+        #link should now be to enable to the account
         expect(page).to have_link("Enable")
         @merchant_1.reload
         expect(@merchant_1.enabled).to eq(false)
@@ -90,7 +90,7 @@ RSpec.describe "All users can see a merchants index page", type: :feature do
       within "#merchant-#{@merchant_2.id}" do
         click_link 'Disable'
         expect(current_path).to eq(merchants_path)
-        #link should now be to enalbe to the account
+        #link should now be to enable to the account
         expect(page).to have_link("Enable")
         @merchant_2.reload
         expect(@merchant_2.enabled).to eq(false)
