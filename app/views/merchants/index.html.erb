@@ -10,7 +10,7 @@
         <% end %></h3>
       <ul>
         <% if admin_user? %>
-          <li><%= link_to 'Disable' %></li>
+          <li><%= link_to 'Disable', admin_merchant_path(merchant, disable: true), method: :patch %></li>
         <% end %>
         <li>City: <%= merchant.city%></li>
         <li>State: <%= merchant.state%></li>
