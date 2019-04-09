@@ -60,7 +60,7 @@ RSpec.describe User, type: :model do
       #creates 3 order_items and 3 associated items/pending orders
       oi_1, oi_2, oi_3 = create_list(:order_item, 3)
       #creates second item associated with same order
-      oi_4 = create(:order_item, order_id: oi_1.order.id, order: oi_1.order)
+      oi_4 = create(:order_item, order: oi_1.order)
       #creates order_item and order with shipped status
       fulfilled_oi_1 = create(:fulfilled_order_item, order: create(:shipped_order))
       #creates items associated with a specific merchant of fulfilled and unfulfilled order_items

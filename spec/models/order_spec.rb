@@ -22,7 +22,7 @@ RSpec.describe Order, type: :model do
       #total quantity of items in a single order
       actual = order_1.total_quantity
       #generated via pry session AR query
-      expected = 28
+      expected = [oi_1, oi_2, oi_3, oi_4].sum { |oi| oi.quantity }
 
       expect(actual).to eq(expected)
     end
@@ -37,7 +37,7 @@ RSpec.describe Order, type: :model do
       #grand total of item prices summed up for single order
       actual = order_1.grand_total
       #generated via pry session AR query
-      expected = 162.0
+      expected = [oi_1, oi_2, oi_3, oi_4].sum { |oi| oi.quantity * oi.order_price }
 
       expect(actual).to eq(expected)
     end
