@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   #general routes
   root to: "welcome#index"
   resources :orders, only: [:show]
-  
+
   #merchant routes
   resources :items, only: [:index, :show]
 
