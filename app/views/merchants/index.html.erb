@@ -12,3 +12,27 @@
     </section>
   <% end %>
 </section>
+
+<section class = "merchant-statistics">
+ <h2>Merchant Statistics</h2>
+    <section id='best-sellers'>
+    <h3>Best Sellers:</h3>
+      <% @best_sellers.each do |merchant| %>
+       <ul> <%= merchant.name %> : $<%= merchant.total_revenue %> </ul>
+      <% end %>
+    </section>
+    <section id='fastest-sellers'>
+       <h3>Fastest Fulfillment Time:</h3>
+      <% @fastest_sellers.each do |merchant| %>
+
+       <ul> <%= merchant.name %> average fullfillment time: <%=  merchant.fill_time %></ul>
+      <% end %>
+      </section>
+    <section id='slowest-sellers'>
+       <h3>Slowest Fulfillment Time:</h3>
+      <% @slowest_sellers.each do |merchant| %>
+
+       <ul> <%= merchant.name %> average fullfillment time: <%=  merchant.fill_time %></ul>
+      <% end %>
+    </section>
+</section>
