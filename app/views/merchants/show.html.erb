@@ -1,5 +1,7 @@
 <%= render partial: 'users/show' %>
 
+<%= link_to "View my Items", dashboard_items_path %>
+
 <section id='pending-orders'>
   <% @pending_orders.each do |order| %>
   <section id="pending-order-card-<%= order.id %>">
