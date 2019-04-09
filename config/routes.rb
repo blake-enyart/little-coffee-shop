@@ -1,15 +1,18 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  #general routes
   root to: "welcome#index"
-
+  resources :orders, only: [:show]
+  
   #merchant routes
   resources :items, only: [:index, :show]
-  resources :merchants, only: [:index]
+
+  resources :merchants, only: [:index, :show]
   get '/dashboard', to: 'merchants#show', as: :dashboard
 
   #admin routes
   namespace :admin do
-    get '/dashboard', to: 'users#show', as: :dashboard
+    get '/dashboard/:id', to: 'users#show', as: :dashboard
     resources :merchants, only: [:show, :update]
     resources :users, only: [:show, :index]
   end
@@ -33,6 +36,5 @@ Rails.application.routes.draw do
   get '/login', to: "sessions#new", as: :login
   post '/login', to: "sessions#create"
   get '/logout', to: "sessions#destroy", as: :logout
-
   resources :users, only: [:new, :create, :edit, :update]
 end

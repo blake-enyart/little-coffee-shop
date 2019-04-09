@@ -109,7 +109,7 @@ RSpec.describe 'navigation bar' do
       expect(page).to_not have_link("Cart", href: cart_path)
 
       click_link "Dashboard"
-      expect(current_path).to eq(admin_dashboard_path)
+      expect(current_path).to eq(admin_dashboard_path(admin))
 
       click_link "Logout"
       expect(current_path).to eq(root_path)

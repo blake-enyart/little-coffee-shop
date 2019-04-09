@@ -1,0 +1,35 @@
+<h1>Merchants</h1>
+<section class = "items-container">
+  <% @merchants.each do |merchant| %>
+    <section class = "item-card" id='merchant-<%= merchant.id %>'>
+        <h3 class="bg-dark text-white" >
+        <% if admin_user? %>
+            <%= link_to merchant.name, admin_merchant_path(merchant) %>
+        <% else %>
+          <%= link_to merchant.name, merchant_path(merchant) %>
+        <% end %></h3>
+      <ul>
+        <% if admin_user? %>
+          <li><%= link_to 'Disable' %></li>
+        <% end %>
+        <li>City: <%= merchant.city%></li>
+        <li>State: <%= merchant.state%></li>
+        <li>Enrolled since: <%= merchant.created_at%></li>
+      </ul>
+    </section>
+  <% end %>
+  <% if admin_user? %>
+    <h1>Disabled Merchants</h1>
+    <% @merchants_disabled.each do |merchant| %>
+      <section id='merchant-<%= merchant.id %>'>
+        <h3><%= link_to merchant.name, merchant_path(merchant) %></h3>
+        <ul>
+          <li>City: <%= merchant.city%></li>
+          <li>Merchant: <%= merchant.state%></li>
+          <li>Enrolled since: <%= merchant.created_at%></li>
+          <li><%= link_to 'Enable' %></li>
+        </ul>
+      </section>
+    <% end %>
+  <% end %>
+</section>

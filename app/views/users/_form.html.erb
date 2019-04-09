@@ -1,27 +1,30 @@
-<%= form_for(@user) do |f| %>
-<%= f.label :name %>
-<%= f.text_field :name %>
+<h1>Sign in</h1>
+<section class = "form">
+  <%= form_for(@user) do |f| %>
+    <%= f.label :name %>
+    <p><%= f.text_field :name %></p>
 
-<%= f.label :street %>
-<%= f.text_field :street %>
+    <%= f.label :street %>
+    <p><%= f.text_field :street %></p>
 
-<%= f.label :city %>
-<%= f.text_field :city %>
+    <%= f.label :city %>
+    <p><%= f.text_field :city %></p>
 
-<%= f.label :state %>
-<%= f.text_field :state %>
+    <%= f.label :state %>
+    <p><%= f.text_field :state %></p>
 
-<%= f.label :zipcode %>
-<%= f.text_field :zipcode %>
+    <%= f.label :zipcode %>
+    <p><%= f.text_field :zipcode %></p>
 
-<%= f.label :email %>
-<%= f.email_field :email %>
+    <%= f.label :email %>
+    <p><%= f.email_field :email %></p>
 
-<%= f.label :password %>
-<%= f.password_field :password %>
+    <%= f.label :password %>
+    <p><%= f.password_field :password %></p>
 
-<%= f.label :password_confirmation %>
-<%= f.password_field :password_confirmation %>
-<%= f.submit('Submit') %>
+    <%= f.label :password_confirmation %>
+    <p><%= f.password_field :password_confirmation %></p>
 
-<% end %>
+    <%= f.submit('Submit') %>
+  <% end %>
+</section>
