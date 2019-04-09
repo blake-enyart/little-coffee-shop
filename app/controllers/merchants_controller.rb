@@ -2,6 +2,9 @@ class MerchantsController < ApplicationController
 
   def index
     @merchants = User.where(role: 'merchant', enabled: true)
+    @best_sellers = @merchants.top_three_sellers
+    @fastest_sellers = @merchants.fastest_fulfillment
+    @slowest_sellers = @merchants.slowest_fulfillment
   end
 
   def show
