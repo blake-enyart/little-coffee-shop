@@ -34,6 +34,17 @@ h3 {
   width: 100%;
 }
 
+.cart-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  margin: 10px;
+  justify-content: space-around;
+  text-align: center;
+  width: 100%;
+}
+
 .stats-item {
   margin: 5px;
   text-align: center;
@@ -46,7 +57,7 @@ h3 {
   justify-content: start;
 }
 
-.item {
+.item-card {
   flex: 30%;
   border: 1px solid gray;
   padding: 10px;
@@ -59,7 +70,7 @@ ul {
 }
 
 .form {
-  flex: 30%;
+  width: 40%;
   border: 1px solid gray;
   padding: 10px;
   margin: 10px;
@@ -72,12 +83,14 @@ ul {
 
 img {
   width: 250px;
-  padding: 15px;
+  padding-bottom: 15px;
+  padding-top: 15px;
 }
 
 .thumbnail {
   width: 160px;
-  padding: 15px;
+  padding-top: 15px;
+  padding-bottom: 15px;
 }
 
 .welcome-header {
@@ -96,4 +109,13 @@ img {
   margin-top: 120px;
   margin-left: 60px;
   font-size: 150%
+}
+
+.cart-card {
+  flex: 100%;
+  display: flex;
+  border: 1px solid gray;
+  padding: 10px;
+  margin: 10px;
+  text-align: left;
 }
