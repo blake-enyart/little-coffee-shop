@@ -1,35 +1,38 @@
-<h1>Cart</h1>
-<section class = "cart-container">
-  <% @cart.items.each do |item, quantity| %>
-    <section class = "cart-card" id="cart-item-<%= item.id %>">
-      <section id = "cart-header">
-        <h3><%= link_to item.name, item_path(item) %> </h3>
-        <%= link_to image_tag(item.image_url, alt: "Image of #{item.name}"), item_path(item) %>
-        <p>Merchant: <%= item.user.name %></p>
-      </section>
-      <p>Unit Price: <%= number_to_currency(item.price) %></p>
-      <p>Quantity: <%= quantity %>
-        <ul>
-          <li><%= link_to "+", increment_item_path(item) %></li>
-          <li><%= link_to "-", decrement_item_path(item) %></li>
-        </ul>
-      </p>
-      <p>Subtotal: <%= number_to_currency(item.subtotal(quantity)) %></p>
-      <p><%= link_to "Remove", remove_item_path(item) %></p>
+<header class = "cart-header">
+  <% unless current_user %>
+    <section id='register-or-login-to-checkout'>
+      <p>You must <%= link_to "Register", new_user_path %> or <%= link_to "Login", login_path %> to checkout.</p>
     </section>
   <% end %>
-
+  <% unless @cart.empty? %>
+    <%= link_to "Empty Cart", empty_cart_path %>
+    <%= link_to "Checkout", checkout_path %>
+  <% end %>
+</header>
+<h1>Cart</h1>
+<section id = "items-container">
+  <% @cart.items.each do |item, quantity| %>
+    <section class = "cart-container" id="cart-item-<%= item.id %>">
+      <section id = "cart-header">
+        <h3><%= link_to item.name, item_path(item) %> </h3>
+        <%= link_to image_tag(item.image_url, class: "small-image", alt: "Image of #{item.name}"), item_path(item) %>
+        <p><%= link_to "Remove Item From Cart", remove_item_path(item) %></p>
+      </section>
+      <p>Merchant: <%= item.user.name %></p>
+      <p>Unit Price: <%= number_to_currency(item.price) %></p>
+      <section class = "quantity">
+        <p>Quantity: <%= quantity %>
+          <ul>
+            <li><%= link_to "+", increment_item_path(item) %></li>
+            <li><%= link_to "-", decrement_item_path(item) %></li>
+          </ul>
+        </p>
+      </section>
+      <p>Subtotal: <%= number_to_currency(item.subtotal(quantity)) %></p>
+    </section>
+  <% end %>
 </section>
-
 
 <% unless @cart.empty? %>
-  Grand Total: $<%= @cart.grand_total.round(2) %>
-  <%= link_to "Empty Cart", empty_cart_path %>
-  <%= link_to "Checkout", checkout_path %>
-<% end %>
-
-<% unless current_user %>
-<section id='register-or-login-to-checkout'>
-  <p>You must <%= link_to "Register", new_user_path %> or <%= link_to "Login", login_path %> to checkout.</p>
-</section>
+  <h5 class = "grand-total">Grand Total: <%= number_to_currency(@cart.grand_total) %></h5>
 <% end %>
