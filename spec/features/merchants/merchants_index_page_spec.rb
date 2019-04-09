@@ -81,8 +81,8 @@ RSpec.describe "All users can see a merchants index page", type: :feature do
         expect(current_path).to eq(merchants_path)
         #link should now be to enalbe to the account
         expect(page).to have_link("Enable")
-        user = User.find(@merchant_1.id)
-        expect(user.enabled).to eq(false)
+        @merchant_1.reload
+        expect(@merchant_1.enabled).to eq(false)
       end
       #flash message isnt occuring within css tag
       expect(page).to have_content("#{@merchant_1.name} is now disabled")
@@ -92,11 +92,25 @@ RSpec.describe "All users can see a merchants index page", type: :feature do
         expect(current_path).to eq(merchants_path)
         #link should now be to enalbe to the account
         expect(page).to have_link("Enable")
-        user = User.find(@merchant_2.id)
-        expect(user.enabled).to eq(false)
+        @merchant_2.reload
+        expect(@merchant_2.enabled).to eq(false)
       end
       #flash message isnt occuring within css tag
       expect(page).to have_content("#{@merchant_2.name} is now disabled")
     end
   end
+
+  context 'as a merchant' do
+    describe 'attempts to login' do
+      it 'should prevent login if disabled' do
+        merchant = create(:inactive_merchant)
+        visit login_path
+        fill_in "email", with: merchant.email
+        fill_in "password", with: merchant.password
+        click_button "Log In"
+        expect(current_path).to eq(login_path)
+      end
+    end
+  end
+
 end
