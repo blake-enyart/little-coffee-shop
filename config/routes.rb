@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   #general routes
   root to: "welcome#index"
   resources :orders, only: [:show]
-  
+
   #merchant routes
   resources :items, only: [:index, :show]
 
@@ -28,8 +28,8 @@ Rails.application.routes.draw do
   #user routes
   get '/profile', to: "users#show", as: :profile
   get '/profile/edit', to: "users#edit", as: :edit_profile
-  get '/profile/orders', to: "orders#index", as: :orders
-  get '/profile/orders/:id', to: "orders#show", as: :order
+  get '/profile/orders', to: "orders#index", as: :profile_orders
+  get '/profile/orders/:id', to: "orders#show", as: :profile_order
   resources :cart, only: [:create]
 
   #all users routes
