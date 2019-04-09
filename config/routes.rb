@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   get '/profile', to: "users#show", as: :profile
   get '/profile/edit', to: "users#edit", as: :edit_profile
   get '/profile/orders', to: "orders#index", as: :orders
+  get '/profile/orders/:id', to: "orders#show", as: :order
   resources :cart, only: [:create]
 
   #all users routes
