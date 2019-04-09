@@ -48,13 +48,22 @@ RSpec.describe Item, type: :model do
         expect(item.average_fulfilled_time).to include("no fulfillment data available for this item")
       end
     end
-    
+
     describe '.disable' do
       it 'should change item status to disabled' do
         item = create(:item)
         expect(item.enabled).to eq(true)
         item.disable
         expect(item.enabled).to eq(false)
+      end
+    end
+
+    describe '.enable' do
+      it 'should change item status to enabled' do
+        item = create(:inactive_item)
+        expect(item.enabled).to eq(false)
+        item.enable
+        expect(item.enabled).to eq(true)
       end
     end
   end
