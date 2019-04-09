@@ -84,5 +84,20 @@ RSpec.describe 'Merchant Items Index Page', type: :feature do
         expect(page).to_not have_link("Enable")
       end
     end
+
+    scenario 'clicking on an item Enable link enables the item' do
+      expect(@inactive_item.enabled).to eq(false)
+
+      within "#merchant-item-#{@inactive_item.id}" do
+        click_link "Enable"
+      end
+
+      expect(current_path).to eq(dashboard_items_path)
+
+      expect(page).to have_content("#{@inactive_item.name} is now available for sale.")
+
+      @inactive_item.reload   # .reload in order to update the object with new database value
+      expect(@inactive_item.enabled).to eq(true)
+    end
   end
 end
