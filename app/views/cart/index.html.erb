@@ -6,7 +6,9 @@
   <% end %>
   <% unless @cart.empty? %>
     <%= link_to "Empty Cart", empty_cart_path %>
-    <%= link_to "Checkout", checkout_path %>
+    <% if current_reguser? %>
+      <%= link_to "Checkout", checkout_path %>
+    <% end %>
   <% end %>
 </header>
 <h1>Cart</h1>

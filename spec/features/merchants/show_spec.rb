@@ -23,6 +23,11 @@ RSpec.describe 'Dashboard Show Page' do
         expect(page).to have_content("#{@merchant.city}, #{@merchant.state} #{@merchant.zipcode}")
         expect(page).to_not have_content(@merchant.password)
         expect(page).to_not have_link('Edit Details')
+        expect(page).to have_link('View my Items')
+
+        click_on 'View my Items'
+
+        expect(current_path).to eq('/dashboard/items')
       end
 
       it '*can see all the orders on dashboard' do
