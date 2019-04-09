@@ -4,4 +4,13 @@ class Merchants::ItemsController < ApplicationController
     @merchant = current_user
   end
 
+  def enable_item
+    item = Item.find(params[:id])
+    item.update(enabled: true)
+
+    flash[:item_enable_success] = "#{item.name} is now available for sale."
+
+    redirect_to dashboard_items_path
+  end
+
 end
