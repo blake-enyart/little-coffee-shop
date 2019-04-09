@@ -45,18 +45,18 @@ RSpec.describe 'User Order Show Page' do
 
   context 'as a registered user, with orders in the system, viewing my profile/orders' do
     before(:each) do
-        @user = create(:user)
-        @order_1 = create(:order, user: @user)
-        @order_2 = create(:order, user: @user)
+      @user = create(:user)
+      @order_1 = create(:order, user: @user)
+      @order_2 = create(:order, user: @user)
 
-        visit root_path
+      visit root_path
 
-        click_link "Login"
-        fill_in "email", with: @user.email
-        fill_in "password", with: @user.password
-        click_button "Log In"
+      click_link "Login"
+      fill_in "email", with: @user.email
+      fill_in "password", with: @user.password
+      click_button "Log In"
 
-        visit orders_path
+      visit orders_path
     end
 
     it 'shows order info for all my orders' do
