@@ -97,6 +97,17 @@ RSpec.describe "All users can see a merchants index page", type: :feature do
       end
       #flash message isnt occuring within css tag
       expect(page).to have_content("#{@merchant_2.name} is now disabled")
+
+      within "#merchant-#{@merchant_3.id}" do
+        click_link 'Enable'
+        expect(current_path).to eq(merchants_path)
+        #link should now be to enable to the account
+        expect(page).to have_link("Disable")
+        @merchant_3.reload
+        expect(@merchant_3.enabled).to eq(false)
+      end
+      #flash message isnt occuring within css tag
+      expect(page).to have_content("#{@merchant_3.name} is now enabled")
     end
   end
 
