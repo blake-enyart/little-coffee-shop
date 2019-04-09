@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   #admin routes
   namespace :admin do
-    get '/dashboard/:id', to: 'users#show', as: :dashboard
+    get '/dashboard', to: 'users#dashboard', as: :dashboard
     resources :merchants, only: [:show, :update]
     resources :users, only: [:show, :index]
   end
