@@ -19,7 +19,7 @@ RSpec.describe User, type: :model do
     it { should have_many :items } # for merchants
   end
 
-  describe 'Class Methods' do
+  describe 'Class Method(s)' do
     it '.permit_email?' do
       user_1 = create(:user)
 
@@ -34,27 +34,41 @@ RSpec.describe User, type: :model do
       expect(actual).to eq(expected)
     end
   end
-  
-  describe 'Instance Methods' do
-    describe '#disable_merchant_items' do
-      it 'disables all items for a merchant' do
-        admin = create(:admin)
-        merchant = create(:merchant)
-        item_1 = create(:item)
-        item_2 = create(:item)
-        item_3 = create(:item)
-        merchant.items << item_1
-        merchant.items << item_2
-        merchant.items << item_3
-        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(admin)
-        expect(item_1.enabled).to eq(true)
-        expect(item_2.enabled).to eq(true)
-        expect(item_3.enabled).to eq(true)
-        merchant.disable_merchant_items
-        expect(item_1.enabled).to eq(false)
-        expect(item_2.enabled).to eq(false)
-        expect(item_3.enabled).to eq(false)
-      end
+
+  describe 'Instance Method(s)' do
+    it '#disable_merchant_items' do
+      admin = create(:admin)
+      merchant = create(:merchant)
+      item_1 = create(:item)
+      item_2 = create(:item)
+      item_3 = create(:item)
+      merchant.items << item_1
+      merchant.items << item_2
+      merchant.items << item_3
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(admin)
+      expect(item_1.enabled).to eq(true)
+      expect(item_2.enabled).to eq(true)
+      expect(item_3.enabled).to eq(true)
+      merchant.disable_merchant_items
+      expect(item_1.enabled).to eq(false)
+      expect(item_2.enabled).to eq(false)
+      expect(item_3.enabled).to eq(false)
+    end
+
+    it '#pending_orders' do
+      merchant = create(:merchant)
+      #creates 3 order_items and 3 associated items/pending orders
+      oi_1, oi_2, oi_3 = create_list(:order_item, 3)
+      #creates second item associated with same order
+      oi_4 = create(:order_item, order: oi_1.order)
+      #creates order_item and order with shipped status
+      fulfilled_oi_1 = create(:fulfilled_order_item, order: create(:shipped_order))
+      #creates items associated with a specific merchant of fulfilled and unfulfilled order_items
+      merchant.items << [oi_1.item, oi_2.item, fulfilled_oi_1.item]
+
+      actual = merchant.pending_orders
+      expected = [oi_1.order, oi_2.order]
+      expect(actual).to eq(expected)
     end
   end
 end
