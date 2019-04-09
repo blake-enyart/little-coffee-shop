@@ -12,6 +12,13 @@ class Admin::MerchantsController < Admin::BaseController
       merchant.update(enabled: false)
       flash[:merchant_disabled] = "#{merchant.name} is now disabled"
       redirect_to merchants_path
+    elsif !params[:disable]
+      merchant = User.find(params[:id])
+      # need to write enable merch items 
+      merchant.disable_merchant_items
+      merchant.update(enabled: true)
+      flash[:merchant_disabled] = "#{merchant.name} is now enabled"
+      redirect_to merchants_path
     else
       user_to_be_updated = User.find(params[:id])
       user_to_be_updated.disable_merchant_items
