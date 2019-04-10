@@ -1,0 +1,24 @@
+<h1>Order ID: <%= @order.id %></h1>
+
+<section class = "order-show-container">
+  <ul>
+    <li>Date of Order: <%= @order.created_at %></li>
+    <li>Last Updated: <%= @order.updated_at %></li>
+    <li>Status: <%= @order.status %></li>
+  </ul>
+  <% @order.items.each do |item| %>
+    <section class = "item-card" id='item-<%= item.id %>'>
+      <h3 class="bg-dark text-white"><%= link_to item.name, item_path(item) %></h3>
+      <ul>
+        <li><%= link_to image_tag(item.image_url, alt: "Image of #{item.name}"), item_path(item) %></li>
+        <li>Description: <%= item.description %></li>
+        <li>Merchant: <%= item.user.name %></li>
+        <li>Quantity: <%= item.order_quantity(@order.id) %></li>
+        <li>Price: <%= number_to_currency(item.order_price(@order.id)) %></li>
+        <li>Sub Total: <%= number_to_currency(item.order_subtotal(@order.id)) %></li>
+      </ul>
+    </section>
+  <% end %>
+  <p>Total Items: <%= @order.total_quantity %></p>
+  <p>Grand Total: $<%= @order.grand_total %></p>
+</section>

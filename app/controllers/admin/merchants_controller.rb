@@ -6,10 +6,22 @@ class Admin::MerchantsController < Admin::BaseController
   end
 
   def update
-    user_to_be_updated = User.find(params[:id])
-    user_to_be_updated.disable_merchant_items
-    user_to_be_updated.update(role: 0)
-    flash[:notice] = "Merchant #{user_to_be_updated.name} downgraded"
-    redirect_to admin_user_path(user_to_be_updated)
+    merchant = User.find(params[:id])
+    if params[:disable]
+      merchant.disable_merchant_items
+      merchant.update(enabled: false)
+      flash[:merchant_disabled] = "#{merchant.name} is now disabled"
+      redirect_to merchants_path
+    elsif params[:enable]
+      merchant.update(enabled: true)
+      merchant.enable_merchant_items
+      flash[:merchant_enabled] = "#{merchant.name} is now enabled"
+      redirect_to merchants_path
+    elsif params[:downgrade]
+      merchant.disable_merchant_items
+      merchant.update(role: 0)
+      flash[:notice] = "Merchant #{merchant.name} downgraded"
+      redirect_to admin_user_path(merchant)
+    end
   end
 end
