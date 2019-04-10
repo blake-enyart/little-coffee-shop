@@ -65,9 +65,9 @@ RSpec.describe Item, type: :model do
         expect(item.enabled).to eq(false)
         item.enable
         expect(item.enabled).to eq(true)
-      end 
-    end 
-    
+      end
+    end
+
     describe '.order_quantity' do
       it 'should get the item quantity for an order' do
         @order_1 = create(:order)
@@ -78,9 +78,7 @@ RSpec.describe Item, type: :model do
         expect(@item_1.order_quantity(@order_1.id)).to eq(2)
       end
     end
-<<<<<<< Updated upstream
-=======
-    
+
     describe '.order_quantity' do
       it 'should get the item quantity for an order' do
         @order_1 = create(:order)
@@ -91,7 +89,6 @@ RSpec.describe Item, type: :model do
         expect(@item_1.order_quantity(@order_1.id)).to eq(2)
       end
     end
->>>>>>> Stashed changes
 
     describe '.order_price' do
       it 'should get the item price for an order' do
@@ -114,11 +111,7 @@ RSpec.describe Item, type: :model do
         expect(@item_1.order_subtotal(@order_1.id)).to eq(7)
       end
     end
-<<<<<<< Updated upstream
-  end 
-=======
   end
->>>>>>> Stashed changes
 
   describe 'class methods' do
     it "finds the #five_most_popular and #five_least_popular" do

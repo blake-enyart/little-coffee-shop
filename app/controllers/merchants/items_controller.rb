@@ -13,18 +13,15 @@ class Merchants::ItemsController < ApplicationController
     redirect_to dashboard_items_path
   end
 
-<<<<<<< Updated upstream
-=======
   def delete_item
     item = Item.find(params[:id])
     item.destroy
 
     flash[:item_delete_success] = "#{item.name} has been deleted."
-    
+
     redirect_to dashboard_items_path
   end
-  
->>>>>>> Stashed changes
+
   def disable_item
     item = Item.find(params[:id])
     item.update(enabled: false)

@@ -99,8 +99,6 @@ RSpec.describe 'Merchant Items Index Page', type: :feature do
       @inactive_item.reload   # .reload in order to update the object with new database value
       expect(@inactive_item.enabled).to eq(true)
     end
-<<<<<<< Updated upstream
-=======
 
     scenario 'Clicking on Delete link for an item disables' do
       expect(page).to have_css("#merchant-item-#{@item_1.id}")
@@ -113,6 +111,5 @@ RSpec.describe 'Merchant Items Index Page', type: :feature do
       expect(page).to have_content("#{@item_1.name} has been deleted.")
       expect(page).to_not have_css("#merchant-item-#{@item_1.id}")
     end
->>>>>>> Stashed changes
   end
 end
