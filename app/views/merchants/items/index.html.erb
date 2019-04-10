@@ -1,0 +1,25 @@
+<h1>Welcome to your Merchant Items Dashboard</h1>
+
+<%= link_to "Add New Item" %>
+<h2>Your Items</h2>
+
+<% @merchant.items.each do |item| %>
+  <section id="merchant-item-<%= item.id %>">
+    <ul>
+      <li>Item ID: <%= item.id %></li>
+      <li>Item Name: <%= item.name %></li>
+      <li><%= link_to image_tag(item.image_url, alt: "Image of #{item.name}"), item_path(item) %></li>
+      <li>Price: <%= number_to_currency(item.price) %></li>
+      <li>Inventory: <%= item.quantity %></li>
+      <li><%= link_to "Edit this item", edit_item_path(item) %></li>
+      <% if item.order_items.count == 0 %>
+        <li><%= link_to "Delete Item" %></li>
+      <% end %>
+      <% if item.enabled %>
+        <li><%= link_to "Disable" %></li>
+      <% else %>
+        <li><%= link_to "Enable", enable_item_path(item) %></li>
+      <% end %>
+    </ul>
+  </section>
+<% end %>

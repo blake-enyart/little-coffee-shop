@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   #general routes
   root to: "welcome#index"
-  resources :items, only: [:index, :show]
+  resources :items, only: [:index, :show, :edit, :destroy]
+  resources :orders, only: [:show]
 
   #merchant routes
   resources :merchants, only: [:index, :show] do
@@ -9,10 +10,12 @@ Rails.application.routes.draw do
   end
   get '/dashboard', to: 'merchants#show', as: :dashboard
   get '/dashboard/orders/:id', to: 'merchants/orders#show', as: :dashboard_order
+  get '/dashboard/items', to: 'merchants/items#index', as: :dashboard_items
+  get '/enable_item/:id', to: 'merchants/items#enable_item', as: :enable_item
 
   #admin routes
   namespace :admin do
-    get '/dashboard/:id', to: 'users#show', as: :dashboard
+    get '/dashboard', to: 'users#dashboard', as: :dashboard
     resources :merchants, only: [:show, :update]
     resources :users, only: [:show, :index]
   end
