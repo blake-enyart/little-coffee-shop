@@ -10,6 +10,17 @@
     <img src=<%= item.image_url %> alt=<%= item.name %>>
     <p>Item Price: <%= @merchant_order_items.where(item_id: item.id)[0].order_price %></p>
     <p>Quantity: <%= @merchant_order_items.where(item_id: item.id)[0].quantity %></p>
+
+    <% if @merchant_order_items.where(item_id: item.id)[0].fulfilled %>
+      <p>Item Already Fulfilled</p>
+    <% else %>
+      <% if item.enough_stock_for_order(@merchant_order_items.where(item_id: item.id)[0].quantity) %>
+        <p><%= link_to "Fulfill Item", fulfill_item_path(order: @order, order_item: @merchant_order_items.where(item_id: item.id)[0]) %></p>
+      <% else %>
+        <p>Not Enough Stock to Fulfill Item</p>
+      <% end %>
+    <% end %>
+
   </section>
   <% end %>
 </section>

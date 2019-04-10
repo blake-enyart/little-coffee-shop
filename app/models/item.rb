@@ -12,6 +12,10 @@ class Item < ApplicationRecord
     update(enabled: false)
   end
 
+  def enough_stock_for_order(order_quantity)
+    self.quantity >= order_quantity
+  end
+  
   def enable
     update(enabled: true)
   end
