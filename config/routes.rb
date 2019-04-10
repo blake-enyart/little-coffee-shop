@@ -10,7 +10,12 @@ Rails.application.routes.draw do
   resources :merchants, only: [:index, :show]
   get '/dashboard', to: 'merchants#show', as: :dashboard
   get '/dashboard/items', to: 'merchants/items#index', as: :dashboard_items
+  get '/dashboard/items/new', to: 'merchants/items#new', as: :new_merchant_item
+  post '/merchants/items', to: 'merchants/items#create'
   get '/enable_item/:id', to: 'merchants/items#enable_item', as: :enable_item
+  # namespace :merchants do
+  #   resources :items
+  # end
 
   #admin routes
   namespace :admin do
@@ -39,4 +44,5 @@ Rails.application.routes.draw do
   post '/login', to: "sessions#create"
   get '/logout', to: "sessions#destroy", as: :logout
   resources :users, only: [:new, :create, :edit, :update]
+
 end
