@@ -5,13 +5,14 @@ Rails.application.routes.draw do
   resources :orders, only: [:show]
 
   #merchant routes
-  resources :items, only: [:index, :show, :edit, :destroy]
+  resources :items, only: [:new, :create, :index, :show, :edit, :destroy]
 
-  resources :merchants, only: [:index, :show]
+  resources :merchants, only: [:index, :show] do
+
+  end
   get '/dashboard', to: 'merchants#show', as: :dashboard
   get '/dashboard/items', to: 'merchants/items#index', as: :dashboard_items
   get '/dashboard/items/new', to: 'merchants/items#new', as: :new_merchant_item
-  post '/merchants/items', to: 'merchants/items#create'
   get '/enable_item/:id', to: 'merchants/items#enable_item', as: :enable_item
 
   #admin routes

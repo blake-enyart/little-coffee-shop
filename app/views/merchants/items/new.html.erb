@@ -1,13 +1,13 @@
-<%= form_tag(merchants_items_path(id: @item.id), method: "post") do %>
-  <%= label_tag("item[name]", "Name") %>
-  <%= text_field_tag("item[name]" )%>
-  <%= label_tag( "item[description]", "Description") %>
-  <%= text_field_tag( "item[description]") %>
-  <%= label_tag( "item[image_url]", "Image Url") %>
-  <%= text_field_tag( "item[image_url]") %>
-  <%= label_tag( "item[quantity]", "Quantity") %>
-  <%= number_field_tag("item[quantity]") %>
-  <%= label_tag("item[price]", "Price")%>
-  <%= number_field_tag("item[price]") %>
-  <%= submit_tag("Add Item") %>
-<% end %>
+ <%= form_for [@merchant, @item] do |f| %>
+  <%= f.label(:name)%>
+  <%= f.text_field(:name )%>
+  <%= f.label( :description)%>
+  <%= f.text_field( :description) %>
+  <%= f.label( :image_url)%>
+  <%= f.text_field( :image_url) %>
+  <%= f.label( :quantity)%>
+  <%= f.number_field(:quantity) %>
+  <%= f.label(:price)%>
+  <%= f.number_field(:price) %>
+  <%= f.submit("Add Item") %>
+<% end  %>

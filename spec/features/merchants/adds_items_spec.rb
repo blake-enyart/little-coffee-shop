@@ -74,5 +74,32 @@ RSpec.describe 'Merchant Items Index Page', type: :feature do
       
       expect(item.image_url).to eq("https://i.pinimg.com/originals/2a/84/90/2a849069c7f487f71bb6594dffb84e5e.png")
     end
+
+    it 'new item must have price' do
+
+      fill_in "Name",	with: "#{@item_3.name}" 
+      fill_in "Description",	with: "#{@item_3.description}" 
+      fill_in "Image Url",	with: "#{@item_3.image_url}" 
+      fill_in "Quantity",	with: "#{@item_3.quantity}" 
+      fill_in "Price",	with: nil 
+      click_button "Add Item"
+      save_and_open_page
+      expect(page).to have_content("Price is not a number")
+      expect(page).to have_content("Price can't be blank")
+    end
+    it 'new item must have quantity' do
+     
+      fill_in "Name",	with: "#{@item_3.name}" 
+      fill_in "Description",	with: "#{@item_3.description}" 
+      fill_in "Image url",	with: "#{@item_3.image_url}" 
+      fill_in "Quantity",	with: nil
+      fill_in "Price",	with: "#{@item_3.price}" 
+      click_button "Add Item"
+
+      expect(page).to have_content("Quantity is not a number")
+      expect(page).to have_content("Quantity can't be blank")
+      expect(page).to have_content("#{@item_3.name}")
+      expect(find_field('Name').value).to eq(@item_3.name)
+    end
   end
 end
