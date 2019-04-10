@@ -18,7 +18,7 @@ class Merchants::ItemsController < ApplicationController
     item.destroy
 
     flash[:item_delete_success] = "#{item.name} has been deleted."
-
+    
     redirect_to dashboard_items_path
   end
 
