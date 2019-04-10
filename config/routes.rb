@@ -13,9 +13,6 @@ Rails.application.routes.draw do
   get '/dashboard/items/new', to: 'merchants/items#new', as: :new_merchant_item
   post '/merchants/items', to: 'merchants/items#create'
   get '/enable_item/:id', to: 'merchants/items#enable_item', as: :enable_item
-  # namespace :merchants do
-  #   resources :items
-  # end
 
   #admin routes
   namespace :admin do
