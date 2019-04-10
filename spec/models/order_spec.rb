@@ -41,5 +41,28 @@ RSpec.describe Order, type: :model do
         expect(actual).to eq(expected)
       end
     end
+
+    describe '#pending_to_packaged' do
+      it 'change order status to pending when all items are fullfilled' do
+        merchant_1 = create(:merchant)
+        merchant_2 = create(:merchant)
+        #syntax to create multiple items and assign them to a chosen merchant
+        item_1, item_2, item_3 = create_list(:item, 3, user: merchant_1)
+        item_4, item_5, item_6 = create_list(:item, 3, user: merchant_2)
+        order = create(:order)
+        oi_1 = create(:fulfilled_order_item, item: item_1, order: order)
+        oi_2 = create(:fulfilled_order_item, item: item_2, order: order)
+        oi_3 = create(:fulfilled_order_item, item: item_3, order: order)
+        oi_4 = create(:fulfilled_order_item, item: item_4, order: order)
+        oi_5 = create(:fulfilled_order_item, item: item_5, order: order)
+        oi_6 = create(:fulfilled_order_item, item: item_6, order: order)
+
+        order.pending_to_packaged
+
+        actual = order.status
+        expected = 'packaged'
+        expect(actual).to eq(expected)
+      end
+    end
   end
 end
