@@ -15,6 +15,24 @@ RSpec.describe Item, type: :model do
   end
 
   describe 'Instance methods' do
+    describe "#enough_stock_for_order(order_quantity)" do
+      it 'returns true if inventory >= order_quantity' do
+        item = create(:item, quantity: 2)
+        order_quantity_1 = 1
+        order_quantity_2 = 2
+
+        expect(item.enough_stock_for_order(order_quantity_1)).to eq(true)
+        expect(item.enough_stock_for_order(order_quantity_2)).to eq(true)
+      end
+
+      it 'returns false if inventory < order_quantity' do
+        item = create(:item, quantity: 1)
+        order_quantity = 2
+
+        expect(item.enough_stock_for_order(order_quantity)).to eq(false)
+      end
+    end
+
     describe "#subtotal(quantity)" do
       it 'returns a subtotal aka item.price * quantity argument' do
         item = create(:item)
@@ -48,7 +66,7 @@ RSpec.describe Item, type: :model do
         expect(item.average_fulfilled_time).to include("no fulfillment data available for this item")
       end
     end
-    
+
     describe '.disable' do
       it 'should change item status to disabled' do
         item = create(:item)
