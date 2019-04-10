@@ -15,6 +15,10 @@ class Item < ApplicationRecord
   def enough_stock_for_order(order_quantity)
     self.quantity >= order_quantity
   end
+  
+  def enable
+    update(enabled: true)
+  end
 
   def subtotal(quantity)
     self.price * quantity
@@ -50,4 +54,17 @@ class Item < ApplicationRecord
     .order("total_fulfilled asc")
     .limit(5)
   end
+
+  def order_quantity(order_id)
+    OrderItem.find_by(order_id: order_id).quantity
+  end
+
+  def order_price(order_id)
+    OrderItem.find_by(order_id: order_id).order_price
+  end
+
+  def order_subtotal(order_id)
+    order_quantity(order_id) * order_price(order_id)
+  end
+
 end

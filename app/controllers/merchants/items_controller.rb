@@ -23,4 +23,21 @@ class Merchants::ItemsController < ApplicationController
     redirect_to dashboard_order_path(order)
   end
 
+  def delete_item
+    item = Item.find(params[:id])
+    item.destroy
+
+    flash[:item_delete_success] = "#{item.name} has been deleted."
+    
+    redirect_to dashboard_items_path
+  end
+
+  def disable_item
+    item = Item.find(params[:id])
+    item.update(enabled: false)
+
+    flash[:item_disable_success] = "#{item.name} is no longer for sale."
+
+    redirect_to dashboard_items_path
+  end
 end
