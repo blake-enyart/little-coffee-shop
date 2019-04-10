@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   #general routes
   root to: "welcome#index"
   resources :items, only: [:index, :show, :edit, :destroy]
-  resources :orders, only: [:show]
+  resources :orders, only: [:show, :update]
 
   #merchant routes
   resources :merchants, only: [:index, :show] do
