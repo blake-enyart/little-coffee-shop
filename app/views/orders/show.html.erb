@@ -14,7 +14,7 @@
         <li>Description: <%= item.description %></li>
         <li>Merchant: <%= item.user.name %></li>
         <li>Quantity: <%= item.order_quantity %></li>
-        <li>Price: <%= number_to_currency(item.order_price) %></li>
+        <li>Price: <%= number_to_currency(item.ordered_price) %></li>
         <li>Sub Total: <%= number_to_currency(item.order_subtotal) %></li>
       </ul>
     </section>

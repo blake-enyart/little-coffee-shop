@@ -60,10 +60,34 @@ RSpec.describe Item, type: :model do
 
     describe '.order_quantity' do
       it 'should get the item quantity for an order' do
+        @order_1 = create(:order)
         @item_1 = create(:item)
-        @order_item_1= create(:fulfilled_order_item, item: @item_1, quantity: 2)
 
-        expect(item_1.order_quantity(order_1.id)).to eq(2)
+        @order_item_1= create(:fulfilled_order_item, order: @order_1, item: @item_1, quantity: 2)
+
+        expect(@item_1.order_quantity(@order_1.id)).to eq(2)
+      end
+    end
+
+    describe '.order_price' do
+      it 'should get the item price for an order' do
+        @order_1 = create(:order)
+        @item_1 = create(:item)
+
+        @order_item_1= create(:fulfilled_order_item, order: @order_1, item: @item_1, quantity: 2, order_price: 3.50)
+
+        expect(@item_1.ordered_price(@order_1.id)).to eq(3.50)
+      end
+    end
+
+    describe '.order_subtotal' do
+      it 'should get the item price for an order' do
+        @order_1 = create(:order)
+        @item_1 = create(:item)
+
+        @order_item_1= create(:fulfilled_order_item, order: @order_1, item: @item_1, quantity: 2, order_price: 3.50)
+
+        expect(@item_1.order_subtotal(@order_1.id)).to eq(7)
       end
     end
   end
