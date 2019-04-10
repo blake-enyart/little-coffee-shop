@@ -5,7 +5,6 @@ class Merchants::ItemsController < ApplicationController
   end
 
   def new
-    # require 'pry'; binding.pry
     @merchant = current_user
     @item = Item.new
   end
