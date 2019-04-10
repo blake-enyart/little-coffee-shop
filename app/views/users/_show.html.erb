@@ -9,3 +9,6 @@
     <%= link_to 'My Orders', profile_orders_path %>
   <% end %>
 <% end %>
+<% if admin_user? %>
+<%= link_to 'Upgrade', admin_user_path(@user, upgrade: true), method: :patch %>
+<% end %>

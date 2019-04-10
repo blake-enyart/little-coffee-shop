@@ -12,16 +12,14 @@ Rails.application.routes.draw do
   get '/dashboard/orders/:id', to: 'merchants/orders#show', as: :dashboard_order
   get '/dashboard/items', to: 'merchants/items#index', as: :dashboard_items
   get '/enable_item/:id', to: 'merchants/items#enable_item', as: :enable_item
-  
   get '/delete_item/:id', to: 'merchants/items#delete_item', as: :delete_item
-
   get '/disable_item/:id', to: 'merchants/items#disable_item', as: :disable_item
 
   #admin routes
   namespace :admin do
     get '/dashboard', to: 'users#dashboard', as: :dashboard
     resources :merchants, only: [:show, :update]
-    resources :users, only: [:show, :index]
+    resources :users, only: [:show, :index, :update]
   end
 
   #cart routes

@@ -15,5 +15,19 @@ RSpec.describe 'Admin User Show Page', type: :feature do
         expect(page).to_not have_link('Edit Details', href: edit_profile_path)
       end
     end
+    describe '*visit a users show page' do
+
+      scenario 'admin clicks upgrade button' do
+        admin = create(:admin)
+        user_1 = create(:user)
+        allow_any_instance_of(ApplicationController).to \
+        receive(:current_user).and_return(admin)
+
+        visit admin_user_path(user_1)
+        click_link 'Upgrade'
+        expect(current_path).to eq(admin_merchant_path(user_1))
+        expect(page).to have_content("#{user_1.name} has been upgraded")
+      end
+    end
   end
 end
