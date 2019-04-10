@@ -9,6 +9,13 @@ This is a student project from Turing School of Software & Design as part of the
 - View the original assignment [here](https://github.com/turingschool-projects/little_shop_v2)
 
 
+## Contributors
+- Matt Levy       [GitHub](https://github.com/milevy1)
+- Blake Enyart    [GitHub](https://github.com/blake-enyart)
+- Rene Casco      [GitHub](https://github.com/renecasco)
+- Michael Karnes  [GitHub](https://github.com/mikekarnes123)
+- Noah Flint      [GitHub](https://github.com/n-flint)
+
 ## Built With
 
 * [Rails 5.1.7](http://sinatrarb.com/) - Web Framework
