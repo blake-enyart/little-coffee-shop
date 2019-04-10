@@ -42,19 +42,28 @@ RSpec.describe Item, type: :model do
         expect(item.average_fulfilled_time).to include("3 days 16:00")
       end
 
-      it 'should calculate average fulfillment time for an item' do
+      it 'should calculate average fulfillment time for an item' do #this test has same name as previous one
         item = create(:item)
 
         expect(item.average_fulfilled_time).to include("no fulfillment data available for this item")
       end
     end
-    
+
     describe '.disable' do
       it 'should change item status to disabled' do
         item = create(:item)
         expect(item.enabled).to eq(true)
         item.disable
         expect(item.enabled).to eq(false)
+      end
+    end
+
+    describe '.order_quantity' do
+      it 'should get the item quantity for an order' do
+        @item_1 = create(:item)
+        @order_item_1= create(:fulfilled_order_item, item: @item_1, quantity: 2)
+
+        expect(item_1.order_quantity(order_1.id)).to eq(2)
       end
     end
   end
