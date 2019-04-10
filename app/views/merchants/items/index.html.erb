@@ -16,9 +16,9 @@
         <li><%= link_to "Delete Item" %></li>
       <% end %>
       <% if item.enabled %>
-        <li><%= link_to "Disable" %></li>
+        <li><%= link_to "Disable", disable_item_path(item) %></li>
       <% else %>
-        <li><%= link_to "Enable" %></li>
+        <li><%= link_to "Enable", enable_item_path(item) %></li>
       <% end %>
     </ul>
   </section>

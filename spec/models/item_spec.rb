@@ -42,7 +42,7 @@ RSpec.describe Item, type: :model do
         expect(item.average_fulfilled_time).to include("3 days 16:00")
       end
 
-      it 'should calculate average fulfillment time for an item' do
+      it 'should return a no fullfillment data message if there are no orders' do
         item = create(:item)
 
         expect(item.average_fulfilled_time).to include("no fulfillment data available for this item")
@@ -58,15 +58,49 @@ RSpec.describe Item, type: :model do
       end
     end
 
+
     describe '.enable' do
       it 'should change item status to enabled' do
         item = create(:inactive_item)
         expect(item.enabled).to eq(false)
         item.enable
         expect(item.enabled).to eq(true)
+      end 
+    end 
+    
+    describe '.order_quantity' do
+      it 'should get the item quantity for an order' do
+        @order_1 = create(:order)
+        @item_1 = create(:item)
+
+        @order_item_1= create(:fulfilled_order_item, order: @order_1, item: @item_1, quantity: 2)
+
+        expect(@item_1.order_quantity(@order_1.id)).to eq(2)
       end
     end
-  end
+
+    describe '.order_price' do
+      it 'should get the item price for an order' do
+        @order_1 = create(:order)
+        @item_1 = create(:item)
+
+        @order_item_1= create(:fulfilled_order_item, order: @order_1, item: @item_1, quantity: 2, order_price: 3.50)
+
+        expect(@item_1.order_price(@order_1.id)).to eq(3.50)
+      end
+    end
+
+    describe '.order_subtotal' do
+      it 'should get the item price for an order' do
+        @order_1 = create(:order)
+        @item_1 = create(:item)
+
+        @order_item_1= create(:fulfilled_order_item, order: @order_1, item: @item_1, quantity: 2, order_price: 3.50)
+
+        expect(@item_1.order_subtotal(@order_1.id)).to eq(7)
+      end
+    end
+  end 
 
   describe 'class methods' do
     it "finds the #five_most_popular and #five_least_popular" do

@@ -25,7 +25,7 @@ RSpec.describe Order, type: :model do
         expect(order.grand_total).to eq(expected)
       end
     end
-      
+
     describe '#total_quantity' do
       it 'returns the total quantity of items for an order' do
         oi_1 = create(:order_item)
@@ -33,7 +33,6 @@ RSpec.describe Order, type: :model do
         oi_2, oi_3, oi_4 = create_list(:order_item, 3, order: oi_1.order)
         #main order for clarity in test
         order_1 = oi_1.order
-
         #total quantity of items in a single order
         actual = order_1.total_quantity
 

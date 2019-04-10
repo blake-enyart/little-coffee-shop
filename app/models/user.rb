@@ -34,5 +34,6 @@ class User < ApplicationRecord
     #selects pending orders where the user id is the merchant id
     Order.joins(:items)
          .where('items.user_id = ? AND orders.status = 0',self.id)
+         .distinct
   end
 end
