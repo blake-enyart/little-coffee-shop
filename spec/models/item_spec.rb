@@ -42,7 +42,7 @@ RSpec.describe Item, type: :model do
         expect(item.average_fulfilled_time).to include("3 days 16:00")
       end
 
-      it 'should calculate average fulfillment time for an item' do #this test has same name as previous one
+      it 'should return a no fullfillment data message if there are no orders' do
         item = create(:item)
 
         expect(item.average_fulfilled_time).to include("no fulfillment data available for this item")
