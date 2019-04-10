@@ -1,14 +1,15 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   #general routes
   root to: "welcome#index"
+  resources :items, only: [:index, :show, :edit, :destroy]
   resources :orders, only: [:show]
 
   #merchant routes
-  resources :items, only: [:index, :show, :edit, :destroy]
-
-  resources :merchants, only: [:index, :show]
+  resources :merchants, only: [:index, :show] do
+    resources :items, only: [:show]
+  end
   get '/dashboard', to: 'merchants#show', as: :dashboard
+  get '/dashboard/orders/:id', to: 'merchants/orders#show', as: :dashboard_order
   get '/dashboard/items', to: 'merchants/items#index', as: :dashboard_items
   get '/enable_item/:id', to: 'merchants/items#enable_item', as: :enable_item
 
