@@ -26,7 +26,9 @@ RSpec.describe 'Admin User Show Page', type: :feature do
         visit admin_user_path(user_1)
         click_link 'Upgrade'
         expect(current_path).to eq(admin_merchant_path(user_1))
+        user_1.reload
         expect(page).to have_content("#{user_1.name} has been upgraded")
+        expect(user_1.role).to eq("merchant")
       end
     end
   end
