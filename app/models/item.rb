@@ -51,12 +51,12 @@ class Item < ApplicationRecord
     OrderItem.find_by(order_id: order_id).quantity
   end
 
-  def ordered_price(order_id)
+  def order_price(order_id)
     OrderItem.find_by(order_id: order_id).order_price
   end
 
   def order_subtotal(order_id)
-    order_quantity(order_id) * ordered_price(order_id)
+    order_quantity(order_id) * order_price(order_id)
   end
 
 end

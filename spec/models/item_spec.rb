@@ -76,7 +76,7 @@ RSpec.describe Item, type: :model do
 
         @order_item_1= create(:fulfilled_order_item, order: @order_1, item: @item_1, quantity: 2, order_price: 3.50)
 
-        expect(@item_1.ordered_price(@order_1.id)).to eq(3.50)
+        expect(@item_1.order_price(@order_1.id)).to eq(3.50)
       end
     end
 

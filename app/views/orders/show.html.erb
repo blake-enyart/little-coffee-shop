@@ -13,11 +13,12 @@
         <li><%= link_to image_tag(item.image_url, alt: "Image of #{item.name}"), item_path(item) %></li>
         <li>Description: <%= item.description %></li>
         <li>Merchant: <%= item.user.name %></li>
-        <li>Quantity: <%= item.order_quantity %></li>
-        <li>Price: <%= number_to_currency(item.ordered_price) %></li>
-        <li>Sub Total: <%= number_to_currency(item.order_subtotal) %></li>
+        <li>Quantity: <%= item.order_quantity(@order.id) %></li>
+        <li>Price: <%= number_to_currency(item.order_price(@order.id)) %></li>
+        <li>Sub Total: <%= number_to_currency(item.order_subtotal(@order.id)) %></li>
       </ul>
     </section>
   <% end %>
+  <p>Total Items: <%= @order.total_quantity %></p>
   <p>Grand Total: $<%= @order.grand_total %></p>
 </section>
