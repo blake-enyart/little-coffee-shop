@@ -13,7 +13,7 @@
       <li>Inventory: <%= item.quantity %></li>
       <li><%= link_to "Edit this item", edit_item_path(item) %></li>
       <% if item.order_items.count == 0 %>
-        <li><%= link_to "Delete Item" %></li>
+        <li><%= link_to "Delete Item", delete_item_path(item) %></li>
       <% end %>
       <% if item.enabled %>
         <li><%= link_to "Disable" %></li>
