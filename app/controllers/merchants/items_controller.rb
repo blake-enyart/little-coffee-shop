@@ -21,7 +21,7 @@ class Merchants::ItemsController < ApplicationController
     
     redirect_to dashboard_items_path
   end
-  
+
   def disable_item
     item = Item.find(params[:id])
     item.update(enabled: false)

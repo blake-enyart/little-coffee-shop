@@ -12,6 +12,10 @@ class Item < ApplicationRecord
     update(enabled: false)
   end
 
+  def enable
+    update(enabled: true)
+  end
+
   def subtotal(quantity)
     self.price * quantity
   end
