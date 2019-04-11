@@ -5,12 +5,16 @@ Rails.application.routes.draw do
   resources :orders, only: [:show, :update]
 
   #merchant routes
+  resources :items, only: [:new, :create, :index, :show, :edit, :destroy]
+
   resources :merchants, only: [:index, :show] do
     resources :items, only: [:show]
   end
+
   get '/dashboard', to: 'merchants#show', as: :dashboard
   get '/dashboard/orders/:id', to: 'merchants/orders#show', as: :dashboard_order
   get '/dashboard/items', to: 'merchants/items#index', as: :dashboard_items
+  get '/dashboard/items/new', to: 'merchants/items#new', as: :new_merchant_item
   get '/enable_item/:id', to: 'merchants/items#enable_item', as: :enable_item
   get '/fulfill_item/:id', to: 'merchants/items#fulfill_item', as: :fulfill_item
   get '/delete_item/:id', to: 'merchants/items#delete_item', as: :delete_item
@@ -42,5 +46,8 @@ Rails.application.routes.draw do
   get '/login', to: "sessions#new", as: :login
   post '/login', to: "sessions#create"
   get '/logout', to: "sessions#destroy", as: :logout
-  resources :users, only: [:new, :create, :edit, :update]
+  resources :users, only: [:new, :create, :edit, :update] do
+    resources :items, only: [:create]
+  end
+
 end

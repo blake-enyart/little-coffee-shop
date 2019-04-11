@@ -2,7 +2,10 @@ class Item < ApplicationRecord
   validates_presence_of :name
   validates_presence_of :description
   validates_presence_of :quantity
-  validates_presence_of :price
+  validates_presence_of :price 
+
+  validates_numericality_of :price, greater_than: 0.00
+  validates_numericality_of :quantity, greater_than: 0
 
   belongs_to :user
   has_many :order_items

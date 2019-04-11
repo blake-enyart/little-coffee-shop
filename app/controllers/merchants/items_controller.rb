@@ -4,6 +4,11 @@ class Merchants::ItemsController < ApplicationController
     @merchant = current_user
   end
 
+  def new
+    @merchant = current_user
+    @item = Item.new
+  end
+
   def enable_item
     item = Item.find(params[:id])
     item.update(enabled: true)
