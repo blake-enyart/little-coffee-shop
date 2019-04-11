@@ -21,21 +21,34 @@ RSpec.describe 'Merchant Dashboard Statistics', type: :feature do
       @order_item_5 = create(:order_item, item: @item_5, quantity: 5)
       @order_item_6 = create(:order_item, item: @item_6, quantity: 6)
       @order_item_7 = create(:order_item, item: @item_6, quantity: 6)
-
-      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@merchant)
-      visit dashboard_path
     end
 
     it 'shows the top 5 items I have sold by quantity, and the quantity of each that Ive sold' do
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@merchant)
+      visit dashboard_path
+
       within "#top-5-items-sold" do
         expect(page).to have_content("#{@item_6.name} - 12 #{@item_5.name} - #{@order_item_5.quantity} #{@item_4.name} - #{@order_item_4.quantity} #{@item_3.name} - #{@order_item_3.quantity} #{@item_1.name} - 2")
       end
     end
 
-    xit 'shows the total quantity of items Ive sold and a a percentage against my sold units plus remaining inventory'
+    it 'shows the total quantity of items Ive sold and a a percentage against my sold units plus remaining inventory' do
     # (eg, if I have sold 1,000 things and still have 9,000 things in inventory,
     # the message would say something like
     # "Sold 1,000 items, which is 10% of your total inventory"
+      merchant = create(:merchant)
+
+      i1, i2, i3, i4, i5, i6, i7, i8, i9 = create_list(:item, 9, quantity: 10, user: merchant)
+      oi1 = create(:fulfilled_order_item, quantity: 10, item: i1)
+
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(merchant)
+      visit dashboard_path
+
+      expected = "Sold #{merchant.items_sold} items, which is #{merchant.percent_inventory_sold}% of your total inventory."
+      within "#percent-inventory-sold" do
+        expect(page).to have_content(expected)
+      end
+    end
 
     xit 'shows top 3 states where my items were shipped, and their quantities'
 
