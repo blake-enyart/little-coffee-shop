@@ -50,7 +50,32 @@ RSpec.describe 'Merchant Dashboard Statistics', type: :feature do
       end
     end
 
-    xit 'shows top 3 states where my items were shipped, and their quantities'
+    it 'shows top 3 states where my items were shipped, and their quantities' do
+      merchant = create(:merchant)
+      item = create(:item, user: merchant)
+
+      co_user = create(:user, state: "CO")
+      il_user = create(:user, state: "IL")
+      az_user = create(:user, state: "AZ")
+      fl_user = create(:user, state: "FL")
+
+      co_order = create(:shipped_order, user: co_user)
+      il_order = create(:shipped_order, user: il_user)
+      az_order = create(:shipped_order, user: az_user)
+      fl_order = create(:shipped_order, user: fl_user)
+
+      co_order_item = create(:fulfilled_order_item, quantity: 10, item: item, order: co_order)
+      il_order_item = create(:fulfilled_order_item, quantity: 9, item: item, order: il_order)
+      az_order_item = create(:fulfilled_order_item, quantity: 8, item: item, order: az_order)
+      fl_order_item = create(:fulfilled_order_item, quantity: 1, item: item, order: fl_order)
+
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(merchant)
+      visit dashboard_path
+
+      within "#top-3-states" do
+        expect(page).to have_content("CO - 10 items IL - 9 items AZ - 8 items")
+      end
+    end
 
     xit 'shows top 3 city/state where my items were shipped, and their quantities'
 

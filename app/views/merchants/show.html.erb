@@ -14,6 +14,14 @@
   <p>Sold <%= @user.items_sold %> items, which is <%= @user.percent_inventory_sold %>% of your total inventory.</p>
 </section>
 
+<section id="top-3-states">
+  <p>
+    <% @user.top_three_states_with_quantity_sold.each do |relation| %>
+    <%= relation.state %> - <%= relation.quantity_sold %> items 
+    <% end %>
+  </p>
+</section>
+
 <section id='pending-orders'>
   <% @pending_orders.each do |order| %>
   <section id="pending-order-card-<%= order.id %>">
