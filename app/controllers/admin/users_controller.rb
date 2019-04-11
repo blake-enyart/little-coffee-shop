@@ -14,6 +14,5 @@ class Admin::UsersController < Admin::BaseController
   def dashboard
     @admin = current_user
     @orders = Order.sort_by_status
-    @orders_packaged  = Order.where(status: 'packaged')
   end
 end
