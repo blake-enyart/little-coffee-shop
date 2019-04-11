@@ -10,7 +10,7 @@ RSpec.describe 'Registration workflow' do
 
         click_link 'Register'
 
-        expect(current_path).to eq(new_user_path)
+        expect(current_path).to eq(registration_path)
         fill_in "Name", with: user.name
         fill_in "Email", with: user.email
         fill_in "Password", with: user.password
@@ -36,7 +36,7 @@ RSpec.describe 'Registration workflow' do
 
         click_link 'Register'
 
-        expect(current_path).to eq(new_user_path)
+        expect(current_path).to eq(registration_path)
         fill_in "Name", with: user.name
         fill_in "Email", with: user.email
         fill_in "Password", with: user.password
@@ -57,7 +57,7 @@ RSpec.describe 'Registration workflow' do
 
         click_link 'Register'
 
-        expect(current_path).to eq(new_user_path)
+        expect(current_path).to eq(registration_path)
         fill_in "Name", with: user.name
         fill_in "Email", with: user.email
         fill_in "Password", with: user.password

@@ -22,7 +22,7 @@ RSpec.describe 'navigation bar' do
       within "nav" do
         click_link "Register"
       end
-      expect(current_path).to eq(new_user_path)
+      expect(current_path).to eq(registration_path)
 
       click_link "Home"
       expect(current_path).to eq(root_path)
