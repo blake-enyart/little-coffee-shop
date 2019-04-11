@@ -14,4 +14,8 @@ class Order < ApplicationRecord
   def total_quantity
     self.order_items.sum(:quantity)
   end
+
+  def self.sort_by_status
+    Order.order("status=3, status=2, status=0, status=1")
+  end
 end
