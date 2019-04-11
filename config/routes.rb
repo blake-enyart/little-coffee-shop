@@ -7,9 +7,7 @@ Rails.application.routes.draw do
   #merchant routes
   resources :items, only: [:new, :create, :index, :show, :edit, :destroy]
 
-  resources :merchants, only: [:index, :show] do
-
-  end
+  resources :merchants, only: [:index, :show]
   get '/dashboard', to: 'merchants#show', as: :dashboard
   get '/dashboard/items', to: 'merchants/items#index', as: :dashboard_items
   get '/dashboard/items/new', to: 'merchants/items#new', as: :new_merchant_item
@@ -41,6 +39,8 @@ Rails.application.routes.draw do
   get '/login', to: "sessions#new", as: :login
   post '/login', to: "sessions#create"
   get '/logout', to: "sessions#destroy", as: :logout
-  resources :users, only: [:new, :create, :edit, :update]
+  resources :users, only: [:new, :create, :edit, :update] do
+    resources :items, only: [:create]
+  end
 
 end
