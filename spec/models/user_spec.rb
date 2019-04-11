@@ -86,6 +86,35 @@ RSpec.describe User, type: :model do
       end
     end
 
+    describe '#top_three_states' do
+      it 'returns top 3 states where my items shipped' do
+        merchant = create(:merchant)
+        item = create(:item, user: merchant)
+
+        co_user = create(:user, state: "CO")
+        il_user = create(:user, state: "IL")
+        az_user = create(:user, state: "AZ")
+        fl_user = create(:user, state: "FL")
+
+        co_order = create(:shipped_order, user: co_user)
+        il_order = create(:shipped_order, user: il_user)
+        az_order = create(:shipped_order, user: az_user)
+        fl_order = create(:shipped_order, user: fl_user)
+
+        co_order_item = create(:fulfilled_order_item, quantity: 10, item: item, order: co_order)
+        il_order_item = create(:fulfilled_order_item, quantity: 9, item: item, order: il_order)
+        az_order_item = create(:fulfilled_order_item, quantity: 8, item: item, order: az_order)
+        fl_order_item = create(:fulfilled_order_item, quantity: 1, item: item, order: fl_order)
+
+        active_record = merchant.top_three_states_with_quantity_sold
+        states = active_record.map { |relation| relation.state }
+        quantity_sold = active_record.map { |relation| relation.quantity_sold }
+
+        expect(states).to eq(["CO", "IL", "AZ"])
+        expect(quantity_sold).to eq([10, 9, 8])
+      end
+    end
+
     it '#disable_merchant_items' do
       admin = create(:admin)
       merchant = create(:merchant)
