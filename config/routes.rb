@@ -46,6 +46,7 @@ Rails.application.routes.draw do
   get '/login', to: "sessions#new", as: :login
   post '/login', to: "sessions#create"
   get '/logout', to: "sessions#destroy", as: :logout
+  get '/register', to: "users#new", as: :registration
   resources :users, only: [:new, :create, :edit, :update] do
     resources :items, only: [:create]
   end
