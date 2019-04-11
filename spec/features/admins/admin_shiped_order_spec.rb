@@ -1,5 +1,5 @@
 require 'rails_helper'
-RSpec.describe 'admin user index' do
+RSpec.describe 'admin shipping package' do
   context 'as an admin' do
       it 'changes the staus of an order to shipped' do
         admin = create(:admin)
