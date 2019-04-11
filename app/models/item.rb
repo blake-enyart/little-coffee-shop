@@ -2,7 +2,10 @@ class Item < ApplicationRecord
   validates_presence_of :name
   validates_presence_of :description
   validates_presence_of :quantity
-  validates_presence_of :price
+  validates_presence_of :price 
+
+  validates_numericality_of :price, greater_than: 0.00
+  validates_numericality_of :quantity, greater_than: 0
 
   belongs_to :user
   has_many :order_items
@@ -10,6 +13,14 @@ class Item < ApplicationRecord
 
   def disable
     update(enabled: false)
+  end
+
+  def enough_stock_for_order(order_quantity)
+    self.quantity >= order_quantity
+  end
+  
+  def enable
+    update(enabled: true)
   end
 
   def subtotal(quantity)

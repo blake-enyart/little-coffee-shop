@@ -5,6 +5,9 @@
     <li>Date of Order: <%= @order.created_at %></li>
     <li>Last Updated: <%= @order.updated_at %></li>
     <li>Status: <%= @order.status %></li>
+    <% if @order.pending? %>
+      <li><%= link_to "Cancel Order", order_path(@order, cancel_order: true), method: :patch %></li>
+    <% end %>
   </ul>
   <% @order.items.each do |item| %>
     <section class = "item-card" id='item-<%= item.id %>'>

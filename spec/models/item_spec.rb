@@ -15,6 +15,24 @@ RSpec.describe Item, type: :model do
   end
 
   describe 'Instance methods' do
+    describe "#enough_stock_for_order(order_quantity)" do
+      it 'returns true if inventory >= order_quantity' do
+        item = create(:item, quantity: 2)
+        order_quantity_1 = 1
+        order_quantity_2 = 2
+
+        expect(item.enough_stock_for_order(order_quantity_1)).to eq(true)
+        expect(item.enough_stock_for_order(order_quantity_2)).to eq(true)
+      end
+
+      it 'returns false if inventory < order_quantity' do
+        item = create(:item, quantity: 1)
+        order_quantity = 2
+
+        expect(item.enough_stock_for_order(order_quantity)).to eq(false)
+      end
+    end
+
     describe "#subtotal(quantity)" do
       it 'returns a subtotal aka item.price * quantity argument' do
         item = create(:item)
@@ -55,6 +73,27 @@ RSpec.describe Item, type: :model do
         expect(item.enabled).to eq(true)
         item.disable
         expect(item.enabled).to eq(false)
+      end
+    end
+
+
+    describe '.enable' do
+      it 'should change item status to enabled' do
+        item = create(:inactive_item)
+        expect(item.enabled).to eq(false)
+        item.enable
+        expect(item.enabled).to eq(true)
+      end
+    end
+
+    describe '.order_quantity' do
+      it 'should get the item quantity for an order' do
+        @order_1 = create(:order)
+        @item_1 = create(:item)
+
+        @order_item_1= create(:fulfilled_order_item, order: @order_1, item: @item_1, quantity: 2)
+
+        expect(@item_1.order_quantity(@order_1.id)).to eq(2)
       end
     end
 
