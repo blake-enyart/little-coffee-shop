@@ -24,7 +24,7 @@ RSpec.describe 'Login workflow' do
         fill_in "password", with: user.password
         click_button "Log In"
 
-        expect(page).to have_content("You are now logged in as #{user.email}.")
+        expect(page).to have_content("You are now logged in as #{user.name}.")
         expect(current_path).to eq(profile_path)
         expect(page).to have_content(user.name)
       end
@@ -43,7 +43,7 @@ RSpec.describe 'Login workflow' do
         fill_in "password", with: admin.password
         click_button "Log In"
 
-        expect(page).to have_content("You are now logged in as #{admin.email}.")
+        expect(page).to have_content("You are now logged in as #{admin.name}.")
         expect(current_path).to eq(root_path)
       end
     end
@@ -61,7 +61,7 @@ RSpec.describe 'Login workflow' do
         fill_in "password", with: merchant.password
         click_button "Log In"
 
-        expect(page).to have_content("You are now logged in as #{merchant.email}.")
+        expect(page).to have_content("You are now logged in as #{merchant.name}.")
         expect(current_path).to eq(dashboard_path)
       end
     end

@@ -14,7 +14,7 @@ RSpec.describe 'Logout workflow' do
         fill_in('Password', with: user.password)
         click_button('Log In')
 
-        expect(page).to have_content("You are now logged in as #{user.email}.")
+        expect(page).to have_content("You are now logged in as #{user.name}.")
 
         click_link('Logout')
 
