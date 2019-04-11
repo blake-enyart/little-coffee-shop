@@ -32,6 +32,9 @@ RSpec.describe 'admin shipping package' do
 
       expect(page).to_not have_css("#order-#{order_1.id}")
       expect(order_1.status).to eq('shipped')
+
+      visit order_path(order_1)
+      expect(page).to_not have_link("Cancel Order")
     end
   end
 end
