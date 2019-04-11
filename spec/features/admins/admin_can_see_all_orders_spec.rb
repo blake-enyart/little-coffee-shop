@@ -33,13 +33,10 @@ RSpec.describe "Admin Dashboard" do
         expect(page).to have_content("Date of Order: #{@order_4.created_at}")
       end
 
+      expect(page.all(".orders")[0]).to have_content("#{@order_2.id}")
+      expect(page.all(".orders")[1]).to have_content("#{@order_1.id}")
+      expect(page.all(".orders")[2]).to have_content("#{@order_3.id}")
+      expect(page.all(".orders")[3]).to have_content("#{@order_4.id}")
     end
   end
 end
-
-# Orders are sorted by "status" in this order:
-#
-# - packaged
-# - pending
-# - shipped
-# - cancelled
