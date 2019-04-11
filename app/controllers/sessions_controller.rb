@@ -1,6 +1,9 @@
 class SessionsController < ApplicationController
 
   def new
+    if current_user
+      user_redirect()
+    end
   end
 
   def destroy
@@ -11,13 +14,13 @@ class SessionsController < ApplicationController
 
   def create
     user = User.find_by(email: params[:email])
-    # statement to prevent users that dont exist or are diabled from loging in 
+    # statement to prevent users that dont exist or are diabled from logging in
     if !user || !user.enabled
       flash[:error] = 'Your credentials are incorrect.'
       render :new
     elsif user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      flash[:success] = "You are now logged in as #{user.email}."
+      flash[:success] = "You are now logged in as #{user.name}."
       user_redirect()
     else
       flash[:error] = 'Your credentials are incorrect.'
