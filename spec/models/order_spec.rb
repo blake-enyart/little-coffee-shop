@@ -49,6 +49,7 @@ RSpec.describe Order, type: :model do
         #syntax to create multiple items and assign them to a chosen merchant
         item_1, item_2, item_3 = create_list(:item, 3, user: merchant_1)
         item_4, item_5, item_6 = create_list(:item, 3, user: merchant_2)
+        item_7 = create(:item, user: merchant_1)
         order = create(:order)
         oi_1 = create(:fulfilled_order_item, item: item_1, order: order)
         oi_2 = create(:fulfilled_order_item, item: item_2, order: order)
@@ -56,7 +57,15 @@ RSpec.describe Order, type: :model do
         oi_4 = create(:fulfilled_order_item, item: item_4, order: order)
         oi_5 = create(:fulfilled_order_item, item: item_5, order: order)
         oi_6 = create(:fulfilled_order_item, item: item_6, order: order)
+        oi_7 = create(:order_item, item: item_7, order: order)
 
+        order.pending_to_packaged
+
+        actual = order.status
+        expected = 'pending'
+        expect(actual).to eq(expected)
+
+        oi_7.fulfill_item
         order.pending_to_packaged
 
         actual = order.status
