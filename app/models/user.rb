@@ -48,8 +48,11 @@ class User < ApplicationRecord
 
   def percent_inventory_sold
     inventory = self.items.sum(:quantity)
-    items_sold = self.items.joins(:order_items).where("order_items.fulfilled = true").sum("order_items.quantity")
 
     items_sold / (inventory.to_f + items_sold)
+  end
+
+  def items_sold
+    self.items.joins(:order_items).where("order_items.fulfilled = true").sum("order_items.quantity")
   end
 end

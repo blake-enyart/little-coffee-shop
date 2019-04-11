@@ -64,15 +64,25 @@ RSpec.describe User, type: :model do
     end
 
     describe '#percent_inventory_sold' do
-      it 'shows the total quantity of items Ive sold and a a percentage against my sold units plus remaining inventory' do
+      it 'returns percentage against my sold units plus remaining inventory' do
         # (eg, if I have sold 10 things and still have 90 things in inventory,
         # the message would say something like
         # "Sold 10 items, which is 10% of your total inventory"
         merchant = create(:merchant)
         i1, i2, i3, i4, i5, i6, i7, i8, i9 = create_list(:item, 9, quantity: 10, user: merchant)
         oi1 = create(:fulfilled_order_item, quantity: 10, item: i1)
-        
+
         expect(merchant.percent_inventory_sold).to eq(0.1)
+      end
+    end
+
+    describe '#items_sold' do
+      it 'returns total items a merchant has sold' do
+        merchant = create(:merchant)
+        item = create(:item, user: merchant)
+        order_item = create(:fulfilled_order_item, quantity: 10, item: item)
+
+        expect(merchant.items_sold).to eq(10)
       end
     end
 
