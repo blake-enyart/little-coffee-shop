@@ -115,6 +115,26 @@ RSpec.describe User, type: :model do
       end
     end
 
+    describe '#best_customer' do
+      it 'returns name and order_count of the user with the most orders from me' do
+        merchant = create(:merchant)
+        item = create(:item, user: merchant)
+
+        co_user = create(:user, state: "CO")
+        co_order_1 = create(:shipped_order, user: co_user)
+        co_order_item_1 = create(:fulfilled_order_item, quantity: 10, item: item, order: co_order_1)
+        co_order_2 = create(:shipped_order, user: co_user)
+        co_order_item_2 = create(:fulfilled_order_item, quantity: 10, item: item, order: co_order_2)
+
+        il_user = create(:user, state: "IL")
+        il_order = create(:shipped_order, user: il_user)
+        il_order_item = create(:fulfilled_order_item, quantity: 9, item: item, order: il_order)
+
+        expect(merchant.best_customer.name).to eq(co_user.name)
+        expect(merchant.best_customer.order_count).to eq(2)
+      end
+    end
+
     it '#disable_merchant_items' do
       admin = create(:admin)
       merchant = create(:merchant)

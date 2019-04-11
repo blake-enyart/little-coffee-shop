@@ -53,10 +53,28 @@ class User < ApplicationRecord
   end
 
   def items_sold
-    self.items.joins(:order_items).where("order_items.fulfilled = true").sum("order_items.quantity")
+    self.items
+    .joins(:order_items)
+    .where("order_items.fulfilled = true")
+    .sum("order_items.quantity")
   end
 
   def top_three_states_with_quantity_sold
-    self.items.joins(order_items: {order: :user}).select("users.state, SUM(order_items.quantity) as quantity_sold").group("users.state").order("quantity_sold DESC").limit(3)
+    self.items
+    .joins(order_items: {order: :user})
+    .select("users.state, SUM(order_items.quantity) as quantity_sold")
+    .group("users.state")
+    .order("quantity_sold DESC")
+    .limit(3)
+  end
+
+  def best_customer
+    self.items
+    .joins(order_items: {order: :user})
+    .select("users.name, COUNT(orders.*) as order_count")
+    .group("users.name")
+    .order("order_count DESC")
+    .limit(1)
+    .first
   end
 end
