@@ -9,6 +9,7 @@ class MerchantsController < ApplicationController
     if merchant_user?
       @user = User.find(current_user.id)
       @pending_orders = @user.pending_orders
+      @top_five_items_sold = @user.top_five_items_sold
     else
       render file: "/public/404", status: 404
     end
