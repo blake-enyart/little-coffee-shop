@@ -9,7 +9,12 @@ class OrdersController < ApplicationController
   end
 
   def update
-    if params[:cancel_order]
+    if params[:ship]
+      order = Order.find(params[:id])
+      order.update(status: 'shipped')
+      redirect_to admin_dashboard_path(current_user)
+      return
+    elsif params[:cancel_order]
       order = Order.find(params[:id])
 
       # Return fulfilled items back to the Item inventory
