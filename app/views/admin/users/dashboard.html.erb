@@ -1,6 +1,6 @@
 <% @orders.each do |order| %>
   <section id = "order-<%= order.id %>">
     <p>Order <%= order.id %></p>
-    <%= link_to 'Shipped', order_path(order), method: :patch %>
+    <%= link_to 'Shipped', order_path(order, ship: true), method: :patch %>
   </section>
 <% end %>
