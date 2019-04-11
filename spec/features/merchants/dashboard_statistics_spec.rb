@@ -123,6 +123,33 @@ RSpec.describe 'Merchant Dashboard Statistics', type: :feature do
       end
     end
 
-    xit 'shows top 3 users who have spent the most money on my items, and the total amount theyve spent'
+    it 'shows top 3 users who have spent the most money on my items, and the total amount theyve spent' do
+      merchant = create(:merchant)
+      item = create(:item, user: merchant, price: 1)
+
+      co_user = create(:user, state: "CO")
+      il_user = create(:user, state: "IL")
+      az_user = create(:user, state: "AZ")
+      fl_user = create(:user, state: "FL")
+
+      co_order = create(:shipped_order, user: co_user)
+      il_order = create(:shipped_order, user: il_user)
+      az_order = create(:shipped_order, user: az_user)
+      fl_order = create(:shipped_order, user: fl_user)
+
+      co_order_item = create(:fulfilled_order_item, quantity: 10, item: item, order: co_order, order_price: 1)
+      il_order_item = create(:fulfilled_order_item, quantity: 9, item: item, order: il_order, order_price: 1)
+      az_order_item = create(:fulfilled_order_item, quantity: 8, item: item, order: az_order, order_price: 1)
+      fl_order_item = create(:fulfilled_order_item, quantity: 1, item: item, order: fl_order, order_price: 1)
+
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(merchant)
+      visit dashboard_path
+
+      expected = "Best customers by revenue: #{co_user.name} - $10.0 #{il_user.name} - $9.0 #{az_user.name} - $8.0"
+
+      within "#best-customers" do
+        expect(page).to have_content(expected)
+      end
+    end
   end
 end

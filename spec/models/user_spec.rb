@@ -155,6 +155,35 @@ RSpec.describe User, type: :model do
       end
     end
 
+    describe '#best_customers_by_revenue' do
+      it 'returns top 3 customers by revenue' do
+        merchant = create(:merchant)
+        item = create(:item, user: merchant, price: 1)
+
+        co_user = create(:user, state: "CO")
+        il_user = create(:user, state: "IL")
+        az_user = create(:user, state: "AZ")
+        fl_user = create(:user, state: "FL")
+
+        co_order = create(:shipped_order, user: co_user)
+        il_order = create(:shipped_order, user: il_user)
+        az_order = create(:shipped_order, user: az_user)
+        fl_order = create(:shipped_order, user: fl_user)
+
+        co_order_item = create(:fulfilled_order_item, quantity: 10, item: item, order: co_order, order_price: 1)
+        il_order_item = create(:fulfilled_order_item, quantity: 9, item: item, order: il_order, order_price: 1)
+        az_order_item = create(:fulfilled_order_item, quantity: 8, item: item, order: az_order, order_price: 1)
+        fl_order_item = create(:fulfilled_order_item, quantity: 1, item: item, order: fl_order, order_price: 1)
+
+        active_record = merchant.best_customers_by_revenue
+        names = active_record.map { |ar| ar.name }
+        revenue = active_record.map { |ar| ar.revenue }
+
+        expect(names).to eq([co_user.name, il_user.name, az_user.name])
+        expect(revenue).to eq([10, 9, 8])
+      end
+    end
+
     it '#disable_merchant_items' do
       admin = create(:admin)
       merchant = create(:merchant)
