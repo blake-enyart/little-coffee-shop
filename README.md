@@ -10,11 +10,11 @@ This is a student project from Turing School of Software & Design as part of the
 
 
 ## Contributors
-- Matt Levy       [GitHub](https://github.com/milevy1)
-- Blake Enyart    [GitHub](https://github.com/blake-enyart)
-- Rene Casco      [GitHub](https://github.com/renecasco)
-- Michael Karnes  [GitHub](https://github.com/mikekarnes123)
-- Noah Flint      [GitHub](https://github.com/n-flint)
+- [Matt Levy](https://github.com/milevy1)
+- [Blake Enyart](https://github.com/blake-enyart)
+- [Rene Casco](https://github.com/renecasco)
+- [Michael Karnes](https://github.com/mikekarnes123)
+- [Noah Flint](https://github.com/n-flint)
 
 ## Built With
 
