@@ -10,6 +10,10 @@
 </ul>
 </section>
 
+<section id="percent-inventory-sold">
+  <p>Sold <%= @user.items_sold %> items, which is <%= @user.percent_inventory_sold %>% of your total inventory.</p>
+</section>
+
 <section id='pending-orders'>
   <% @pending_orders.each do |order| %>
   <section id="pending-order-card-<%= order.id %>">
