@@ -62,7 +62,6 @@ RSpec.describe 'Merchant Items Index Page', type: :feature do
     end
 
     it 'new item image can be left blank must' do
-
       fill_in "Name",	with: "Item Test" 
       fill_in "Description",	with: "Item description" 
       fill_in "Image url",	with: nil 
@@ -85,10 +84,11 @@ RSpec.describe 'Merchant Items Index Page', type: :feature do
       fill_in "Quantity",	with: "#{@item_3.quantity}" 
       fill_in "Price",	with: nil 
       click_button "Add Item"
-     
+      
       expect(page).to have_content("Price is not a number")
       expect(page).to have_content("Price can't be blank")
     end
+
     it 'new item must have quantity' do
       fill_in "Name",	with: "#{@item_3.name}" 
       fill_in "Description",	with: "#{@item_3.description}" 
@@ -101,6 +101,32 @@ RSpec.describe 'Merchant Items Index Page', type: :feature do
       expect(page).to have_content("Quantity is not a number")
       expect(page).to have_content("Quantity can't be blank")
       expect(find_field('Name').value).to eq(@item_3.name)
+    end
+
+    it 'new item must have name' do
+      fill_in "Name",	with: nil 
+      fill_in "Description",	with: "#{@item_3.description}" 
+      fill_in "Image url",	with: "#{@item_3.image_url}" 
+      fill_in "Quantity",	with: "#{@item_3.quantity}" 
+      fill_in "Price",	with: "#{@item_3.price}" 
+
+      click_button "Add Item"
+
+      expect(page).to have_content("Name can't be blank")
+      expect(find_field('Price').value).to eq("#{@item_3.price}")
+    end
+
+    it 'new item must have description' do
+      fill_in "Name",	with: "#{@item_3.description}"
+      fill_in "Description",	with: nil 
+      fill_in "Image url",	with: "#{@item_3.image_url}" 
+      fill_in "Quantity",	with: "#{@item_3.quantity}" 
+      fill_in "Price",	with: "#{@item_3.price}" 
+
+      click_button "Add Item"
+
+      expect(page).to have_content("Description can't be blank")
+      expect(find_field('Price').value).to eq("#{@item_3.price}")
     end
   end
 end
