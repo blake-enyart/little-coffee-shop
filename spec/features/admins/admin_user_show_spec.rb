@@ -25,5 +25,6 @@ RSpec.describe 'Admin User Show Page', type: :feature do
 
         expect(current_path).to eq(admin_merchant_path(merchant))
       end
+    end
   end
 end
