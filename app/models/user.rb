@@ -49,7 +49,7 @@ class User < ApplicationRecord
   def percent_inventory_sold
     inventory = self.items.sum(:quantity)
 
-    items_sold / (inventory.to_f + items_sold)
+    items_sold / (inventory.to_f + items_sold) * 100
   end
 
   def items_sold

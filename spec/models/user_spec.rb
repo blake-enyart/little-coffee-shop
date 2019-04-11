@@ -72,7 +72,7 @@ RSpec.describe User, type: :model do
         i1, i2, i3, i4, i5, i6, i7, i8, i9 = create_list(:item, 9, quantity: 10, user: merchant)
         oi1 = create(:fulfilled_order_item, quantity: 10, item: i1)
 
-        expect(merchant.percent_inventory_sold).to eq(0.1)
+        expect(merchant.percent_inventory_sold).to eq(10)
       end
     end
 
