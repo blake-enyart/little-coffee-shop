@@ -11,6 +11,7 @@ class MerchantsController < ApplicationController
       @pending_orders = @user.pending_orders
       @top_five_items_sold = @user.top_five_items_sold
       @best_customer_by_orders = @user.best_customer_by_orders
+      @best_customer_by_items = @user.best_customer_by_items
     else
       render file: "/public/404", status: 404
     end

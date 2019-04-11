@@ -77,4 +77,14 @@ class User < ApplicationRecord
     .limit(1)
     .first
   end
+
+  def best_customer_by_items
+    self.items
+    .joins(order_items: {order: :user})
+    .select("users.name, SUM(order_items.quantity) as items_ordered")
+    .group("users.name")
+    .order("items_ordered DESC")
+    .limit(1)
+    .first
+  end
 end

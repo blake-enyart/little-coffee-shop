@@ -96,13 +96,32 @@ RSpec.describe 'Merchant Dashboard Statistics', type: :feature do
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(merchant)
       visit dashboard_path
 
-      within "#best-customer" do
-        expect(page).to have_content("Best customer: #{merchant.best_customer_by_orders.name} - #{merchant.best_customer_by_orders.order_count} orders")
+      within "#best-customers" do
+        expect(page).to have_content("Best customer by orders: #{merchant.best_customer_by_orders.name} - #{merchant.best_customer_by_orders.order_count} orders")
       end
     end
 
-    xit 'shows the name of the user who bought the most total items from me and the total quantity'
-    # (pick one if there's a tie)
+    it 'shows the name of the user who bought the most total items from me and the total quantity' do
+      merchant = create(:merchant)
+      item = create(:item, user: merchant)
+
+      co_user = create(:user, state: "CO")
+      co_order_1 = create(:shipped_order, user: co_user)
+      co_order_item_1 = create(:fulfilled_order_item, quantity: 10, item: item, order: co_order_1)
+      co_order_2 = create(:shipped_order, user: co_user)
+      co_order_item_2 = create(:fulfilled_order_item, quantity: 10, item: item, order: co_order_2)
+
+      il_user = create(:user, state: "IL")
+      il_order = create(:shipped_order, user: il_user)
+      il_order_item = create(:fulfilled_order_item, quantity: 9, item: item, order: il_order)
+
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(merchant)
+      visit dashboard_path
+
+      within "#best-customers" do
+        expect(page).to have_content("Best customer by items: #{merchant.best_customer_by_items.name} - #{merchant.best_customer_by_items.items_ordered} items")
+      end
+    end
 
     xit 'shows top 3 users who have spent the most money on my items, and the total amount theyve spent'
   end
