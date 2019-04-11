@@ -74,7 +74,8 @@ RSpec.describe 'Merchant Items Index Page', type: :feature do
 
       expect(page).to have_content("Item Test is now saved and available for sale.")
       
-      expect(item.image_url).to eq("https://i.pinimg.com/originals/2a/84/90/2a849069c7f487f71bb6594dffb84e5e.png")
+      expect(page).to have_css("img[src*='#{item.image_url}']")
+#       expect(item.image_url).to eq("https://i.pinimg.com/originals/2a/84/90/2a849069c7f487f71bb6594dffb84e5e.png")
     end
 
     it 'new item must have price' do
