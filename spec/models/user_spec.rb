@@ -55,6 +55,22 @@ RSpec.describe User, type: :model do
       expect(item_3.enabled).to eq(false)
     end
 
+    it '#enable_merchant_items' do
+      admin = create(:admin)
+      merchant = create(:merchant)
+      item_1 = create(:inactive_item)
+      item_2 = create(:inactive_item)
+      item_3 = create(:inactive_item)
+      merchant.items << item_1
+      merchant.items << item_2
+      merchant.items << item_3
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(admin)
+      merchant.enable_merchant_items
+      expect(item_1.enabled).to eq(true)
+      expect(item_2.enabled).to eq(true)
+      expect(item_3.enabled).to eq(true)
+    end
+
     it '#pending_orders' do
       merchant = create(:merchant)
       #creates 3 order_items and 3 associated items/pending orders

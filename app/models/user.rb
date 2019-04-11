@@ -26,9 +26,14 @@ class User < ApplicationRecord
     items.each {|item| item.disable}
   end
 
+  def enable_merchant_items
+    items.each {|item| item.enable}
+  end
+
   def pending_orders
     #selects pending orders where the user id is the merchant id
     Order.joins(:items)
          .where('items.user_id = ? AND orders.status = 0',self.id)
+         .distinct
   end
 end
