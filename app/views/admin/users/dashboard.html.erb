@@ -1,6 +1,18 @@
+<h1>Admin Dashboard</h1>
+<section class = "container">
+  <% @orders.each do |order| %>
+    <section class = "order-card" id = "order-<%=order.id%>">
+      <p>User: <%= link_to order.user.name, admin_user_path(order.user) %></p>
+      <p>Order ID: <%= order.id %></p>
+      <p>Date of Order: <%= order.created_at %></p>
+    </section>
+  <% end %>
+</section>
+
 <% @orders.each do |order| %>
   <section id = "order-<%= order.id %>">
     <p>Order <%= order.id %></p>
     <%= link_to 'Shipped', order_path(order, ship: true), method: :patch %>
   </section>
 <% end %>
+
