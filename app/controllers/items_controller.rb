@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-
+  
   def index
     @items = Item.where(enabled: true)
     @most_popular = Item.five_most_popular
@@ -9,7 +9,6 @@ class ItemsController < ApplicationController
   def show
     @item = Item.find(params[:id])
   end
-
 
   def create
     @item = current_user.items.new(item_params)
@@ -25,10 +24,9 @@ class ItemsController < ApplicationController
     end
   end
 
-    private
+  private
 
   def item_params
     params.require(:item).permit(:name, :description, :image_url, :quantity, :price)
   end
-
 end
