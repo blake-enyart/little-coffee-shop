@@ -68,7 +68,7 @@ class User < ApplicationRecord
     .limit(3)
   end
 
-  def best_customer
+  def best_customer_by_orders
     self.items
     .joins(order_items: {order: :user})
     .select("users.name, COUNT(orders.*) as order_count")

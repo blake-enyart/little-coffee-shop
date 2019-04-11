@@ -97,7 +97,7 @@ RSpec.describe 'Merchant Dashboard Statistics', type: :feature do
       visit dashboard_path
 
       within "#best-customer" do
-        expect(page).to have_content("Best customer: #{merchant.best_customer.name} - #{merchant.best_customer.order_count} orders")
+        expect(page).to have_content("Best customer: #{merchant.best_customer_by_orders.name} - #{merchant.best_customer_by_orders.order_count} orders")
       end
     end
 

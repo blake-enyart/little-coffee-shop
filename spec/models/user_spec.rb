@@ -115,7 +115,7 @@ RSpec.describe User, type: :model do
       end
     end
 
-    describe '#best_customer' do
+    describe '#best_customer_by_orders' do
       it 'returns name and order_count of the user with the most orders from me' do
         merchant = create(:merchant)
         item = create(:item, user: merchant)
@@ -130,8 +130,8 @@ RSpec.describe User, type: :model do
         il_order = create(:shipped_order, user: il_user)
         il_order_item = create(:fulfilled_order_item, quantity: 9, item: item, order: il_order)
 
-        expect(merchant.best_customer.name).to eq(co_user.name)
-        expect(merchant.best_customer.order_count).to eq(2)
+        expect(merchant.best_customer_by_orders.name).to eq(co_user.name)
+        expect(merchant.best_customer_by_orders.order_count).to eq(2)
       end
     end
 

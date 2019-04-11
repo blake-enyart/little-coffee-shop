@@ -25,9 +25,9 @@
   </p>
 </section>
 
-<% if @best_customer %>
+<% if @best_customer_by_orders %>
 <section id="best-customer">
-  <p>Best customer: <%= @best_customer.name %> - <%= @best_customer.order_count %> orders</p>
+  <p>Best customer: <%= @best_customer_by_orders.name %> - <%= @best_customer_by_orders.order_count %> orders</p>
 </section>
 <% end %>
 
