@@ -12,7 +12,7 @@ RSpec.describe 'User cancels an order', type: :feature do
       @order = create(:order, user: @user, status: 0)
 
       @unfulfilled_order_item = create(:order_item, order: @order, item: @item_1, quantity: 1)
-      @fulffileed_order_item = create(:fulfilled_order_item, order: @order, item: @item_2, quantity: 1)
+      @fulffiled_order_item = create(:fulfilled_order_item, order: @order, item: @item_2, quantity: 1)
 
       visit order_path(@order)
     end
@@ -22,32 +22,32 @@ RSpec.describe 'User cancels an order', type: :feature do
     end
 
     scenario 'if the order is NOT pending, I do not see a link to cancel the order' do
-      @packaged_order = create(:packaged_order)
-      @shipped_order = create(:shipped_order)
-      @cancelled_order = create(:cancelled_order)
+      packaged_order = create(:packaged_order)
+      shipped_order = create(:shipped_order)
+      cancelled_order = create(:cancelled_order)
 
-      visit order_path(@packaged_order)
+      visit order_path(packaged_order)
       expect(page).to_not have_link("Cancel Order")
 
-      visit order_path(@shipped_order)
+      visit order_path(shipped_order)
       expect(page).to_not have_link("Cancel Order")
 
-      visit order_path(@cancelled_order)
+      visit order_path(cancelled_order)
       expect(page).to_not have_link("Cancel Order")
     end
 
     context 'clicking on the Cancel Order button' do
       it 'changes each row in the order_items table to status unfulfilled' do
         expect(@unfulfilled_order_item.fulfilled).to eq(false)
-        expect(@fulffileed_order_item.fulfilled).to eq(true)
+        expect(@fulffiled_order_item.fulfilled).to eq(true)
 
         click_on "Cancel Order"
 
         @unfulfilled_order_item.reload
-        @fulffileed_order_item.reload
+        @fulffiled_order_item.reload
 
         expect(@unfulfilled_order_item.fulfilled).to eq(false)
-        expect(@fulffileed_order_item.fulfilled).to eq(false)
+        expect(@fulffiled_order_item.fulfilled).to eq(false)
       end
 
       it 'changes the order status to cancelled' do
@@ -63,7 +63,7 @@ RSpec.describe 'User cancels an order', type: :feature do
         click_on "Cancel Order"
         @item_2.reload
 
-        expect(@item_2.quantity).to eq(11)  # Because fulffileed_order_item.quantity is returned to inventory
+        expect(@item_2.quantity).to eq(11)  # Because fulffiled_order_item.quantity is returned to inventory
       end
 
       it 'returns me to my profile page' do
