@@ -47,6 +47,6 @@ RSpec.describe 'Merchant Dashboard Statistics', type: :feature do
     xit 'shows the name of the user who bought the most total items from me and the total quantity'
     # (pick one if there's a tie)
 
-    it 'shows top 3 users who have spent the most money on my items, and the total amount theyve spent'
+    xit 'shows top 3 users who have spent the most money on my items, and the total amount theyve spent'
   end
 end
