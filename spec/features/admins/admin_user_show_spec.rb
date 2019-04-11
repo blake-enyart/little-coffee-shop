@@ -14,6 +14,17 @@ RSpec.describe 'Admin User Show Page', type: :feature do
 
         expect(page).to_not have_link('Edit Details', href: edit_profile_path)
       end
+
+      it '*when user is merchant, redirects to merchant show page' do
+        admin = create(:admin)
+        merchant = create(:merchant)
+        allow_any_instance_of(ApplicationController).to \
+        receive(:current_user).and_return(admin)
+
+        visit admin_user_path(merchant)
+
+        expect(current_path).to eq(admin_merchant_path(merchant))
+      end
     end
   end
 end
