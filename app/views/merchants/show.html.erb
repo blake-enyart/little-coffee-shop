@@ -3,6 +3,7 @@
 <%= link_to "View my Items", dashboard_items_path %>
 
 <section id="top-5-items-sold">
+  <h1>Top 5 Items Sold</h1>
 <ul>
   <% @top_five_items_sold.each do |item|  %>
   <li><%= item.name %> - <%= item.quantity_sold %></li>
@@ -11,16 +12,24 @@
 </section>
 
 <section id="percent-inventory-sold">
+  <h1>Inventory Stats</h1>
   <p>Sold <%= @user.items_sold %> items, which is <%= @user.percent_inventory_sold %>% of your total inventory.</p>
 </section>
 
 <section id="top-3-states">
+  <h1>Top Three States</h1>
   <p>
     <% @user.top_three_states_with_quantity_sold.each do |relation| %>
-    <%= relation.state %> - <%= relation.quantity_sold %> items 
+    <%= relation.state %> - <%= relation.quantity_sold %> items
     <% end %>
   </p>
 </section>
+
+<% if @best_customer %>
+<section id="best-customer">
+  <p>Best customer: <%= @best_customer.name %> - <%= @best_customer.order_count %> orders</p>
+</section>
+<% end %>
 
 <section id='pending-orders'>
   <% @pending_orders.each do |order| %>
