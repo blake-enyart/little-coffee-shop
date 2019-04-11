@@ -25,12 +25,11 @@ RSpec.describe 'admin shipping package' do
       click_on "Dashboard"
 
       within "#order-#{order_1.id}" do
-        click_on 'Shipped'
+        click_on 'Ship Order'
       end
 
       order_1.reload
 
-      expect(page).to_not have_css("#order-#{order_1.id}")
       expect(order_1.status).to eq('shipped')
 
       visit order_path(order_1)
