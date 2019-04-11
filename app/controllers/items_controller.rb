@@ -10,10 +10,6 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
-  def new
-    @merchant = current_user
-    @item = Item.new
-  end
 
   def create
     @item = current_user.items.new(item_params)
@@ -25,8 +21,7 @@ class ItemsController < ApplicationController
       redirect_to dashboard_items_path
     else
       flash[:error] = @item.errors.full_messages.join(", ")
-      # redirect_to new_merchant_item_path
-      render :new
+      render :"/merchants/items/new"
     end
   end
 
