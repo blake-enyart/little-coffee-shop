@@ -14,4 +14,10 @@ class Order < ApplicationRecord
   def total_quantity
     self.order_items.sum(:quantity)
   end
+
+  def pending_to_packaged
+    if self.order_items.pluck(:fulfilled).all?
+      self.status = 1
+    end
+  end
 end
