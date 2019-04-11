@@ -36,4 +36,20 @@ class User < ApplicationRecord
          .where('items.user_id = ? AND orders.status = 0',self.id)
          .distinct
   end
+
+  def top_five_items_sold
+    self.items
+    .select("items.*, SUM(order_items.quantity) as quantity_sold")
+    .joins(:order_items)
+    .group("items.id")
+    .order("quantity_sold DESC, items.name ASC")
+    .limit(5)
+  end
+
+  def percent_inventory_sold
+    inventory = self.items.sum(:quantity)
+    items_sold = self.items.joins(:order_items).where("order_items.fulfilled = true").sum("order_items.quantity")
+
+    items_sold / (inventory.to_f + items_sold)
+  end
 end

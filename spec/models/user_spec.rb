@@ -36,6 +36,48 @@ RSpec.describe User, type: :model do
   end
 
   describe 'Instance Method(s)' do
+    describe '#top_five_items_sold' do
+      it 'returns the top five items sold and quantity_sold' do
+        @merchant = create(:merchant)
+
+        @item_1 = create(:item, user: @merchant, quantity: 10)
+        @item_2 = create(:item, user: @merchant, quantity: 10)
+        @item_3 = create(:item, user: @merchant, quantity: 10)
+        @item_4 = create(:item, user: @merchant, quantity: 10)
+        @item_5 = create(:item, user: @merchant, quantity: 10)
+        @item_6 = create(:item, user: @merchant, quantity: 10)
+
+
+        @order_item_0 = create(:order_item, item: @item_1, quantity: 1)
+        @order_item_1 = create(:order_item, item: @item_1, quantity: 1)
+        @order_item_2 = create(:order_item, item: @item_2, quantity: 2)
+        @order_item_3 = create(:order_item, item: @item_3, quantity: 3)
+        @order_item_4 = create(:order_item, item: @item_4, quantity: 4)
+        @order_item_5 = create(:order_item, item: @item_5, quantity: 5)
+        @order_item_6 = create(:order_item, item: @item_6, quantity: 6)
+        @order_item_7 = create(:order_item, item: @item_6, quantity: 6)
+
+        expected = [@item_6, @item_5, @item_4, @item_3, @item_1]
+
+        expect(@merchant.top_five_items_sold).to eq(expected)
+      end
+    end
+
+    describe '#percent_inventory_sold' do
+      it 'shows the total quantity of items Ive sold and a a percentage against my sold units plus remaining inventory' do
+        # (eg, if I have sold 10 things and still have 90 things in inventory,
+        # the message would say something like
+        # "Sold 10 items, which is 10% of your total inventory"
+        merchant = create(:merchant)
+        i1, i2, i3, i4, i5, i6, i7, i8, i9 = create_list(:item, 9, quantity: 10, user: merchant)
+        oi1 = create(:fulfilled_order_item, quantity: 10, item: i1)
+
+        # Need total inventory -
+        # Need total fullfilled order_item quantity
+        expect(merchant.percent_inventory_sold).to eq(0.1)
+      end
+    end
+
     it '#disable_merchant_items' do
       admin = create(:admin)
       merchant = create(:merchant)
