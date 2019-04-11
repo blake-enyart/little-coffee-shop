@@ -2,6 +2,14 @@
 
 <%= link_to "View my Items", dashboard_items_path %>
 
+<section id="top-5-items-sold">
+<ul>
+  <% @top_five_items_sold.each do |item|  %>
+  <li><%= item.name %> - <%= item.quantity_sold %></li>
+  <% end %>
+</ul>
+</section>
+
 <section id='pending-orders'>
   <% @pending_orders.each do |order| %>
   <section id="pending-order-card-<%= order.id %>">
