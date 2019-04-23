@@ -4,18 +4,18 @@
 <p><%= @order.user.street %></p>
 <p><%= @order.user.city %>, <%= @order.user.state %></p>
 <section id='item-container'>
-  <% @merchant_items.each do |item| %>
+  <% @merchant_items.each do |item, order_item| %>
   <section id='item-card-<%= item.id %>'>
     <%= link_to item.name, item_path(item) %>
     <img src=<%= item.image_url %> alt=<%= item.name %>>
-    <p>Item Price: <%= @merchant_order_items.where(item_id: item.id)[0].order_price %></p>
-    <p>Quantity: <%= @merchant_order_items.where(item_id: item.id)[0].quantity %></p>
+    <p>Item Price: <%= order_item.order_price %></p>
+    <p>Quantity: <%= order_item.quantity %></p>
 
-    <% if @merchant_order_items.where(item_id: item.id)[0].fulfilled %>
+    <% if order_item.fulfilled %>
       <p>Item Already Fulfilled</p>
     <% else %>
-      <% if item.enough_stock_for_order(@merchant_order_items.where(item_id: item.id)[0].quantity) %>
-        <p><%= link_to "Fulfill Item", fulfill_item_path(order: @order, order_item: @merchant_order_items.where(item_id: item.id)[0]) %></p>
+      <% if item.enough_stock_for_order(order_item.quantity) %>
+        <p><%= link_to "Fulfill Item", fulfill_item_path(order: @order, order_item: order_item) %></p>
       <% else %>
         <p>Not Enough Stock to Fulfill Item</p>
       <% end %>
