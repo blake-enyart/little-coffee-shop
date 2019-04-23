@@ -45,8 +45,10 @@ class CartController < ApplicationController
   def decrement_item
     item = Item.find(params[:id])
 
-    if @cart.count_of(item.id) < item.quantity
+    if @cart.count_of(item.id) > 1
       @cart.deduct_item(item.id)
+    else
+      @cart.contents.delete(params[:id])
     end
 
     redirect_to cart_path
