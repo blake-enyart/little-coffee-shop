@@ -3,9 +3,14 @@
 <h3>Address:</h3>
 <p><%= @user.street %></p>
 <p><%= @user.city %>, <%= @user.state %> <%= @user.zipcode %></p>
+
 <% if current_reguser? %>
 <%= link_to 'Edit Details', edit_profile_path %>
   <% if @user.orders.count > 0 %>
     <%= link_to 'My Orders', profile_orders_path %>
   <% end %>
+<% end %>
+
+<% if admin_user? %>
+  <%= button_to 'Upgrade to Merchant', admin_user_path(@user, 'user[role]': 'merchant'), method: :patch %>
 <% end %>
