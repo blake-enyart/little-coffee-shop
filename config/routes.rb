@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
   #general routes
   root to: "welcome#index"
-  resources :items, only: [:index, :show, :edit, :destroy]
+  resources :items, only: [:index, :show, :destroy]
   resources :orders, only: [:show, :update]
 
   #merchant routes
-  resources :items, only: [:new, :create, :index, :show, :edit, :destroy]
+  resources :items, only: [:new, :create, :index, :show, :destroy]
 
   resources :merchants, only: [:index, :show] do
     resources :items, only: [:show]
@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   get '/dashboard/orders/:id', to: 'merchants/orders#show', as: :dashboard_order
   get '/dashboard/items', to: 'merchants/items#index', as: :dashboard_items
   get '/dashboard/items/new', to: 'merchants/items#new', as: :new_merchant_item
+  get '/dashboard/items/:id/edit', to: 'merchants/items#edit', as: :edit_item
+  patch '/dashboard/items/:id/edit', to: 'merchants/items#update'
   get '/enable_item/:id', to: 'merchants/items#enable_item', as: :enable_item
   get '/fulfill_item/:id', to: 'merchants/items#fulfill_item', as: :fulfill_item
   get '/delete_item/:id', to: 'merchants/items#delete_item', as: :delete_item
