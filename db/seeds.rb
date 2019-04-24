@@ -244,7 +244,7 @@ until n == 10 do
   n += 1
 end
 
-# Confirmaiton messages
+# Confirmation messages
 puts 'seed data finished'
 puts "Users created: #{User.count.to_i}"
 puts "Orders created: #{Order.count.to_i}"
