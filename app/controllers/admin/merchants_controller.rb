@@ -20,7 +20,7 @@ class Admin::MerchantsController < Admin::BaseController
     elsif params[:downgrade]
       merchant.disable_merchant_items
       merchant.update(role: 0)
-      flash[:notice] = "Merchant #{merchant.name} downgraded"
+      flash[:notice] = "Merchant #{merchant.name} downgraded."
       redirect_to admin_user_path(merchant)
     end
   end

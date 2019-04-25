@@ -28,6 +28,7 @@ RSpec.describe 'navigation bar' do
       expect(current_path).to eq(root_path)
     end
   end
+
   context 'as a registered user' do
     it 'shows navigation bar for a registered user' do
       user = create(:user)
@@ -59,6 +60,7 @@ RSpec.describe 'navigation bar' do
       expect(current_path).to eq(root_path)
     end
   end
+
   context 'as a merchant' do
     it 'shows navigation bar for merchant' do
       merchant = create(:merchant)
@@ -86,7 +88,20 @@ RSpec.describe 'navigation bar' do
       click_link "Logout"
       expect(current_path).to eq(root_path)
     end
+
+    it 'users index link should not appear in nav' do
+      merchant = create(:merchant)
+      allow_any_instance_of(ApplicationController).to \
+      receive(:current_user).and_return(merchant)
+
+      visit root_path
+
+      within('.navbar') do
+        expect(page).to_not have_link('Users')
+      end
+    end
   end
+
   context 'as an Admin' do
     it 'shows navigation bar for admin' do
       admin = create(:admin)
@@ -113,6 +128,18 @@ RSpec.describe 'navigation bar' do
 
       click_link "Logout"
       expect(current_path).to eq(root_path)
+    end
+
+    it 'users index link in nav' do
+      admin = create(:admin)
+      allow_any_instance_of(ApplicationController).to \
+      receive(:current_user).and_return(admin)
+
+      visit root_path
+
+      within('.navbar') do
+        expect(page).to have_link('Users')
+      end
     end
   end
 end
